@@ -1,6 +1,6 @@
-# User-friendly site thing
+# Corvid
 
-We're working on the name.
+User-friendly static site generation as a service. Powered by [Pelican](http://blog.getpelican.com/).
 
 # Installation
 
