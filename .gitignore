@@ -110,3 +110,7 @@ tramp
 pyvenv.cfg
 pip-selfcheck.json
 venv/*
+
+
+# User-defined ignores
+corvid/corvid/credentials.py
