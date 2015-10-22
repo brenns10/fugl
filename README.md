@@ -1,4 +1,4 @@
-# Corvid
+# Corvid ![Build Status](https://travis-ci.org/jpcjr/corvid.svg?branch=master)
 
 User-friendly static site generation as a service. Powered by [Pelican](http://blog.getpelican.com/).
 
