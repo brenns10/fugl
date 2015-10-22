@@ -114,3 +114,4 @@ venv/*
 
 # User-defined ignores
 corvid/corvid/credentials.py
+doc/_build
