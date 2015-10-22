@@ -10,9 +10,11 @@ User-friendly static site generation as a service. Powered by [Pelican](http://b
 - The settings given in the repo are expecting a role named `corvid` that owns
   a database with the same name. To set this up, enter the Postgres REPL with
   `sudo -u postgres psql` and enter the following commands:
+- When doing development, you need `CREATEDB` to run tests, but during deploy we
+  will shut that off.
 
 ```sql
-    CREATE ROLE corvid PASSWORD '<password>' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;
+    CREATE ROLE corvid PASSWORD '<password>' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
     CREATE DATABASE corvid OWNER corvid;
     CREATE DATABASE test_corvid OWNER corvid;  -- only if you're testing
 ```
