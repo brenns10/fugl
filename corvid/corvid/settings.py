@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # make sure SECRET_KEY, DB_PASSWORD are defined in credentials.py
-from credentials import SECRET_KEY
-from credentials import DB_PASSWORD
+from corvid.credentials import SECRET_KEY
+from corvid.credentials import DB_PASSWORD
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
