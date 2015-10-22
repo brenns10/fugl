@@ -7,7 +7,7 @@ install:
   - pip install -r requirements.txt
   - pip install sphinx sphinx_rtd_theme
 before_script:
-  - psql -U postgres "CREATE ROLE corvid PASSWORD 'password' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;"
+  - psql -U postgres -c "CREATE ROLE corvid PASSWORD 'password' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;"
   - echo "SECRET_KEY='test'" > corvid/corvid/credentials.py
   - echo "DB_PASSWORD='password'" >> corvid/corvid/credentials.py
 script: cd corvid && python manage.py test
