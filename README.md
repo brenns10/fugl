@@ -11,9 +11,10 @@ User-friendly static site generation as a service. Powered by [Pelican](http://b
   a database with the same name. To set this up, enter the Postgres REPL with
   `sudo -u postgres psql` and enter the following commands:
 
-```
+```sql
     CREATE ROLE corvid PASSWORD '<password>' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;
     CREATE DATABASE corvid OWNER corvid;
+    CREATE DATABASE test_corvid OWNER corvid;  -- only if you're testing
 ```
 
 - Edit `postgresql.conf` (found on Ubuntu under `/etc/postgresql/9.4/main/postgresql.conf`),
