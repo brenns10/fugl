@@ -12,7 +12,7 @@ before_script:
   - echo "DB_PASSWORD='password'" >> corvid/corvid/credentials.py
 script: cd corvid && python manage.py test
 after_success:
-  - make -C doc html
+  - cd .. && make -C doc html
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./push.sh || false'
 env:
   global:
