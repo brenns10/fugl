@@ -2,7 +2,7 @@
 Represents a project: a static website.
 """
 from django.db import models
-from user import User
+from .user import User
 
 
 class Project(models.Model):

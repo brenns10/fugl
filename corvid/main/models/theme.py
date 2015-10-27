@@ -1,5 +1,5 @@
 from django.db import models
-from user import User
+from .user import User
 
 
 class Theme(models.Model):
