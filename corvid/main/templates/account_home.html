@@ -1,0 +1,7 @@
+{% extends 'templates/base.html' %}
+<h1>Account Home</h1>
+<ul>
+    {% for project in projects %}
+    <li>{{ project.title }}</li>
+    {% endblock %}
+</ul>
