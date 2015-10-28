@@ -13,8 +13,10 @@ before_script:
   - psql -U postgres -c "CREATE ROLE corvid PASSWORD 'password' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;"
   - echo "SECRET_KEY='test'" > corvid/corvid/credentials.py
   - echo "DB_PASSWORD='password'" >> corvid/corvid/credentials.py
-script: cd corvid && python manage.py test
+script: cd corvid && coverage run --source=corvid,main --omit=\*/migrations/\* python manage.py test
 after_success:
+  - pwd
+  - coverage html -d ../htmlcov
   - cd .. && make -C doc html
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./push.sh || false'
 env:
