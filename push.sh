@@ -23,7 +23,7 @@ fi
 
 # Copy in the HTML.  You may want to change this with your documentation path.
 cp -R ../$REPO/doc/_build/html/* doc/
-mv ../$REPO/htmlcov .
+cp -R ../$REPO/htmlcov htmlcov/
 
 # Add and commit changes.
 git add -A .
