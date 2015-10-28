@@ -1,20 +1,8 @@
-{% extends 'form.html' %}
-{% block form %}
-<h1>Login</h1>
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% elif next %}
-{% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
-please login with an account that has access.</p>
-{% else %}
-<p>Please login to see this page.</p>
-{% endif %}
-{% endif %}
-<label for='username'>Username</label>
-<input type='text' id='username' name='username'/>
-<label for='password'>Password</label>
-<input type='password' id='password' name='password'/>
-<a href='{% url 'register' %}'>Register</a>
-<input type='submit' name='login' value='Login'/>
+{% extends 'base.html' %}
+{% block content %}
+<form action='#' method='post'>
+    {% csrf_token %}
+    {{ form }}
+    <input type='submit' name='create_account' value='Login'/>
+</form>
 {% endblock %}

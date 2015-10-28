@@ -2,7 +2,7 @@
 {% block content %}
 <form action='#' method='post'>
     {% csrf_token %}
-    {% block form %}
-    {% endblock %}
+    {{ form.as_p }}
+    <input type='submit' name='create_account' value='Submit'/>
 </form>
 {% endblock %}
