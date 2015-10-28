@@ -1,0 +1,5 @@
+<label for='plugins'>Plugins</label>
+{% for plugin in plugins %}
+<input type='checkbox' name='{{ plugin.title }}' {% if plugin.active %} checked {% endif %}>
+{{ plugin.title }} &nbsp;
+{% endfor %}

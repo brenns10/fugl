@@ -1,10 +1,8 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Login</h1>
-<form action='#' method='post'>
-    <label for='username'>Username</label> <input type='text' id='username' name='username'/>
-    <label for='email'>Email</label> <input type='text' id='email' name='email'/>
-    <label for='password'>Password</label> <input type='password' id='password' name='password'/>
-    <input type='submit' name='create_account' value='Create Account'/>
-</form>
+{% extends 'form.html' %}
+{% block form %}
+<h1>Create Account</h1>
+<label for='username'>Username</label> <input type='text' id='username' name='username'/>
+<label for='email'>Email</label> <input type='text' id='email' name='email'/>
+<label for='password'>Password</label> <input type='password' id='password' name='password'/>
+<input type='submit' name='create_account' value='Create Account'/>
 {% endblock %}
