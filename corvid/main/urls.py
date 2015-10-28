@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from .views.root import root_controller
 from .views.user import user_home_controller
-from .views.register import RegistrationView
+from .views.registration import RegistrationView
+from .forms.login import LoginForm
 from django.contrib.auth.views import login as login_view
 
 

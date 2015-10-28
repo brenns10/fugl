@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from main.models.user import User
-from main.forms.register import RegistrationForm
+from main.forms.registration import RegistrationForm
 
 
 class RegistrationView(FormView):
