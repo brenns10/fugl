@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', root_controller),
     url(r'^login', login_view),
     url(r'^home', user_home_controller),
+    url(r'^register', login_view, name='register'),
 ]

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% block content %}
 <h1>Account Home</h1>
 <ul>
     {% for project in projects %}
     <li>{{ project.title }}</li>
-    {% endblock %}
-    <li>New Project</li>
+    {% endfor %}
+    <li><a href='{% url 'new_project' %}'>New Project</a></li>
 </ul>
+{% endblock %}
