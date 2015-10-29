@@ -15,14 +15,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
             name='Page',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('content', models.CharField(max_length=50000)),
             ],
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PagePlugin',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('head_markup', models.CharField(max_length=5000)),
                 ('body_markup', models.CharField(max_length=5000)),
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('content', models.CharField(max_length=50000)),
                 ('date_created', models.DateTimeField()),
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Project',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('description', models.CharField(max_length=1000)),
                 ('preview_url', models.URLField()),
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProjectPlugin',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('markup', models.CharField(max_length=5000)),
                 ('project', models.ForeignKey(to='main.Project')),
@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tag',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('posts', models.ManyToManyField(to='main.Post')),
                 ('project', models.ForeignKey(to='main.Project')),
@@ -79,7 +79,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Theme',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('title', models.CharField(max_length=50)),
                 ('filepath', models.FilePathField()),
                 ('body_markup', models.CharField(max_length=5000)),
@@ -105,6 +105,11 @@ class Migration(migrations.Migration):
             model_name='page',
             name='post_plugins',
             field=models.ManyToManyField(to='main.PagePlugin'),
+        ),
+        migrations.AddField(
+            model_name='page',
+            name='project',
+            field=models.ForeignKey(to='main.Project'),
         ),
         migrations.AddField(
             model_name='category',
