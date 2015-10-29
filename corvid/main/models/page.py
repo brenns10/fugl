@@ -6,3 +6,4 @@ class Page(models.Model):
     content = models.CharField(max_length=50000)
 
     post_plugins = models.ManyToManyField('PagePlugin')
+    project = models.ForeignKey('Project')

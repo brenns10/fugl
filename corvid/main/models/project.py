@@ -15,3 +15,7 @@ class Project(models.Model):
 
     owner = models.ForeignKey(User)
     theme = models.ForeignKey('Theme')
+
+    @property
+    def project_home_url(self):
+        return '/project/{0}'.format(self.preview_url)

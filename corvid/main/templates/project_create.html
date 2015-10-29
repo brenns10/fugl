@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action='#' method='post'>
+<h1>Create Project</h1>
+<form action="#" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type='submit' name='create_account' value='Submit'/>
+    <input type="submit" value="Create" />
 </form>
 {% endblock %}
