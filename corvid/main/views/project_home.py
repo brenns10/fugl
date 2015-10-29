@@ -6,7 +6,7 @@ from main.models.page import Page
 from main.models.category import Category
 
 
-class ProjectDetailView(DetailView, ProtectedViewMixin):
+class ProjectDetailView(ProtectedViewMixin, DetailView):
     model = Project
     template_name = 'project_home.html'
 

@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from main.models.project import Project
@@ -7,7 +8,7 @@ from main.models.page import Page
 from .protected_view import ProtectedViewMixin
 
 
-class CreatePageView(CreateView, ProtectedViewMixin):
+class CreatePageView(ProtectedViewMixin, CreateView):
     template_name = 'edit_page_post.html'
     model = Page
     fields = ['title', 'content']
@@ -28,11 +29,18 @@ class CreatePageView(CreateView, ProtectedViewMixin):
         }
         page = Page.objects.create(**kwargs)
         page.save()
-        return HttpResponse('<html>Page saved: {0}/{1}</html>'.format(project.title, data['title']))
+        url_kwargs = {
+            'owner': self.request.user.username,
+            'title': self.kwargs['title'],
+        }
+        ctx = {
+            'success_message': 'Page created!',
+            'return_message': 'Project home',
+            'return_url': reverse('project_home', kwargs=url_kwargs),
+        }
+        return TemplateResponse(self.request, 'success.html', context=ctx)
 
-
-
-class UpdatePageView(UpdateView, ProtectedViewMixin):
+class UpdatePageView(ProtectedViewMixin, UpdateView):
     template_name = 'edit_page_post.html'
     model = Page
     fields = ['title', 'content']

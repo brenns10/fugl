@@ -10,4 +10,4 @@ class ProtectedViewMixin(object):
     """
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(ProtectedView, self).dispatch(*args, **kwargs)
+        return super(ProtectedViewMixin, self).dispatch(*args, **kwargs)
