@@ -26,3 +26,21 @@ class RootViewTestCase(CorvidTestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 302)
         self.assertIn('/home/', response.url)
+
+    def test_other_response_types_500(self):
+        self.assertTrue(self.client.login(username=self.admin_user.username,
+                                          password=self.admin_password))
+        response = self.client.post('/')
+        self.assertEqual(response.status_code, 500)
+
+        response = self.client.put('/')
+        self.assertEqual(response.status_code, 500)
+
+        response = self.client.head('/')
+        self.assertEqual(response.status_code, 500)
+
+        response = self.client.delete('/')
+        self.assertEqual(response.status_code, 500)
+
+        response = self.client.patch('/')
+        self.assertEqual(response.status_code, 500)
