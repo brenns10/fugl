@@ -10,7 +10,6 @@ class CreateProjectView(CreateView):
     fields = ['title', 'description']
     default_theme = Theme.objects.get(title='default')
 
-
     def form_valid(self, form):
         # default theme?
         user = self.request.user
@@ -21,7 +20,7 @@ class CreateProjectView(CreateView):
         kwargs = {
             'title': title,
             'description': data['description'],
-            'preview_url': '/'.join([user.username, title]),
+            'preview_url': '{0}/{1}'.format(user.username, title),
             'owner': user,
             'theme': default_theme,
         }

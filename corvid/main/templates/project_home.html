@@ -1,21 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Project Home</h1>
-<a href='{% url 'view' project_id=project.id %}'>View</a>
-<a href='{% url 'download' project_id=project.id %}'>Download</a>
-<a href='{% url 'project_settins' project_id=project.id %}'>Project Settings</a>
 <h2>Pages</h2>
 <ul>
-{% for page in pages %}
-    <li>{{ page.title }}</li>
+{% for page in pages_ %}
+  <li>
+    <a href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
+      {{ page.title }}
+    </a>
+  </li>
 {% endfor %}
 </ul>
-<a href='{% url 'new_page' project_id=project.id %}'>New Pages</a>
-<h2>Articles</h2>
-<ul>
-{% for article in articles %}
-    <li>article.title</li>
-{% endfor %}
-</ul>
-<a href='{% url 'new_article' project_id=project.id %}'>New Article</a>
+
+<a href="{% url 'new_page' owner=owner title=title %}">New Page</a>
+<h2>Posts</h2>
+<b>None yet!</b>
 {% endblock %}

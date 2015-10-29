@@ -1,9 +1,9 @@
 from django.views.generic import ListView
-from .protected_view import ProtectedView
+from .protected_view import ProtectedViewMixin
 from main.models.project import Project
 
 
-class UserHomeView(ListView):
+class UserHomeView(ListView, ProtectedViewMixin):
     """View that will list all projects belonging to this User"""
     model = Project
     template_name = 'account_home.html'
