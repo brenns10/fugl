@@ -7,7 +7,7 @@ from main.models.page import Page
 from .protected_view import ProtectedViewMixin
 
 
-class CreatePageView(CreateView, ProtectedViewMixin):
+class CreatePageView(ProtectedViewMixin, CreateView):
     template_name = 'edit_page_post.html'
     model = Page
     fields = ['title', 'content']
@@ -31,8 +31,7 @@ class CreatePageView(CreateView, ProtectedViewMixin):
         return HttpResponse('<html>Page saved: {0}/{1}</html>'.format(project.title, data['title']))
 
 
-
-class UpdatePageView(UpdateView, ProtectedViewMixin):
+class UpdatePageView(ProtectedViewMixin, UpdateView):
     template_name = 'edit_page_post.html'
     model = Page
     fields = ['title', 'content']

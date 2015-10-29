@@ -3,7 +3,7 @@ from .protected_view import ProtectedViewMixin
 from main.models.project import Project
 
 
-class UserHomeView(ListView, ProtectedViewMixin):
+class UserHomeView(ProtectedViewMixin, ListView):
     """View that will list all projects belonging to this User"""
     model = Project
     template_name = 'account_home.html'
