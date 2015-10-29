@@ -1,4 +1,6 @@
 from django.views.generic.edit import CreateView
+from django.template.response import TemplateResponse
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from main.models.project import Project
 from main.models.theme import Theme
@@ -26,4 +28,9 @@ class CreateProjectView(CreateView):
         }
         proj = Project.objects.create(**kwargs)
         proj.save()
-        return HttpResponse('<html>Project created: {0}</html>'.format(title))
+        ctx = {
+            'success_message': 'Project created!',
+            'return_message': 'Project home',
+            'return_url': reverse('project_home', kwargs={'owner': user.username, 'title': title}),
+        }
+        return TemplateResponse(self.request, 'success.html', context=ctx)
