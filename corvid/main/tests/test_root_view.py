@@ -6,7 +6,7 @@ from django.test import Client
 from main.tests.base import CorvidTestCase
 
 
-class UserHomeViewTestCase(CorvidTestCase):
+class RootViewTestCase(CorvidTestCase):
 
     def setUp(self):
         super().setUpTheme()
