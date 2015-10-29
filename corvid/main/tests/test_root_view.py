@@ -1,5 +1,5 @@
 """
-Test for main.views.user.UserHomeView.
+Test for main.views.root.root_controller.
 """
 
 from django.test import Client
