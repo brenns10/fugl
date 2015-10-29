@@ -4,9 +4,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from main.models.project import Project
 from main.models.theme import Theme
+from .protected_view import ProtectedViewMixin
 
 
-class CreateProjectView(CreateView):
+class CreateProjectView(ProtectedViewMixin, CreateView):
     template_name = 'project_create.html'
     model = Project
     fields = ['title', 'description']
