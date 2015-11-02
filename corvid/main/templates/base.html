@@ -5,6 +5,9 @@
 
     <body>
         <div class='content'>
+            {% if user.is_authenticated %}
+            <p><a href='/logout'>logout</a>
+            {% endif %}
             {% block content %} {% endblock %}
         </div>
     </body>

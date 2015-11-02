@@ -7,11 +7,13 @@ from .views.page import CreatePageView
 from .views.page import UpdatePageView
 from .views.project_home import ProjectDetailView
 from django.contrib.auth.views import login as login_view
+from django.contrib.auth.views import logout_then_login as logout_view
 
 
 urlpatterns = [
     url(r'^$', root_controller, name='root'),
     url(r'^login', login_view, name='login'),
+    url(r'^logout', logout_view, name='logout'),
     url(r'^home', UserHomeView.as_view(), name='home'),
     url(r'^register', RegistrationView.as_view(), name='register'),
     url(r'^project/create$', CreateProjectView.as_view(), name='new_project'),
