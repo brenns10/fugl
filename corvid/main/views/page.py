@@ -17,6 +17,7 @@ class CreatePageView(ProtectedViewMixin, CreateView):
         context = super(CreatePageView, self).get_context_data(**kwargs)
         context['action'] = 'Add'
         context['type'] = 'Page'
+        context['project'] = self.kwargs['title']
         return context
 
     def form_valid(self, form):
