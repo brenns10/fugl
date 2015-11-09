@@ -46,3 +46,39 @@ class RegistrationViewTestCase(CorvidTestCase):
         # After this, we should NOT have a test_user in the database.
         users = User.objects.filter(username='test_user')
         self.assertEqual(len(users), 0)
+
+    def test_post_invalid_username_with_spaces_fails(self):
+        post_data = {'username': 'test user', 'password': 'test_pass',
+                     'email': 'example@example.com'}
+        response = self.client.post('/register/', post_data)
+        # We should get a 200 OK (even though the registration fails)
+        self.assertEqual(response.status_code, 200)
+        # It should contain a message about an invalid email address.
+        self.assertIn(b'Enter a valid username', response.content)
+        # After this, we should NOT have a test_user in the database.
+        users = User.objects.filter(username='test_user')
+        self.assertEqual(len(users), 0)
+
+    def test_post_invalid_username_invalid_character_fails(self):
+        post_data = {'username': 'test/user', 'password': 'test_pass',
+                     'email': 'example@example.com'}
+        response = self.client.post('/register/', post_data)
+        # We should get a 200 OK (even though the registration fails)
+        self.assertEqual(response.status_code, 200)
+        # It should contain a message about an invalid email address.
+        self.assertIn(b'Enter a valid username', response.content)
+        # After this, we should NOT have a test_user in the database.
+        users = User.objects.filter(username='test_user')
+        self.assertEqual(len(users), 0)
+
+    def test_post_invalid_username_too_long_fails(self):
+        post_data = {'username': '0123456789012345678901234567890',
+                     'password': 'test_pass', 'email': 'example@example.com'}
+        response = self.client.post('/register/', post_data)
+        # We should get a 200 OK (even though the registration fails)
+        self.assertEqual(response.status_code, 200)
+        # It should contain a message about an invalid email address.
+        self.assertIn(b'Ensure this value has at most', response.content)
+        # After this, we should NOT have a test_user in the database.
+        users = User.objects.filter(username='test_user')
+        self.assertEqual(len(users), 0)
