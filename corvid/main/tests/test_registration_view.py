@@ -28,7 +28,7 @@ class RegistrationViewTestCase(CorvidTestCase):
         # We should get a 200 OK:
         self.assertEqual(response.status_code, 200)
         # That contains "Registration successful"
-        self.assertIn('Registration successful', response.content)
+        self.assertIn(b'Registration successful', response.content)
         # After this, we should have a test_user in the database.
         users = User.objects.filter(username='test_user')
         self.assertEqual(len(users), 1)
@@ -42,7 +42,7 @@ class RegistrationViewTestCase(CorvidTestCase):
         # We should get a 200 OK (even though the registration fails)
         self.assertEqual(response.status_code, 200)
         # It should contain a message about an invalid email address.
-        self.assertIn('Enter a valid email address', response.content)
+        self.assertIn(b'Enter a valid email address', response.content)
         # After this, we should NOT have a test_user in the database.
         users = User.objects.filter(username='test_user')
         self.assertEqual(len(users), 0)
