@@ -55,6 +55,7 @@ class UpdatePageView(ProtectedViewMixin, UpdateView):
         context = super(UpdatePageView, self).get_context_data(**kwargs)
         context['action'] = 'Edit'
         context['type'] = 'Page'
+        context['project'] = self.kwargs['proj_title']
         return context
 
     def get_success_url(self):
