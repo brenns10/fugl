@@ -84,7 +84,7 @@
 <p id="t3" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t4" class="stm run hide_run"><span class="key">class</span> <span class="nam">Page</span><span class="op">(</span><span class="nam">models</span><span class="op">.</span><span class="nam">Model</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t5" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">title</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">CharField</span><span class="op">(</span><span class="nam">max_length</span><span class="op">=</span><span class="num">50</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t6" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">content</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">CharField</span><span class="op">(</span><span class="nam">max_length</span><span class="op">=</span><span class="num">50000</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t6" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">content</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">TextField</span><span class="op">(</span><span class="nam">max_length</span><span class="op">=</span><span class="num">50000</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t7" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t8" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">post_plugins</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">ManyToManyField</span><span class="op">(</span><span class="str">&#39;PagePlugin&#39;</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t9" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">project</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">ForeignKey</span><span class="op">(</span><span class="str">&#39;Project&#39;</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
@@ -98,7 +98,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.2</a>,
-            created at 2015-11-09 01:02
+            created at 2015-11-11 04:21
         </p>
     </div>
 </div>
