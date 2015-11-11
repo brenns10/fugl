@@ -7,6 +7,7 @@ class Post(models.Model):
     date_created = models.DateTimeField()
     date_updated = models.DateTimeField()
 
+    project = models.ForeignKey('Project')
     category = models.ForeignKey('Category')
     tags = models.ManyToManyField('Tag')
     post_plugins = models.ManyToManyField('PagePlugin')
