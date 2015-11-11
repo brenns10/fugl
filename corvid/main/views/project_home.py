@@ -3,7 +3,7 @@ from .protected_view import ProtectedViewMixin
 from main.models.user import User
 from main.models.project import Project
 from main.models.page import Page
-from main.models.category import Category
+from main.models.post import Post
 
 
 class ProjectDetailView(ProtectedViewMixin, DetailView):
@@ -23,8 +23,9 @@ class ProjectDetailView(ProtectedViewMixin, DetailView):
         context['owner'] = self.object.owner.username
         context['title'] = self.object.title
         pages = [p for p in Page.objects.filter(project=self.object)]
-        print(len(pages))
+        posts = [p for p in Post.objects.filter(project=self.object)]
         context['pages_'] = pages
+        context['posts_'] = posts
         # TODO: Getting posts: Category -> posts
         # categories = Category.objects.filter(project=self.object)
         # context['posts'] = categories.filter(title__in=categories)
