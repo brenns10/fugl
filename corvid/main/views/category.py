@@ -12,10 +12,14 @@ class CreateCategoryView(ProtectedViewMixin, CreateView):
     fields = ['title']
 
     def get_context_data(self, **kwargs):
+        project = Project.objects.get(owner=self.request.user, title=self.kwargs['title'])
+        categories = [c for c in Category.objects.filter(project=project)]
+
         context = super(CreateCategoryView, self).get_context_data(**kwargs)
         context['action'] = 'Add'
         context['type'] = 'Category'
         context['project'] = self.kwargs['title']
+        context['categories_'] = categories
         return context
 
     def form_valid(self, form):
