@@ -8,7 +8,7 @@ from main.forms.registration import RegistrationForm
 
 
 class RegistrationView(FormView):
-    template_name = 'form.html'
+    template_name = 'registration/register.html'
     form_class = RegistrationForm
 
     def form_valid(self, form):

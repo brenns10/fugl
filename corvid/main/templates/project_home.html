@@ -1,18 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Project Home</h1>
-<h2>Pages</h2>
-<ul>
-{% for page in pages_ %}
-  <li>
-    <a href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
-      {{ page.title }}
-    </a>
-  </li>
-{% endfor %}
-</ul>
+<div class='col-md-6 text-left'>
+    <h2>Pages</h2>
+    <ul>
+    {% for page in pages_ %}
+      <li>
+        <a href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
+          {{ page.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
 
-<a href="{% url 'new_page' owner=owner title=title %}">New Page</a>
-<h2>Posts</h2>
-<b>None yet!</b>
+    <a href="{% url 'new_page' owner=owner title=title %}">New Page</a>
+</div>
+<div class='col-md-6 text-left'>
+    <h2>Posts</h2>
+    <ul>
+    {% for post in posts_ %}
+      <li>
+        <a href="{% url 'edit_post' owner=owner proj_title=title post_title=post.title %}">
+          {{ post.title }}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'new_post' owner=owner title=title %}">New Post</a> <br />
+    <a href="{% url 'new_category' owner=owner title=title %}">New Category</a>
+</div>
 {% endblock %}

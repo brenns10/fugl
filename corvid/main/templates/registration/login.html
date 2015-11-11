@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load bootstrap_tags %}
 {% block content %}
-<form action='#' method='post'>
+<div class='login'>
+<form action='#' method='post' >
     {% csrf_token %}
-    {{ form }}
-    <input type='submit' name='login' value='Login'/>
+    {{ form|as_bootstrap }}
+    <div class='form-actions'>
+        <input class='btn btn-primary col-md-12' type='submit' name='login' value='Login'/>
+        <a href='/register'>Create Account</a>
+    </div>
 </form>
-<a href='/register'>Create Account</a>
+</div>
 {% endblock %}
