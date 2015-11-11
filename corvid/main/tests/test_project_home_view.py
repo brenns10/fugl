@@ -54,6 +54,7 @@ class ProjectDetailViewTestCase(CorvidTestCase):
                                    (self.admin_user.username,
                                     self.project.title))
         self.assertEqual(response.status_code, 200)
+        self.assertIn(self.project.title.encode('utf8'), response.content)
 
     def test_logged_in_nonexisting_project_404(self):
         self.client.login(username=self.admin_user.username,
