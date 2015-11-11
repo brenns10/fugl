@@ -3,6 +3,7 @@ run: migrate venv
 	venv/bin/python corvid/manage.py runserver
 
 migrate: venv
+	venv/bin/python corvid/manage.py makemigrations
 	venv/bin/python corvid/manage.py migrate
 
 test: migrate venv

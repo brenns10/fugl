@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-{{ success_message }}
-<a href="{{ return_url }}">{{ return_message }}</a>
+<h3>{{ success_message }}</h3>
+You should be automatically redirected to {{return_message }}. To go there now <a href="{{ return_url }}">click here</a>
+<script type='text/javascript'>
+setTimeout('redirect("{{ return_url }}")', 3000);
+</script>
 {% endblock %}
