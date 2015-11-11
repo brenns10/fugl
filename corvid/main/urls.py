@@ -6,6 +6,7 @@ from .views.create_project import CreateProjectView
 from .views.page import CreatePageView
 from .views.page import UpdatePageView
 from .views.project_home import ProjectDetailView
+from .views.category import CreateCategoryView
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
 
@@ -23,4 +24,6 @@ urlpatterns = [
         CreatePageView.as_view(), name='new_page'),
     url(r'^project/(?P<owner>[^/]+)/(?P<proj_title>[^/]+)/page/edit/(?P<page_title>[^/]+)',
         UpdatePageView.as_view(), name='edit_page'),
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/category/new',
+        CreateCategoryView.as_view(), name='new_category'),
 ]
