@@ -67,8 +67,10 @@ class UpdatePostView(ProtectedViewMixin, UpdateView):
     fields = ['title', 'content']
 
     def get_object(self):
-        project = Project.objects.get(owner=self.request.user, title=self.kwargs['proj_title'])
-        post = Post.objects.get(project=project, title=self.kwargs['post_title'])
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        projectqs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
+        post = get_object_or_404(Post.objects, project=project, title=self.kwargs['post_title'])
         return post
 
     def get_context_data(self, **kwargs):

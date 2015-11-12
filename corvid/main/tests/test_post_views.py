@@ -33,6 +33,7 @@ UpdatePostView:
 """
 
 from django.test import Client
+from django.utils import timezone
 from .base import CorvidTestCase
 from main.models.post import Post
 from main.models.user import User
@@ -63,6 +64,7 @@ class CreatePostViewTestCase(CorvidTestCase):
     def tearDown(self):
         self.otheruser.delete()
         self.project.delete()
+        self.category.delete()
         super().tearDownTheme()
 
     def url_for(self, project):
@@ -144,7 +146,7 @@ class CreatePostViewTestCase(CorvidTestCase):
         resp = self.client.post(url)
         self.assertEqual(resp.status_code, 404)
 
-"""
+
 class UpdatePostViewTestCase(CorvidTestCase):
 
     def setUp(self):
@@ -161,12 +163,19 @@ class UpdatePostViewTestCase(CorvidTestCase):
         )
         self.project.save()
 
+        self.category = Category.objects.create(title='default',
+                                                project=self.project)
+        self.category.save()
+
         self.post = Post.objects.create(
-            title='testpost1', content='test post 1', project=self.project)
+            title='testpost1', content='test post 1', project=self.project,
+            category=self.category, date_created=timezone.now(),
+            date_updated=timezone.now())
         self.post.save()
 
     def tearDown(self):
         self.otheruser.delete()
+        self.category.delete()
         self.post.delete()
         self.project.delete()
         super().tearDownTheme()
@@ -225,6 +234,7 @@ class UpdatePostViewTestCase(CorvidTestCase):
         newdata = {
             'title': self.post.title,
             'content': 'new content',
+            'category': self.category.id,
         }
 
         # Post to the form.
@@ -242,6 +252,7 @@ class UpdatePostViewTestCase(CorvidTestCase):
         # Assert that the change happened.
         self.post.refresh_from_db()
         self.assertEqual(self.post.content, newdata['content'])
+        self.assertNotEqual(self.post.date_created, self.post.date_updated)
 
     def test_invalid_user(self):
         url = '/project/idontexist/ialsodontexist/post/edit/meneither'
@@ -267,4 +278,3 @@ class UpdatePostViewTestCase(CorvidTestCase):
         self.assertEqual(resp.status_code, 404)
         resp = self.client.post(url)
         self.assertEqual(resp.status_code, 404)
-"""
