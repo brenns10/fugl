@@ -35,10 +35,7 @@ UpdatePostView:
 from django.test import Client
 from django.utils import timezone
 from .base import CorvidTestCase
-from main.models.post import Post
-from main.models.user import User
-from main.models.project import Project
-from main.models.category import Category
+from main.models import Post, User, Project, Category
 
 
 class CreatePostViewTestCase(CorvidTestCase):
