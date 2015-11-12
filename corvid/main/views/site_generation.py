@@ -1,5 +1,4 @@
 from django.views.generic.base import View
-from django.core.servers.basehttp import FileWrapper
 from django.utils.text import slugify
 from django.http import HttpResponse
 from main.models.project import Project

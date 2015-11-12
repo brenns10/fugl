@@ -20,15 +20,21 @@ class Post(models.Model):
     def get_markdown(self):
         template = """Title: %(title)s
 Author: %(author)s
-Date: %(date)s
-Modified: %(modified)s
-
+%(date_created_str)s%(date_modified_str)s
 %(content)s
 """
-        return (template % {
+        kwargs = {
             'title': self.title,
             'author': self.project.owner.username,
-            'date': str(self.date_created),
-            'modified': str(self.date_updated),
             'content': self.content,
-        })
+            'date_created_str': '',
+            'date_modified_str': '',
+        }
+        date_fmt = '%Y-%m-%d'
+        if self.date_created is not None:
+            kwargs['date_created_str'] = ('Date: {0}\n'
+                                          .format(self.date_created.strftime(date_fmt)))
+        if self.date_updated is not None:
+            kwargs['date_modified_str'] = ('Modified: {0}\n'
+                                           .format(self.date_updated.strftime(date_fmt)))
+        return (template % kwargs)
