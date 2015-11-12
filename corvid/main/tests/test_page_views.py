@@ -1,5 +1,28 @@
 """
 Tests for main.views.page classes: CreatePageView and UpdatePageView.
+
+Tests:
+CreatePageView:
+- GET:
+  - not logged in user redirected to login.
+  - logged in user cannot access form to create a page for projects they don't
+    own. (should 404)
+  - logged in user can access form to create a page for projects they do own.
+- POST:
+  - not logged in user redirected to login
+  - logged in user may not create page on project they don't own (should 404)
+  - logged in user can create a page for project they do own (expected case)
+UpdatePageView:
+- GET:
+  - not logged in user redirected to login
+  - logged in user cannot access page for project they don't own (should 404)
+  - logged in user can access page for project they do own
+    -> should return the page's existing content
+- POST:
+  - not logged in user redirected to login
+  - logged in user cannot edit page for project they don't own (should 404)
+  - logged in user can edit page contents
+    - should be reflected in database
 """
 
 from django.test import Client
@@ -25,21 +48,62 @@ class CreatePageViewTestCase(CorvidTestCase):
         )
         self.project.save()
 
-
     def tearDown(self):
         self.otheruser.delete()
+        self.page.delete()
         self.project.delete()
         super().tearDownTheme()
 
-    def test_create_page(self):
-        formdata = {'title':'test_page1', 'content': 'I am a test page.'}
-        url = '/project/%s/%s/page/new' % (self.admin_user.username,
-                                           self.project.title)
-        self.client.login(username=self.admin_user.username,
-                          password=self.admin_password)
-        response = self.client.post(url, formdata)
+    def url_for(self, project):
+        # return the url for a project
+        return '/project/%s/%s/page/new' % (project.owner.username,
+                                            project.title)
 
-        # On success, the page should return 200.
+    def login_other(self):
+        # login the client as "otheruser"
+        self.client.login(username=self.otheruser.username,
+                          password=self.otherpass)
+
+    def test_get_not_logged_in_redirect(self):
+        # When a not-logged-in user accesses the page, it should redirect.
+        url = self.url_for(self.project)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, 'http://testserver/login/?next='+url)
+
+    def test_get_not_owner_404(self):
+        # Should 404 if you don't own the project
+        url = self.url_for(self.project)
+        self.login_other()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_owner(self):
+        # Should return the correct form when you own the project
+        url = self.url_for(self.project)
+        self.login()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Create Page', response.content)
+
+    def test_post_not_logged_in_redirect(self):
+        url = self.url_for(self.project)
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, 'http://testserver/login/?next='+url)
+
+    def test_post_not_owner_404(self):
+        # Should 404 if you don't own the project
+        url = self.url_for(self.project)
+        self.login_other()
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_owner(self):
+        formdata = {'title':'testpage2', 'content': 'I am a test page.'}
+        url = self.url_for(self.project)
+        self.login()
+        response = self.client.post(url, formdata)
         self.assertEqual(response.status_code, 200)
 
         # Also, there should be a corresponding page object in the DB.
@@ -50,35 +114,101 @@ class CreatePageViewTestCase(CorvidTestCase):
         # Cleanup before the test is over.
         page_object.delete()
 
-    def test_update_page(self):
-        # First, create a page and save it to the database.
-        data = {
-            'title': 'CreatePageViewTestCase.test_update_page',
-            'content': 'original content',
-            'project': self.project
-        }
-        page = Page.objects.create(**data)
-        page.save()
-        self.assertEqual(page.content, data['content'])
 
-        # Now, we will update it using the update page view.
-        del data['project']
-        data['content'] = 'new content'
+class CreatePageViewTestCase(CorvidTestCase):
 
-        # Stuff to send the response.
-        self.client.login(username=self.admin_user.username,
-                          password=self.admin_password)
-        url = '/project/%s/%s/page/edit/%s' % (self.admin_user.username,
-                                               self.project.title,
-                                               data['title'])
-        response = self.client.post(url, data)
+    def setUp(self):
+        super().setUpTheme()
+        self.client = Client()
+        self.otherpass = 'cock-of-the-rock'
+        self.otheruser = User.objects.create_user('other_user',
+                                                  'other@example.com',
+                                                  self.otherpass)
+        self.otheruser.save()
+        self.project = Project.objects.create(
+            title='testproj', description='test project', preview_url='',
+            owner=self.admin_user, theme=self.default_theme
+        )
+        self.project.save()
+
+        self.page = Page.objects.create(
+            title='testpage1', content='test page 1', project=self.project)
+        self.page.save()
+
+    def tearDown(self):
+        self.otheruser.delete()
+        self.page.delete()
+        self.project.delete()
+        super().tearDownTheme()
+
+    def url_for(self, page):
+        # return the url for a project
+        return '/project/%s/%s/page/edit/%s' % (page.project.owner.username,
+                                                page.project.title,
+                                                page.title)
+
+    def login_other(self):
+        # login the client as "otheruser"
+        self.client.login(username=self.otheruser.username,
+                          password=self.otherpass)
+
+    def test_get_not_logged_in_redirect(self):
+        # When a not-logged-in user accesses the page, it should redirect.
+        url = self.url_for(self.page)
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, 'http://testserver/login/?next='+url)
 
+    def test_get_not_owner_404(self):
+        # Should 404 if you don't own the project
+        url = self.url_for(self.page)
+        self.login_other()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_owner(self):
+        # Should return the correct form when you own the project
+        url = self.url_for(self.page)
+        self.login()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode('utf8')
+        self.assertIn('Edit Page', content)
+        self.assertIn(self.page.content, content)
+        self.assertIn(self.page.title, content)
+
+    def test_post_not_logged_in_redirect(self):
+        url = self.url_for(self.page)
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, 'http://testserver/login/?next='+url)
+
+    def test_post_not_owner_404(self):
+        # Should 404 if you don't own the project
+        url = self.url_for(self.page)
+        self.login_other()
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_owner(self):
+        # Data we will send in the form
+        newdata = {
+            'title': self.page.title,
+            'content': 'new content',
+        }
+
+        # Post to the form.
+        self.login()
+        url = self.url_for(self.page)
+        response = self.client.post(url, newdata)
+
+        # Assert that it redirects to the project home.
+        self.assertEqual(response.status_code, 302)
         redir_url = '/project/%s/%s'  % (self.admin_user.username,
                                          self.project.title)
+        redir_url = 'http://testserver' + redir_url
         self.assertIn(redir_url, response.url)
 
-        # Get an updated version of the page, and make sure the change occurred.
-        page = Page.objects.get(project=self.project, title=data['title'])
-        self.assertEqual(page.content, data['content'])
-        page.delete()
+        # Assert that the change happened.
+        self.page.refresh_from_db()
+        self.assertEqual(self.page.content, newdata['content'])
