@@ -3,8 +3,10 @@ from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from main.models.project import Project
 from main.models.page import Page
+from main.models.user import User
 from .protected_view import ProtectedViewMixin
 
 
@@ -15,13 +17,21 @@ class CreatePageView(ProtectedViewMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(CreatePageView, self).get_context_data(**kwargs)
+
+        # Verify that the request is coming into a real user and project:
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        qs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(qs, owner=user, title=self.kwargs['title'])
+
         context['action'] = 'Add'
         context['type'] = 'Page'
         context['project'] = self.kwargs['title']
         return context
 
     def form_valid(self, form):
-        project = Project.objects.get(owner=self.request.user, title=self.kwargs['title'])
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        qs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(qs, owner=user, title=self.kwargs['title'])
         data = form.cleaned_data
         kwargs = {
             'title': data['title'],
@@ -47,8 +57,10 @@ class UpdatePageView(ProtectedViewMixin, UpdateView):
     fields = ['title', 'content']
 
     def get_object(self):
-        project = Project.objects.get(owner=self.request.user, title=self.kwargs['proj_title'])
-        page = Page.objects.get(project=project, title=self.kwargs['page_title'])
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        projectqs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
+        page = get_object_or_404(Page.objects, project=project, title=self.kwargs['page_title'])
         return page
 
     def get_context_data(self, **kwargs):
