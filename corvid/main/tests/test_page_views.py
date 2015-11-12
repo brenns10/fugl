@@ -12,6 +12,9 @@ CreatePageView:
   - not logged in user redirected to login
   - logged in user may not create page on project they don't own (should 404)
   - logged in user can create a page for project they do own (expected case)
+- Invalid:
+  - No such user GET/POST 404
+  - No such project GET/POST 404
 UpdatePageView:
 - GET:
   - not logged in user redirected to login
@@ -23,6 +26,10 @@ UpdatePageView:
   - logged in user cannot edit page for project they don't own (should 404)
   - logged in user can edit page contents
     - should be reflected in database
+- Invalid:
+  - No such user GET/POST 404
+  - No such project GET/POST 404
+  - No such page GET/POST 404
 """
 
 from django.test import Client
@@ -50,7 +57,6 @@ class CreatePageViewTestCase(CorvidTestCase):
 
     def tearDown(self):
         self.otheruser.delete()
-        self.page.delete()
         self.project.delete()
         super().tearDownTheme()
 
@@ -84,7 +90,7 @@ class CreatePageViewTestCase(CorvidTestCase):
         self.login()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Create Page', response.content)
+        self.assertIn('Add Page', response.content.decode('utf8'))
 
     def test_post_not_logged_in_redirect(self):
         url = self.url_for(self.project)
@@ -114,8 +120,24 @@ class CreatePageViewTestCase(CorvidTestCase):
         # Cleanup before the test is over.
         page_object.delete()
 
+    def test_invalid_user(self):
+        url = '/project/idontexist/ialsodontexist/page/new'
+        self.login()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        resp = self.client.post(url)
+        self.assertEqual(resp.status_code, 404)
 
-class CreatePageViewTestCase(CorvidTestCase):
+    def test_invalid_project(self):
+        url = '/project/%s/ialsodontexist/page/new' % self.admin_user.username
+        self.login()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        resp = self.client.post(url)
+        self.assertEqual(resp.status_code, 404)
+
+
+class UpdatePageViewTestCase(CorvidTestCase):
 
     def setUp(self):
         super().setUpTheme()
@@ -212,3 +234,28 @@ class CreatePageViewTestCase(CorvidTestCase):
         # Assert that the change happened.
         self.page.refresh_from_db()
         self.assertEqual(self.page.content, newdata['content'])
+
+    def test_invalid_user(self):
+        url = '/project/idontexist/ialsodontexist/page/edit/meneither'
+        self.login()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        resp = self.client.post(url)
+        self.assertEqual(resp.status_code, 404)
+
+    def test_invalid_project(self):
+        url = '/project/%s/ialsodontexist/page/edit/meneither' % self.admin_user.username
+        self.login()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        resp = self.client.post(url)
+        self.assertEqual(resp.status_code, 404)
+
+    def test_invalid_page(self):
+        url = '/project/%s/%s/page/edit/meneither' % (self.admin_user.username,
+                                                      self.project.title)
+        self.login()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        resp = self.client.post(url)
+        self.assertEqual(resp.status_code, 404)
