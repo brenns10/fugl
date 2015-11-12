@@ -4,9 +4,7 @@ from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from main.models.project import Project
-from main.models.post import Post
-from main.models.user import User
+from main.models import Project, Post
 from .protected_view import ProtectedViewMixin
 
 

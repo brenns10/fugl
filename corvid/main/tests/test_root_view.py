@@ -3,7 +3,7 @@ Test for main.views.root.root_controller.
 """
 
 from django.test import Client
-from main.tests.base import CorvidTestCase
+from .base import CorvidTestCase
 
 
 class RootViewTestCase(CorvidTestCase):

@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
-from main.models.user import User
-from main.models.theme import Theme
+from main.models import User, Theme
 
 
 class Command(BaseCommand):

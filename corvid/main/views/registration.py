@@ -3,8 +3,8 @@ from django.views.generic.edit import FormView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from main.models.user import User
-from main.forms.registration import RegistrationForm
+from main.models import User
+from main.forms import RegistrationForm
 
 
 class RegistrationView(FormView):

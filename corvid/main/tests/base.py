@@ -3,8 +3,7 @@ Base class for Corvid tests that set up some database stuff.
 """
 
 from django.test import TestCase
-from main.models.theme import Theme
-from main.models.user import User
+from main.models import User, Theme
 
 
 class CorvidTestCase(TestCase):

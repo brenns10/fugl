@@ -34,9 +34,7 @@ UpdatePageView:
 
 from django.test import Client
 from .base import CorvidTestCase
-from main.models.page import Page
-from main.models.user import User
-from main.models.project import Project
+from main.models import Page, User, Project
 
 
 class CreatePageViewTestCase(CorvidTestCase):

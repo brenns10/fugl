@@ -1,10 +1,7 @@
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
 from .protected_view import ProtectedViewMixin
-from main.models.project import Project
-from main.models.user import User
-from main.models.page import Page
-from main.models.post import Post
+from main.models import Project, User, Page, Post
 
 
 class ProjectDetailView(ProtectedViewMixin, DetailView):
