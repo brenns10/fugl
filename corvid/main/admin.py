@@ -1,17 +1,11 @@
 from django.contrib import admin
 
 
+# Don't hate on star imports.  Sometimes they're just better.
+from .models import *
+
+
 # Register your models here.
-from .models.project import Project
-from .models.theme import Theme
-from .models.project_plugin import ProjectPlugin
-from .models.page import Page
-from .models.post import Post
-from .models.tag import Tag
-from .models.category import Category
-from .models.page_plugin import PagePlugin
-
-
 admin.site.register(Project)
 admin.site.register(Theme)
 admin.site.register(ProjectPlugin)

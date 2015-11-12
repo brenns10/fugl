@@ -2,8 +2,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
-from main.models.project import Project
-from main.models.post import Post
+from main.models import Project, Post
 from .protected_view import ProtectedViewMixin
 from datetime import datetime
 

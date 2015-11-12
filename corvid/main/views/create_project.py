@@ -2,8 +2,7 @@ from django.views.generic.edit import CreateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from main.models.project import Project
-from main.models.theme import Theme
+from main.models import Project, Theme
 from .protected_view import ProtectedViewMixin
 
 

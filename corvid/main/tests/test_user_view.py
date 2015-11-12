@@ -3,7 +3,7 @@ Test for main.views.user.UserHomeView.
 """
 
 from django.test import Client
-from main.tests.base import CorvidTestCase
+from .base import CorvidTestCase
 
 
 class UserHomeViewTestCase(CorvidTestCase):
