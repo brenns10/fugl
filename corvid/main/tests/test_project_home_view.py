@@ -3,9 +3,8 @@ Test for main.views.project_home.ProjectDetailView.
 """
 
 from django.test import Client
-from main.tests.base import CorvidTestCase
-from main.models.project import Project
-from main.models.user import User
+from .base import CorvidTestCase
+from main.models import Project, User
 
 
 class ProjectDetailViewTestCase(CorvidTestCase):

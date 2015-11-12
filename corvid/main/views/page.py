@@ -3,8 +3,7 @@ from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from main.models.project import Project
-from main.models.page import Page
+from main.models import Project, Page
 from .protected_view import ProtectedViewMixin
 
 
