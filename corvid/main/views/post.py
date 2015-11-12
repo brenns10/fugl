@@ -3,11 +3,11 @@ from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from main.models.project import Project
 from main.models.post import Post
 from main.models.user import User
 from .protected_view import ProtectedViewMixin
-from datetime import datetime
 
 
 class CreatePostView(ProtectedViewMixin, CreateView):
@@ -35,7 +35,9 @@ class CreatePostView(ProtectedViewMixin, CreateView):
         project = get_object_or_404(qs, owner=user, title=self.kwargs['title'])
         data = form.cleaned_data
 
-        now = datetime.now()
+        # Was getting runtime errors about naive datetime objects.  See:
+        # https://stackoverflow.com/questions/18622007/runtimewarning-datetimefield-received-a-naive-datetime
+        now = timezone.now()
         kwargs = {
             'title': data['title'],
             'content': data['content'],
