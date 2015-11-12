@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from main.models import Project, Page
+from main.models import Project, Page, User
 from .protected_view import ProtectedViewMixin
 
 
