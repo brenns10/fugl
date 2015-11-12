@@ -10,7 +10,7 @@ test: migrate venv
 	cd corvid && ../venv/bin/python manage.py test
 
 coverage: migrate venv
-	cd corvid && ../venv/bin/coverage run --source=corvid,main --omit=\*/migrations/\* manage.py test
+	cd corvid && ../venv/bin/coverage run --source=corvid,main --omit=\*/migrations/\*,\*/management/\*,corvid/wsgi.py manage.py test
 	cd corvid && ../venv/bin/coverage html -d ../htmlcov
 
 venv:
