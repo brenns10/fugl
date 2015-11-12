@@ -30,9 +30,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
 
         <h2 class="stats">
-            11 statements &nbsp;
+            10 statements &nbsp;
             <span class="run hide_run shortkey_r button_toggle_run">0 run</span>
-            <span class="mis shortkey_m button_toggle_mis">11 missing</span>
+            <span class="mis shortkey_m button_toggle_mis">10 missing</span>
             <span class="exc shortkey_x button_toggle_exc">0 excluded</span>
 
             
@@ -69,47 +69,45 @@
             <td class="linenos">
 <p id="n1" class="stm mis"><a href="#n1">1</a></p>
 <p id="n2" class="stm mis"><a href="#n2">2</a></p>
-<p id="n3" class="stm mis"><a href="#n3">3</a></p>
+<p id="n3" class="pln"><a href="#n3">3</a></p>
 <p id="n4" class="pln"><a href="#n4">4</a></p>
-<p id="n5" class="pln"><a href="#n5">5</a></p>
+<p id="n5" class="stm mis"><a href="#n5">5</a></p>
 <p id="n6" class="stm mis"><a href="#n6">6</a></p>
 <p id="n7" class="stm mis"><a href="#n7">7</a></p>
-<p id="n8" class="stm mis"><a href="#n8">8</a></p>
-<p id="n9" class="pln"><a href="#n9">9</a></p>
+<p id="n8" class="pln"><a href="#n8">8</a></p>
+<p id="n9" class="stm mis"><a href="#n9">9</a></p>
 <p id="n10" class="stm mis"><a href="#n10">10</a></p>
-<p id="n11" class="stm mis"><a href="#n11">11</a></p>
+<p id="n11" class="pln"><a href="#n11">11</a></p>
 <p id="n12" class="pln"><a href="#n12">12</a></p>
-<p id="n13" class="pln"><a href="#n13">13</a></p>
-<p id="n14" class="stm mis"><a href="#n14">14</a></p>
-<p id="n15" class="pln"><a href="#n15">15</a></p>
-<p id="n16" class="stm mis"><a href="#n16">16</a></p>
+<p id="n13" class="stm mis"><a href="#n13">13</a></p>
+<p id="n14" class="pln"><a href="#n14">14</a></p>
+<p id="n15" class="stm mis"><a href="#n15">15</a></p>
+<p id="n16" class="pln"><a href="#n16">16</a></p>
 <p id="n17" class="pln"><a href="#n17">17</a></p>
 <p id="n18" class="pln"><a href="#n18">18</a></p>
-<p id="n19" class="pln"><a href="#n19">19</a></p>
-<p id="n20" class="stm mis"><a href="#n20">20</a></p>
+<p id="n19" class="stm mis"><a href="#n19">19</a></p>
                 
             </td>
             <td class="text">
 <p id="t1" class="stm mis"><span class="key">from</span> <span class="nam">django</span><span class="op">.</span><span class="nam">core</span><span class="op">.</span><span class="nam">management</span><span class="op">.</span><span class="nam">base</span> <span class="key">import</span> <span class="nam">BaseCommand</span><span class="strut">&nbsp;</span></p>
-<p id="t2" class="stm mis"><span class="key">from</span> <span class="nam">main</span><span class="op">.</span><span class="nam">models</span><span class="op">.</span><span class="nam">user</span> <span class="key">import</span> <span class="nam">User</span><span class="strut">&nbsp;</span></p>
-<p id="t3" class="stm mis"><span class="key">from</span> <span class="nam">main</span><span class="op">.</span><span class="nam">models</span><span class="op">.</span><span class="nam">theme</span> <span class="key">import</span> <span class="nam">Theme</span><span class="strut">&nbsp;</span></p>
+<p id="t2" class="stm mis"><span class="key">from</span> <span class="nam">main</span><span class="op">.</span><span class="nam">models</span> <span class="key">import</span> <span class="nam">User</span><span class="op">,</span> <span class="nam">Theme</span><span class="strut">&nbsp;</span></p>
+<p id="t3" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t4" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t5" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t6" class="stm mis"><span class="key">class</span> <span class="nam">Command</span><span class="op">(</span><span class="nam">BaseCommand</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t7" class="stm mis">&nbsp; &nbsp; <span class="nam">args</span> <span class="op">=</span> <span class="str">&#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t8" class="stm mis">&nbsp; &nbsp; <span class="nam">help</span> <span class="op">=</span> <span class="str">&#39;Populate database with default objects&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t9" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t10" class="stm mis">&nbsp; &nbsp; <span class="key">def</span> <span class="nam">handle</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="op">*</span><span class="nam">args</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t11" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">admin_user</span> <span class="op">=</span> <span class="nam">User</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create_user</span><span class="op">(</span><span class="str">&#39;admin_user&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t12" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;admin@example.com&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t13" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;cock-of-the-rock&#39;</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t14" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">admin_user</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t15" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t16" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">default_theme</span> <span class="op">=</span> <span class="nam">Theme</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="nam">title</span><span class="op">=</span><span class="str">&#39;default&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t17" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">filepath</span><span class="op">=</span><span class="str">&#39;themes/default&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t18" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">body_markup</span><span class="op">=</span><span class="str">&#39;&lt;script&gt;console.log(&quot;&quot;)&lt;/script&gt;&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t19" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">creator</span><span class="op">=</span><span class="nam">admin_user</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t20" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">default_theme</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t5" class="stm mis"><span class="key">class</span> <span class="nam">Command</span><span class="op">(</span><span class="nam">BaseCommand</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t6" class="stm mis">&nbsp; &nbsp; <span class="nam">args</span> <span class="op">=</span> <span class="str">&#39;&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t7" class="stm mis">&nbsp; &nbsp; <span class="nam">help</span> <span class="op">=</span> <span class="str">&#39;Populate database with default objects&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t8" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t9" class="stm mis">&nbsp; &nbsp; <span class="key">def</span> <span class="nam">handle</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="op">*</span><span class="nam">args</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t10" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">admin_user</span> <span class="op">=</span> <span class="nam">User</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create_user</span><span class="op">(</span><span class="str">&#39;admin_user&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t11" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;admin@example.com&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t12" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;cock-of-the-rock&#39;</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t13" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">admin_user</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t14" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t15" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">default_theme</span> <span class="op">=</span> <span class="nam">Theme</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="nam">title</span><span class="op">=</span><span class="str">&#39;default&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t16" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">filepath</span><span class="op">=</span><span class="str">&#39;themes/default&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t17" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">body_markup</span><span class="op">=</span><span class="str">&#39;&lt;script&gt;console.log(&quot;&quot;)&lt;/script&gt;&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t18" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">creator</span><span class="op">=</span><span class="nam">admin_user</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t19" class="stm mis">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">default_theme</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
                 
             </td>
         </tr>
@@ -120,7 +118,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.2</a>,
-            created at 2015-11-12 17:47
+            created at 2015-11-12 21:27
         </p>
     </div>
 </div>
