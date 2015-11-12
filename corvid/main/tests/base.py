@@ -25,3 +25,7 @@ class CorvidTestCase(TestCase):
     def tearDownTheme(self):
         self.default_theme.save()
         self.admin_user.delete()
+
+    def login(self):
+        self.client.login(username=self.admin_user.username,
+                          password=self.admin_password)
