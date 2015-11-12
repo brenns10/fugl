@@ -1,8 +1,7 @@
 from django.views.generic.edit import CreateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
-from main.models.category import Category
-from main.models.project import Project
+from main.models import Category, Project
 from .protected_view import ProtectedViewMixin
 
 

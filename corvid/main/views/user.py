@@ -1,6 +1,6 @@
 from django.views.generic import ListView
 from .protected_view import ProtectedViewMixin
-from main.models.project import Project
+from main.models import Project
 
 
 class UserHomeView(ProtectedViewMixin, ListView):

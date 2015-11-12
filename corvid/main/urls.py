@@ -1,14 +1,8 @@
 from django.conf.urls import url
-from .views.root import root_controller
-from .views.user import UserHomeView
-from .views.registration import RegistrationView
-from .views.create_project import CreateProjectView
-from .views.page import CreatePageView
-from .views.page import UpdatePageView
-from .views.post import CreatePostView
-from .views.post import UpdatePostView
-from .views.project_home import ProjectDetailView
-from .views.category import CreateCategoryView
+from .views import ( root_controller, UserHomeView, RegistrationView,
+                     CreateProjectView, CreatePageView, UpdatePageView,
+                     CreatePostView, UpdatePostView, ProjectDetailView,
+                     CreateCategoryView )
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
 

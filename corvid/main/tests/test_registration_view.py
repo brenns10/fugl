@@ -3,8 +3,8 @@ Tests for main.views.registration.RegistrationView.
 """
 
 from django.test import Client
-from main.tests.base import CorvidTestCase
-from main.models.user import User
+from .base import CorvidTestCase
+from main.models import User
 
 
 class RegistrationViewTestCase(CorvidTestCase):
