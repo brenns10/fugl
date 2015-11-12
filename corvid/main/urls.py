@@ -2,7 +2,7 @@ from django.conf.urls import url
 from .views import ( root_controller, UserHomeView, RegistrationView,
                      CreateProjectView, CreatePageView, UpdatePageView,
                      CreatePostView, UpdatePostView, ProjectDetailView,
-                     CreateCategoryView )
+                     CreateCategoryView, SiteGenerationView )
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
 

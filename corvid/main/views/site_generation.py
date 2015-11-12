@@ -1,7 +1,7 @@
 from django.views.generic.base import View
 from django.utils.text import slugify
 from django.http import HttpResponse
-from main.models.project import Project
+from main.models import Project
 from .protected_view import ProtectedViewMixin
 from subprocess import Popen
 import tempfile
