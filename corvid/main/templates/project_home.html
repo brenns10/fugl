@@ -28,6 +28,9 @@
     </ul>
 
     <a href="{% url 'new_post' owner=owner title=title %}">New Post</a> <br />
-    <a href="{% url 'new_category' owner=owner title=title %}">New Category</a>
+    <a href="{% url 'new_category' owner=owner title=title %}">New Category</a> <br />
+</div>
+<div class='row col-md-6 text-left'>
+    <a href="{% url 'site_generation' owner=owner proj_title=title %}">Download ZIP</a> <br />
 </div>
 {% endblock %}

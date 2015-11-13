@@ -7,3 +7,4 @@ from .protected_view import ProtectedViewMixin
 from .registration import RegistrationView
 from .root import root_controller
 from .user import UserHomeView
+from .site_generation import SiteGenerationView
