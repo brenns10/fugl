@@ -40,6 +40,7 @@ class CreatePageView(ProtectedViewMixin, CreateView):
         }
         return TemplateResponse(self.request, 'success.html', context=ctx)
 
+
 class UpdatePageView(ProtectedViewMixin, UpdateView):
     template_name = 'edit_page_post.html'
     model = Page
