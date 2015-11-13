@@ -1,16 +1,23 @@
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import FormView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 from main.models import Project, Theme
+from main.forms import CreateProjectForm
 from .protected_view import ProtectedViewMixin
 
 
-class CreateProjectView(ProtectedViewMixin, CreateView):
+class CreateProjectView(ProtectedViewMixin, FormView):
+    form_class = CreateProjectForm
     template_name = 'project_create.html'
-    model = Project
-    fields = ['title', 'description']
     default_theme = Theme.objects.get(title='default')
+
+    def get_form_kwargs(self):
+        """
+        Put the request user into the form constructor kwargs so it can use it.
+        """
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
     def form_valid(self, form):
         # default theme?
@@ -22,7 +29,7 @@ class CreateProjectView(ProtectedViewMixin, CreateView):
         kwargs = {
             'title': title,
             'description': data['description'],
-            'preview_url': '{0}/{1}'.format(user.username, title),
+            'preview_url': '',
             'owner': user,
             'theme': default_theme,
         }

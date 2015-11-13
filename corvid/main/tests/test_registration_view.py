@@ -35,6 +35,22 @@ class RegistrationViewTestCase(CorvidTestCase):
         # Finally, we can delete the user we created.
         users[0].delete()
 
+    def test_duplicate_username(self):
+        post_data = {'username': self.admin_user.username,
+                     'password': 'test_pass', 'email': 'example@example.com'}
+        response = self.client.post('/register/', post_data)
+        # We should get a 200 OK:
+        self.assertEqual(response.status_code, 200)
+        # That contains "Registration successful"
+        self.assertIn(b'A user with that username already exists.',
+                      response.content)
+        # After this, we should still have an admin_user, but NOT a test_user
+        # in the database.
+        admin_users = User.objects.filter(username=self.admin_user.username)
+        self.assertEqual(len(admin_users), 1)
+        test_users = User.objects.filter(username='test_user')
+        self.assertEqual(len(test_users), 0)
+
     def test_post_invalid_email_fails(self):
         post_data = {'username': 'test_user', 'password': 'test_pass',
                      'email': 'I am not really an email address!'}

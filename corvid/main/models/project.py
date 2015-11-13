@@ -22,7 +22,7 @@ class Project(models.Model):
 
     @property
     def project_home_url(self):
-        return '/project/{0}'.format(self.preview_url)
+        return '/project/{0}/{1}'.format(self.owner.username, self.title)
 
     def get_pelican_conf(self, content_path='content'):
         """Returns pelicanconf correspnding to this Project."""
