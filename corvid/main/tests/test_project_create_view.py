@@ -67,3 +67,20 @@ class CreateProjectViewTestCase(CorvidTestCase):
         self.assertIn(b'This field is required.', resp.content)
         new_number_of_projects = len(Project.objects.all())
         self.assertEqual(old_number_of_projects, new_number_of_projects)
+
+    def test_duplicate_project_name(self):
+        data = {'title': 'duplicate', 'description': 'dupe'}
+        proj = Project.objects.create(title=data['title'],
+                                      description=data['description'],
+                                      owner=self.admin_user,
+                                      theme=self.default_theme)
+        proj.save()
+        old_number_of_projects = len(Project.objects.all())
+        self.login()
+        resp = self.client.post(self.url, data)
+        # 200 doesn't mean failure, sadly
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b'Project with that name already exists.', resp.content)
+        new_number_of_projects = len(Project.objects.all())
+        self.assertEqual(old_number_of_projects, new_number_of_projects)
+        proj.delete()
