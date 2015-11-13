@@ -2,7 +2,7 @@ from django.conf.urls import url
 from .views import ( root_controller, UserHomeView, RegistrationView,
                      CreateProjectView, CreatePageView, UpdatePageView,
                      CreatePostView, UpdatePostView, ProjectDetailView,
-                     CreateCategoryView )
+                     CreateCategoryView, SiteGenerationView )
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
 
@@ -30,4 +30,8 @@ urlpatterns = [
         CreatePostView.as_view(), name='new_post'),
     url(r'^project/(?P<owner>[^/]+)/(?P<proj_title>[^/]+)/post/edit/(?P<post_title>[^/]+)',
         UpdatePostView.as_view(), name='edit_post'),
+
+    # Site generation
+    url(r'^project/(?P<owner>[^/]+)/(?P<proj_title>[^/]+)/generate',
+        SiteGenerationView.as_view(), name='site_generation'),
 ]
