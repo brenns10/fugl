@@ -3,7 +3,6 @@ Represents a project: a static website.
 """
 from django.db import models
 from .user import User
-import os
 
 
 class Project(models.Model):
@@ -23,7 +22,15 @@ class Project(models.Model):
 
     def get_pelican_conf(self, content_path='content'):
         """Returns pelicanconf correspnding to this Project."""
-        template = """#!/usr/bin/env python
+        template_args = {
+            'author': self.owner.username,
+            'site_name': self.title,
+            'content_path': content_path,
+        }
+        return pelicanconf_template % template_args
+
+
+pelicanconf_template = """#!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
@@ -55,9 +62,3 @@ DEFAULT_PAGINATION = False
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 """
-        template_args = {
-            'author': self.owner.username,
-            'site_name': self.title,
-            'content_path': content_path,
-        }
-        return template % template_args

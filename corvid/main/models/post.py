@@ -18,11 +18,6 @@ class Post(models.Model):
         return (slugify(self.title) + '.md')
 
     def get_markdown(self):
-        template = """Title: %(title)s
-Author: %(author)s
-%(date_created_str)s%(date_modified_str)s
-%(content)s
-"""
         kwargs = {
             'title': self.title,
             'author': self.project.owner.username,
@@ -37,4 +32,11 @@ Author: %(author)s
         if self.date_updated is not None:
             kwargs['date_modified_str'] = ('Modified: {0}\n'
                                            .format(self.date_updated.strftime(date_fmt)))
-        return (template % kwargs)
+        return (post_template % kwargs)
+
+
+post_template = """Title: %(title)s
+Author: %(author)s
+%(date_created_str)s%(date_modified_str)s
+%(content)s
+"""

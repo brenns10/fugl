@@ -14,11 +14,13 @@ class Page(models.Model):
         return (slugify(self.title) + '.md')
 
     def get_markdown(self):
-        template = """Title: %(title)s
-
-%(content)s
-"""
-        return (template % {
+        return (page_template % {
             'title': self.title,
             'content': self.content,
         })
+
+
+page_template = """Title: %(title)s
+
+%(content)s
+"""
