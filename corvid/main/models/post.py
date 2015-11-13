@@ -3,6 +3,10 @@ from django.utils.text import slugify
 
 
 class Post(models.Model):
+    class Meta:
+        unique_together = (('title', 'project'),)
+        index_together = (('title', 'project'),)
+
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=50000)
     date_created = models.DateTimeField()
