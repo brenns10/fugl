@@ -16,13 +16,11 @@ class RegistrationView(FormView):
         user = User.objects.create_user(data['username'],
                                         data['email'],
                                         data['password'])
-        if user is None:
-            raise ValidationError('Unable to create user')
-        else:
-            user.save()
-            ctx = {
-                'success_message': 'Registration successful',
-                'return_message': 'Login page',
-                'return_url': reverse('root'),
-            }
-            return TemplateResponse(self.request, 'success.html', context=ctx)
+        # due to form validation we know this will be fine
+        user.save()
+        ctx = {
+            'success_message': 'Registration successful',
+            'return_message': 'Login page',
+            'return_url': reverse('root'),
+        }
+        return TemplateResponse(self.request, 'success.html', context=ctx)
