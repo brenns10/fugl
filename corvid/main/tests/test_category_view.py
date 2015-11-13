@@ -13,6 +13,7 @@ POST:
 """
 
 from django.test import Client
+from django.db import transaction
 from .base import CorvidTestCase
 from main.models import User, Project, Category
 
@@ -84,6 +85,28 @@ class CreateCategoryViewTestCase(CorvidTestCase):
         self.login()
         response = self.client.post(url, data)
         # should get redirected to the project home
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Category created!', response.content)
+        cats = Category.objects.filter(project=self.project,
+                                       title=data['title'])
+        self.assertEqual(len(cats), 1)
+        cats[0].delete()
+
+    def test_create_existing_category(self):
+        data = {'title': 'Serious Business'}
+        category = Category.objects.create(title=data['title'],
+                                           project=self.project)
+        category.save()
+        url = self.url_for(self.project)
+        self.login()
+
+        # BTDubs - this is because of an exception we silence in the view.  If
+        # we don't do this thingy, it will come back and bite us with a weird
+        # exception later in the test.  See this SO question/answer:
+        # https://stackoverflow.com/questions/21458387/transactionmanagementerror-you-cant-execute-queries-until-the-end-of-the-atom
+        with transaction.atomic():
+            response = self.client.post(url, data)
+
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Category created!', response.content)
         cats = Category.objects.filter(project=self.project,
