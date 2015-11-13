@@ -100,6 +100,10 @@
 <p id="n31" class="pln"><a href="#n31">31</a></p>
 <p id="n32" class="pln"><a href="#n32">32</a></p>
 <p id="n33" class="pln"><a href="#n33">33</a></p>
+<p id="n34" class="pln"><a href="#n34">34</a></p>
+<p id="n35" class="pln"><a href="#n35">35</a></p>
+<p id="n36" class="pln"><a href="#n36">36</a></p>
+<p id="n37" class="pln"><a href="#n37">37</a></p>
                 
             </td>
             <td class="text">
@@ -107,7 +111,7 @@
 <p id="t2" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span><span class="nam">views</span> <span class="key">import</span> <span class="op">(</span> <span class="nam">root_controller</span><span class="op">,</span> <span class="nam">UserHomeView</span><span class="op">,</span> <span class="nam">RegistrationView</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t3" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">CreateProjectView</span><span class="op">,</span> <span class="nam">CreatePageView</span><span class="op">,</span> <span class="nam">UpdatePageView</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t4" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">CreatePostView</span><span class="op">,</span> <span class="nam">UpdatePostView</span><span class="op">,</span> <span class="nam">ProjectDetailView</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t5" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">CreateCategoryView</span> <span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t5" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <span class="nam">CreateCategoryView</span><span class="op">,</span> <span class="nam">SiteGenerationView</span> <span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t6" class="stm run hide_run"><span class="key">from</span> <span class="nam">django</span><span class="op">.</span><span class="nam">contrib</span><span class="op">.</span><span class="nam">auth</span><span class="op">.</span><span class="nam">views</span> <span class="key">import</span> <span class="nam">login</span> <span class="key">as</span> <span class="nam">login_view</span><span class="strut">&nbsp;</span></p>
 <p id="t7" class="stm run hide_run"><span class="key">from</span> <span class="nam">django</span><span class="op">.</span><span class="nam">contrib</span><span class="op">.</span><span class="nam">auth</span><span class="op">.</span><span class="nam">views</span> <span class="key">import</span> <span class="nam">logout_then_login</span> <span class="key">as</span> <span class="nam">logout_view</span><span class="strut">&nbsp;</span></p>
 <p id="t8" class="pln"><span class="strut">&nbsp;</span></p>
@@ -135,7 +139,11 @@
 <p id="t30" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">CreatePostView</span><span class="op">.</span><span class="nam">as_view</span><span class="op">(</span><span class="op">)</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">&#39;new_post&#39;</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t31" class="pln">&nbsp; &nbsp; <span class="nam">url</span><span class="op">(</span><span class="str">r&#39;^project/(?P&lt;owner&gt;[^/]+)/(?P&lt;proj_title&gt;[^/]+)/post/edit/(?P&lt;post_title&gt;[^/]+)&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t32" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">UpdatePostView</span><span class="op">.</span><span class="nam">as_view</span><span class="op">(</span><span class="op">)</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">&#39;edit_post&#39;</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t33" class="pln"><span class="op">]</span><span class="strut">&nbsp;</span></p>
+<p id="t33" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t34" class="pln">&nbsp; &nbsp; <span class="com"># Site generation</span><span class="strut">&nbsp;</span></p>
+<p id="t35" class="pln">&nbsp; &nbsp; <span class="nam">url</span><span class="op">(</span><span class="str">r&#39;^project/(?P&lt;owner&gt;[^/]+)/(?P&lt;proj_title&gt;[^/]+)/generate&#39;</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t36" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">SiteGenerationView</span><span class="op">.</span><span class="nam">as_view</span><span class="op">(</span><span class="op">)</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">&#39;site_generation&#39;</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t37" class="pln"><span class="op">]</span><span class="strut">&nbsp;</span></p>
                 
             </td>
         </tr>
@@ -146,7 +154,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.2</a>,
-            created at 2015-11-12 21:30
+            created at 2015-11-13 00:24
         </p>
     </div>
 </div>
