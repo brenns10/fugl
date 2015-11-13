@@ -46,7 +46,6 @@ class SiteGenerationView(ProtectedViewMixin, View):
                 for filename in filenames:
                     path = os.path.join(dirpath, filename)
                     arc_path = os.path.relpath(path, output_dir)
-                    print('adding {0}'.format(arc_path))
                     arc.write(path, arc_path)
 
         # remove the tempdir...
@@ -61,7 +60,6 @@ class SiteGenerationView(ProtectedViewMixin, View):
         resp = HttpResponse(content, content_type='application/zip')
         resp['Content-Disposition'] = 'attachment; filename=output.zip'
         resp['Content-Length'] = len(content)
-        print(len(content))
         return resp
 
 
@@ -72,7 +70,6 @@ def pelican_generate(site_dir, content_dir, settings_file, timeout=10):
         'path_to_content': path_to_content,
         'path_to_settings': path_to_settings,
     })
-    import pprint; pprint.pprint(shlex.split(cmd))
     p = Popen(shlex.split(cmd))
     p.wait(timeout=timeout)  # we don't have all day
 
