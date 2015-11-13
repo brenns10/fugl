@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from main.models import Project
 from .protected_view import ProtectedViewMixin
 from subprocess import Popen
+from datetime import datetime
 import tempfile
 import zipfile
 import shutil
@@ -57,8 +58,10 @@ class SiteGenerationView(ProtectedViewMixin, View):
         tempzipfile.close()
 
         # ...and return the zipfile to the user
+        filename = '{0}_output_{1}.zip'.format(project.title,
+                                               datetime.now().strftime('%Y-%m-%d_%H%M'))
         resp = HttpResponse(content, content_type='application/zip')
-        resp['Content-Disposition'] = 'attachment; filename=output.zip'
+        resp['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
         resp['Content-Length'] = len(content)
         return resp
 
