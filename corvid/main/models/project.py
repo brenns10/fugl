@@ -9,6 +9,10 @@ class Project(models.Model):
     """
     Represents a project: a static website
     """
+    class Meta:
+        unique_together = (('title', 'owner'),)
+        index_together = (('title', 'owner'),)
+
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     preview_url = models.URLField()
