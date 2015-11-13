@@ -29,7 +29,7 @@ class CreateProjectView(ProtectedViewMixin, FormView):
         kwargs = {
             'title': title,
             'description': data['description'],
-            'preview_url': '{0}/{1}'.format(user.username, title),
+            'preview_url': '',
             'owner': user,
             'theme': default_theme,
         }

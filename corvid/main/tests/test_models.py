@@ -87,3 +87,29 @@ class PostTestCase(CorvidTestCase):
         self.assertEqual(frontmatter.get('Date', ''), self.post.date_created.strftime(date_fmt))
         self.assertEqual(frontmatter.get('Modified', ''), self.post.date_updated.strftime(date_fmt))
         self.assertEqual(content, self.post.content)
+
+
+class ProjectTestCase(CorvidTestCase):
+
+    def setUp(self):
+        self.setUpTheme()
+
+        self.project = Project.objects.create(title='project',
+                                              description='project',
+                                              owner=self.admin_user,
+                                              theme=self.default_theme)
+        self.project.save()
+
+    def tearDown(self):
+        self.project.delete()
+        self.tearDownTheme()
+
+    def test_config(self):
+        conf = self.project.get_pelican_conf()
+        self.assertIn("AUTHOR = '%s'" % self.project.owner.username, conf)
+        self.assertIn("SITENAME = '%s'" % self.project.title, conf)
+
+    def test_project_home_url(self):
+        url = '/project/%s/%s' % (self.project.owner.username,
+                                  self.project.title)
+        self.assertEqual(url, self.project.project_home_url)
