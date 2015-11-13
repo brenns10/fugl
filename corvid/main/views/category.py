@@ -1,7 +1,8 @@
 from django.views.generic.edit import CreateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
-from main.models import Category, Project
+from django.shortcuts import get_object_or_404
+from main.models import Category, Project, User
 from .protected_view import ProtectedViewMixin
 
 
@@ -11,7 +12,9 @@ class CreateCategoryView(ProtectedViewMixin, CreateView):
     fields = ['title']
 
     def get_context_data(self, **kwargs):
-        project = Project.objects.get(owner=self.request.user, title=self.kwargs['title'])
+        qs = Project.objects.filter(owner=self.request.user)
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        project = get_object_or_404(qs, owner=user, title=self.kwargs['title'])
         categories = [c for c in Category.objects.filter(project=project)]
 
         context = super(CreateCategoryView, self).get_context_data(**kwargs)
@@ -22,7 +25,9 @@ class CreateCategoryView(ProtectedViewMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        project = Project.objects.get(owner=self.request.user, title=self.kwargs['title'])
+        qs = Project.objects.filter(owner=self.request.user)
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        project = get_object_or_404(qs, owner=user, title=self.kwargs['title'])
         data = form.cleaned_data
         kwargs = {
             'title': data['title'],
