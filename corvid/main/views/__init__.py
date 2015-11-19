@@ -8,3 +8,4 @@ from .registration import RegistrationView
 from .root import root_controller
 from .user import UserHomeView
 from .site_generation import SiteGenerationView
+from .choose_theme import ChooseThemeView
