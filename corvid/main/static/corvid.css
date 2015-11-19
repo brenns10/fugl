@@ -7,3 +7,20 @@
     width: 300px;
     margin: auto;
 }
+
+#nav-corvid {
+    font-family: 'Indie Flower', cursive;
+    font-size: 30;
+    vertical-align: middle;
+    color: black;
+    padding: 2px;
+}
+
+#nav-logo {
+    height: 100%;
+    display: inline;
+}
+
+#logout {
+    color: black;
+}
