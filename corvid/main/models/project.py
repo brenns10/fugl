@@ -32,7 +32,6 @@ class Project(models.Model):
             'content_path': content_path,
             'theme': self.theme.filepath,
         }
-        print(template_args)
         return pelicanconf_template % template_args
 
 
