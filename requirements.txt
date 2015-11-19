@@ -4,3 +4,4 @@ coverage
 django-forms-bootstrap
 pelican
 markdown
+tswift
