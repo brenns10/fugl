@@ -62,7 +62,7 @@ class CreatePostView(ProtectedViewMixin, CreateView):
 class UpdatePostView(ProtectedViewMixin, UpdateView):
     template_name = 'edit_page_post.html'
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'category', 'content']
 
     def get_object(self):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
