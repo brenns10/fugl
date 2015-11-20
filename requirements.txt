@@ -5,3 +5,4 @@ django-forms-bootstrap
 pelican
 markdown
 tswift
+django-pagedown

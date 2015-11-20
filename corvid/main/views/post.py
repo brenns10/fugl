@@ -4,14 +4,26 @@ from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.http import Http404
+from django import forms
+from pagedown.widgets import PagedownWidget
+
 from main.models import Project, Post, User
 from .protected_view import ProtectedViewMixin
 
 
+class PostForm(forms.ModelForm):
+
+    content = forms.CharField(widget=PagedownWidget())
+
+    class Meta:
+        model = Post
+        fields = ['title', 'category', 'content']
+
+
 class CreatePostView(ProtectedViewMixin, CreateView):
+    form_class = PostForm
     template_name = 'edit_page_post.html'
-    model = Post
-    fields = ['title', 'category', 'content']
 
     def get_context_data(self, **kwargs):
         context = super(CreatePostView, self).get_context_data(**kwargs)
@@ -60,9 +72,8 @@ class CreatePostView(ProtectedViewMixin, CreateView):
 
 
 class UpdatePostView(ProtectedViewMixin, UpdateView):
+    form_class = PostForm
     template_name = 'edit_page_post.html'
-    model = Post
-    fields = ['title', 'category', 'content']
 
     def get_object(self):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
