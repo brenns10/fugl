@@ -1,17 +1,28 @@
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import FormView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django import forms
+from pagedown.widgets import PagedownWidget
+
 from main.models import Project, Page, User
 from .protected_view import ProtectedViewMixin
 
 
-class CreatePageView(ProtectedViewMixin, CreateView):
+class PageForm(forms.ModelForm):
+
+    content = forms.CharField(widget=PagedownWidget())
+
+    class Meta:
+        model = Page
+        fields = ['title', 'content']
+
+
+class CreatePageView(ProtectedViewMixin, FormView):
+    form_class = PageForm
     template_name = 'edit_page_post.html'
-    model = Page
-    fields = ['title', 'content']
 
     def get_context_data(self, **kwargs):
         context = super(CreatePageView, self).get_context_data(**kwargs)
@@ -51,9 +62,8 @@ class CreatePageView(ProtectedViewMixin, CreateView):
 
 
 class UpdatePageView(ProtectedViewMixin, UpdateView):
+    form_class = PageForm
     template_name = 'edit_page_post.html'
-    model = Page
-    fields = ['title', 'content']
 
     def get_object(self):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
