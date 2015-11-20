@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.http import Http404
 from django import forms
+from main.models import Category
 from pagedown.widgets import PagedownWidget
 
 from main.models import Project, Post, User
@@ -13,6 +14,13 @@ from .protected_view import ProtectedViewMixin
 
 
 class PostForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        '''
+        DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
+        '''
+        project = kwargs.pop('__project')
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(project=project)
 
     content = forms.CharField(widget=PagedownWidget())
 
@@ -32,12 +40,19 @@ class CreatePostView(ProtectedViewMixin, CreateView):
         # allowed to view it.
         qs = Project.objects.filter(owner=self.request.user)
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
-        project = get_object_or_404(qs, owner=user, title=self.kwargs['title'])
+        project = get_object_or_404(qs, owner=self.request.user, title=self.kwargs['title'])
 
         context['action'] = 'Add'
         context['type'] = 'Post'
         context['project'] = self.kwargs['title']
         return context
+
+    def get_form_kwargs(self):
+        initial = super().get_form_kwargs()
+        qs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(qs, owner=self.request.user, title=self.kwargs['title'])
+        initial['__project'] = project
+        return initial
 
     def form_valid(self, form):
         qs = Project.objects.filter(owner=self.request.user)
@@ -81,6 +96,13 @@ class UpdatePostView(ProtectedViewMixin, UpdateView):
         project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
         post = get_object_or_404(Post.objects, project=project, title=self.kwargs['post_title'])
         return post
+
+    def get_form_kwargs(self):
+        initial = super().get_form_kwargs()
+        qs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(qs, owner=self.request.user, title=self.kwargs['proj_title'])
+        initial['__project'] = project
+        return initial
 
     def get_context_data(self, **kwargs):
         context = super(UpdatePostView, self).get_context_data(**kwargs)
