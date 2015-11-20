@@ -35,7 +35,7 @@ User-friendly static site generation as a service. Powered by [Pelican](http://b
   `pip install -r requirements.txt`
 - This may fail due to lack of development headers when installing native
   extensions (particularly psycopg2 and lxml).  So then you'll probably want
-  `sudo apt-get install python3-dev libxml2-dev`.
+  `sudo apt-get install python3-dev libxml2-dev libxslt1-dev lib32z1-dev`.
 
 # Development
 
