@@ -100,11 +100,11 @@
 <p id="n31" class="pln"><a href="#n31">31</a></p>
 <p id="n32" class="pln"><a href="#n32">32</a></p>
 <p id="n33" class="pln"><a href="#n33">33</a></p>
-<p id="n34" class="stm run hide_run"><a href="#n34">34</a></p>
-<p id="n35" class="pln"><a href="#n35">35</a></p>
+<p id="n34" class="pln"><a href="#n34">34</a></p>
+<p id="n35" class="stm run hide_run"><a href="#n35">35</a></p>
 <p id="n36" class="pln"><a href="#n36">36</a></p>
-<p id="n37" class="stm run hide_run"><a href="#n37">37</a></p>
-<p id="n38" class="pln"><a href="#n38">38</a></p>
+<p id="n37" class="pln"><a href="#n37">37</a></p>
+<p id="n38" class="stm run hide_run"><a href="#n38">38</a></p>
 <p id="n39" class="pln"><a href="#n39">39</a></p>
 <p id="n40" class="pln"><a href="#n40">40</a></p>
 <p id="n41" class="pln"><a href="#n41">41</a></p>
@@ -135,6 +135,8 @@
 <p id="n66" class="pln"><a href="#n66">66</a></p>
 <p id="n67" class="pln"><a href="#n67">67</a></p>
 <p id="n68" class="pln"><a href="#n68">68</a></p>
+<p id="n69" class="pln"><a href="#n69">69</a></p>
+<p id="n70" class="pln"><a href="#n70">70</a></p>
                 
             </td>
             <td class="text">
@@ -170,42 +172,44 @@
 <p id="t30" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;author&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">owner</span><span class="op">.</span><span class="nam">username</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t31" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;site_name&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">title</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t32" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;content_path&#39;</span><span class="op">:</span> <span class="nam">content_path</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t33" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">}</span><span class="strut">&nbsp;</span></p>
-<p id="t34" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">pelicanconf_template</span> <span class="op">%</span> <span class="nam">template_args</span><span class="strut">&nbsp;</span></p>
-<p id="t35" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t33" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;theme&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">theme</span><span class="op">.</span><span class="nam">filepath</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t34" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">}</span><span class="strut">&nbsp;</span></p>
+<p id="t35" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">pelicanconf_template</span> <span class="op">%</span> <span class="nam">template_args</span><span class="strut">&nbsp;</span></p>
 <p id="t36" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t37" class="stm run hide_run"><span class="nam">pelicanconf_template</span> <span class="op">=</span> <span class="str">&quot;&quot;&quot;#!/usr/bin/env python</span><span class="strut">&nbsp;</span></p>
-<p id="t38" class="pln"><span class="str"># -*- coding: utf-8 -*- #</span><span class="strut">&nbsp;</span></p>
-<p id="t39" class="pln"><span class="str">from __future__ import unicode_literals</span><span class="strut">&nbsp;</span></p>
-<p id="t40" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t41" class="pln"><span class="str">AUTHOR = &#39;%(author)s&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t42" class="pln"><span class="str">SITENAME = &#39;%(site_name)s&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t43" class="pln"><span class="str">SITEURL = &#39;&#39;</span><span class="strut">&nbsp;</span></p>
-<p id="t44" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t45" class="pln"><span class="str">PATH = &#39;%(content_path)s&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t37" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t38" class="stm run hide_run"><span class="nam">pelicanconf_template</span> <span class="op">=</span> <span class="str">&quot;&quot;&quot;#!/usr/bin/env python</span><span class="strut">&nbsp;</span></p>
+<p id="t39" class="pln"><span class="str"># -*- coding: utf-8 -*- #</span><span class="strut">&nbsp;</span></p>
+<p id="t40" class="pln"><span class="str">from __future__ import unicode_literals</span><span class="strut">&nbsp;</span></p>
+<p id="t41" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t42" class="pln"><span class="str">AUTHOR = &#39;%(author)s&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t43" class="pln"><span class="str">SITENAME = &#39;%(site_name)s&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t44" class="pln"><span class="str">SITEURL = &#39;&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t45" class="pln"><span class="str">THEME = &#39;%(theme)s&#39;</span><span class="strut">&nbsp;</span></p>
 <p id="t46" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t47" class="pln"><span class="str">TIMEZONE = &#39;America/New_York&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t47" class="pln"><span class="str">PATH = &#39;%(content_path)s&#39;</span><span class="strut">&nbsp;</span></p>
 <p id="t48" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t49" class="pln"><span class="str">DEFAULT_LANG = &#39;en&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t49" class="pln"><span class="str">TIMEZONE = &#39;America/New_York&#39;</span><span class="strut">&nbsp;</span></p>
 <p id="t50" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t51" class="pln"><span class="str"># Feed generation is usually not desired when developing</span><span class="strut">&nbsp;</span></p>
-<p id="t52" class="pln"><span class="str">FEED_ALL_ATOM = None</span><span class="strut">&nbsp;</span></p>
-<p id="t53" class="pln"><span class="str">CATEGORY_FEED_ATOM = None</span><span class="strut">&nbsp;</span></p>
-<p id="t54" class="pln"><span class="str">TRANSLATION_FEED_ATOM = None</span><span class="strut">&nbsp;</span></p>
-<p id="t55" class="pln"><span class="str">AUTHOR_FEED_ATOM = None</span><span class="strut">&nbsp;</span></p>
-<p id="t56" class="pln"><span class="str">AUTHOR_FEED_RSS = None</span><span class="strut">&nbsp;</span></p>
-<p id="t57" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t58" class="pln"><span class="str"># Blogroll</span><span class="strut">&nbsp;</span></p>
-<p id="t59" class="pln"><span class="str">LINKS = ()</span><span class="strut">&nbsp;</span></p>
-<p id="t60" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t61" class="pln"><span class="str"># Social widget</span><span class="strut">&nbsp;</span></p>
-<p id="t62" class="pln"><span class="str">SOCIAL = ()</span><span class="strut">&nbsp;</span></p>
-<p id="t63" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t64" class="pln"><span class="str">DEFAULT_PAGINATION = False</span><span class="strut">&nbsp;</span></p>
+<p id="t51" class="pln"><span class="str">DEFAULT_LANG = &#39;en&#39;</span><span class="strut">&nbsp;</span></p>
+<p id="t52" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t53" class="pln"><span class="str"># Feed generation is usually not desired when developing</span><span class="strut">&nbsp;</span></p>
+<p id="t54" class="pln"><span class="str">FEED_ALL_ATOM = None</span><span class="strut">&nbsp;</span></p>
+<p id="t55" class="pln"><span class="str">CATEGORY_FEED_ATOM = None</span><span class="strut">&nbsp;</span></p>
+<p id="t56" class="pln"><span class="str">TRANSLATION_FEED_ATOM = None</span><span class="strut">&nbsp;</span></p>
+<p id="t57" class="pln"><span class="str">AUTHOR_FEED_ATOM = None</span><span class="strut">&nbsp;</span></p>
+<p id="t58" class="pln"><span class="str">AUTHOR_FEED_RSS = None</span><span class="strut">&nbsp;</span></p>
+<p id="t59" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t60" class="pln"><span class="str"># Blogroll</span><span class="strut">&nbsp;</span></p>
+<p id="t61" class="pln"><span class="str">LINKS = ()</span><span class="strut">&nbsp;</span></p>
+<p id="t62" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t63" class="pln"><span class="str"># Social widget</span><span class="strut">&nbsp;</span></p>
+<p id="t64" class="pln"><span class="str">SOCIAL = ()</span><span class="strut">&nbsp;</span></p>
 <p id="t65" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t66" class="pln"><span class="str"># Uncomment following line if you want document-relative URLs when developing</span><span class="strut">&nbsp;</span></p>
-<p id="t67" class="pln"><span class="str">#RELATIVE_URLS = True</span><span class="strut">&nbsp;</span></p>
-<p id="t68" class="pln"><span class="str">&quot;&quot;&quot;</span><span class="strut">&nbsp;</span></p>
+<p id="t66" class="pln"><span class="str">DEFAULT_PAGINATION = False</span><span class="strut">&nbsp;</span></p>
+<p id="t67" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t68" class="pln"><span class="str"># Uncomment following line if you want document-relative URLs when developing</span><span class="strut">&nbsp;</span></p>
+<p id="t69" class="pln"><span class="str">#RELATIVE_URLS = True</span><span class="strut">&nbsp;</span></p>
+<p id="t70" class="pln"><span class="str">&quot;&quot;&quot;</span><span class="strut">&nbsp;</span></p>
                 
             </td>
         </tr>
@@ -216,7 +220,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.2</a>,
-            created at 2015-11-20 03:02
+            created at 2015-11-20 03:08
         </p>
     </div>
 </div>
