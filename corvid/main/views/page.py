@@ -1,6 +1,5 @@
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
-from django.views.generic.edit import FormView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -20,7 +19,7 @@ class PageForm(forms.ModelForm):
         fields = ['title', 'content']
 
 
-class CreatePageView(ProtectedViewMixin, FormView):
+class CreatePageView(ProtectedViewMixin, CreateView):
     form_class = PageForm
     template_name = 'edit_page_post.html'
 

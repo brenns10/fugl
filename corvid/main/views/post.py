@@ -1,4 +1,5 @@
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
@@ -20,7 +21,7 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'category', 'content']
 
 
-class CreatePostView(ProtectedViewMixin, FormView):
+class CreatePostView(ProtectedViewMixin, CreateView):
     form_class = PostForm
     template_name = 'edit_page_post.html'
 
@@ -70,7 +71,7 @@ class CreatePostView(ProtectedViewMixin, FormView):
         return TemplateResponse(self.request, 'success.html', context=ctx)
 
 
-class UpdatePostView(ProtectedViewMixin, FormView):
+class UpdatePostView(ProtectedViewMixin, UpdateView):
     form_class = PostForm
     template_name = 'edit_page_post.html'
 
