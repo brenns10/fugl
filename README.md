@@ -59,6 +59,7 @@ git submodule init
 git submodule update
 # wait a lot longer
 cd ../corvid
+./manage.py loadthemes
 ```
 
 # Deployment
