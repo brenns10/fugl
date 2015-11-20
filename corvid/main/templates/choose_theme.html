@@ -2,7 +2,7 @@ e{% extends 'base.html' %}
 {% load bootstrap_tags %}
 {% block content %}
 <div class='std-form'>
-<h1>Choose Theme</h1>
+<h1>{{project}} Settings</h1>
 <form action='#' method='post'>
     {% csrf_token %}
     {{ form|as_bootstrap }}

@@ -6,7 +6,7 @@ from .project_home import ProtectedViewMixin
 from main.models import User, Project
 
 
-class ChooseThemeView(ProtectedViewMixin, UpdateView):
+class ProjectSettingsView(ProtectedViewMixin, UpdateView):
 
     template_name = 'choose_theme.html'
     model = Project

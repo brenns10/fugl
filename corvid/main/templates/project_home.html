@@ -4,7 +4,7 @@
 <div class='col-md-12 actions-bar'>
     <a class='actions' href="{% url 'site_generation' owner=owner proj_title=title %}"><span class='glyphicon glyphicon-download'></span> Download ZIP</a>
     <a class='actions' href="{% url 'new_category' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Category</a>
-    <a class='actions' href='{% url 'choose_theme' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
+    <a class='actions' href='{% url 'project_settings' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
 </div>
 <div class='col-md-6 text-left'>
     <div class='panel panel-default'>
