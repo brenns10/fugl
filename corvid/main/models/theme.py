@@ -8,3 +8,6 @@ class Theme(models.Model):
     body_markup = models.CharField(max_length=5000)
 
     creator = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.title

@@ -16,8 +16,7 @@ class CorvidTestCase(TestCase):
         self.admin_user.save()
 
         self.default_theme = Theme.objects.create(title='default',
-                                                  filepath='themes/default',
-                                                  body_markup='<script>console.log("")</script>',
+                                                  filepath='notmyidea',
                                                   creator=self.admin_user)
         self.default_theme.save()
 

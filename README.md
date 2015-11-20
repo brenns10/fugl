@@ -16,7 +16,6 @@ User-friendly static site generation as a service. Powered by [Pelican](http://b
 ```sql
     CREATE ROLE corvid PASSWORD '<password>' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
     CREATE DATABASE corvid OWNER corvid;
-    CREATE DATABASE test_corvid OWNER corvid;  -- only if you're testing
 ```
 
 - Edit `postgresql.conf` (found on Ubuntu under `/etc/postgresql/9.4/main/postgresql.conf`),
@@ -34,10 +33,34 @@ User-friendly static site generation as a service. Powered by [Pelican](http://b
 ### Packages
 - With virtualenv active, install required packages:
   `pip install -r requirements.txt`
+- This may fail due to lack of development headers when installing native
+  extensions (particularly psycopg2 and lxml).  So then you'll probably want
+  `sudo apt-get install python3-dev libxml2-dev libxslt1-dev lib32z1-dev`.
 
 # Development
-- To set up the database: `python manage.py migrate`
-- To launch the test server: `python manage.py runserver`
+
+- To populate the database:
+  - The basics (**you must do this**) `python manage.py populate`
+  - Taylor swift user/project (good for demo) `python manage.py tswizzle`
+- To launch the test server: `make run`
+- To run tests: `make test`
+
+# Themes
+
+To get themes added to the database (you should have gotten everything prior to
+this done):
+
+```bash
+git submodule init
+git submodule update
+# wait a little while
+cd pelican-themes
+git submodule init
+git submodule update
+# wait a lot longer
+cd ../corvid
+./manage.py loadthemes
+```
 
 # Deployment
 WIP. Something using the fabfile.

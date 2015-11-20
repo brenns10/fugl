@@ -30,6 +30,7 @@ class Project(models.Model):
             'author': self.owner.username,
             'site_name': self.title,
             'content_path': content_path,
+            'theme': self.theme.filepath,
         }
         return pelicanconf_template % template_args
 
@@ -41,6 +42,7 @@ from __future__ import unicode_literals
 AUTHOR = '%(author)s'
 SITENAME = '%(site_name)s'
 SITEURL = ''
+THEME = '%(theme)s'
 
 PATH = '%(content_path)s'
 

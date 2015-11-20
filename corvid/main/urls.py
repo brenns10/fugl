@@ -1,8 +1,9 @@
 from django.conf.urls import url
-from .views import ( root_controller, UserHomeView, RegistrationView,
-                     CreateProjectView, CreatePageView, UpdatePageView,
-                     CreatePostView, UpdatePostView, ProjectDetailView,
-                     CreateCategoryView, SiteGenerationView )
+from .views import (root_controller, UserHomeView, RegistrationView,
+                    CreateProjectView, CreatePageView, UpdatePageView,
+                    CreatePostView, UpdatePostView, ProjectDetailView,
+                    CreateCategoryView, SiteGenerationView,
+                    ProjectSettingsView)
 from .views.unauthenticated import login_unrequired
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
@@ -14,7 +15,11 @@ urlpatterns = [
     url(r'^logout', logout_view, name='logout'),
     url(r'^home', UserHomeView.as_view(), name='home'),
     url(r'^register', RegistrationView.as_view(), name='register'),
+
+    # Project URLs
     url(r'^project/create$', CreateProjectView.as_view(), name='new_project'),
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/settings/?$',
+        ProjectSettingsView.as_view(), name='project_settings'),
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/?$',
         ProjectDetailView.as_view(), name='project_home'),
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/category/new',

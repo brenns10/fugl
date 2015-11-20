@@ -16,7 +16,7 @@ class Command(BaseCommand):
         admin_user.save()
 
         default_theme = Theme.objects.create(title='default',
-                                             filepath='themes/default',
+                                             filepath='notmyidea',
                                              body_markup='<script>console.log("")</script>',
                                              creator=admin_user)
         default_theme.save()
