@@ -1,15 +1,13 @@
-{% extends 'form.html' %}
-{% block form %}
-<h1>Project Settings</h1>
-{% include 'project_edit.html' %}
-<h2>Copy Project</h2>
-<label for='new_name'>New Project Name</label>
-<input type='text' id='new_name' name='new_name'/>
-<label for='parts'>Sections to Copy</label>
-<input type='checkbox' id='theme' name='theme'/> Theme &nbsp;
-<input type='checkbox' id='pages' name='pages'/> Pages &nbsp;
-<input type='checkbox' id='articles' name='articles'/> Articles &nbsp;
-<input type='checkbox' id='plugins' name='plugins'/> Plugins &nbsp;
-<input type='submit' name='copy' value='Copy'/>
-<input type='submit' name='save' value='Save'/>
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+<div class='std-form'>
+<h1>{{project}} Settings</h1>
+<form action='#' method='post'>
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+    <input type='submit' class='btn btn-primary' name='create_account' value='Submit'/>
+    <a class='btn btn-default' href='{% url "project_home" owner=user.username title=project %}'>Cancel</a>
+</form>
+</div>
 {% endblock %}

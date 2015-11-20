@@ -8,7 +8,7 @@ from main.models import User, Project
 
 class ProjectSettingsView(ProtectedViewMixin, UpdateView):
 
-    template_name = 'choose_theme.html'
+    template_name = 'project_settings.html'
     model = Project
     fields = ['theme']
 
