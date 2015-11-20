@@ -1,36 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Project Home</h1>
-<div class='col-md-6 text-left'>
-    <h2>Pages</h2>
-    <ul>
-    {% for page in pages_ %}
-      <li>
-        <a href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
-          {{ page.title }}
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
-
-    <a href="{% url 'new_page' owner=owner title=title %}">New Page</a>
+<h1>{{ title }}</h1>
+<div class='col-md-12 actions-bar'>
+    <a class='actions' href="{% url 'site_generation' owner=owner proj_title=title %}"><span class='glyphicon glyphicon-download'></span> Download ZIP</a>
+    <a class='actions' href="{% url 'new_category' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Category</a>
+    <a class='actions' href='#'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
 </div>
 <div class='col-md-6 text-left'>
-    <h2>Posts</h2>
-    <ul>
-    {% for post in posts_ %}
-      <li>
-        <a href="{% url 'edit_post' owner=owner proj_title=title post_title=post.title %}">
-          {{ post.title }}
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
-
-    <a href="{% url 'new_post' owner=owner title=title %}">New Post</a> <br />
-    <a href="{% url 'new_category' owner=owner title=title %}">New Category</a> <br />
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            <h2 class='panel-title'>Pages</h2>
+        </div>
+        <ul class='list-group'>
+            {% for page in pages_ %}
+            <li class='list-group-item'>
+                <a class='actions' href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
+                    <span class='pp-title'>{{ page.title }}</span></a>
+                <div class='go-right'>
+                    <a href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
+                        <span class='glyphicon glyphicon-edit actions'></span></a>
+                </div>
+            </li>
+            {% endfor %}
+            <li class='list-group-item'>
+                <a class='actions' href="{% url 'new_page' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Page</a>
+            </li>
+        </ul>
+    </div>
 </div>
-<div class='row col-md-6 text-left'>
-    <a href="{% url 'site_generation' owner=owner proj_title=title %}">Download ZIP</a> <br />
+<div class='col-md-6 text-left'>
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            <h2 class='panel-title'>Posts</h2>
+        </div>
+        <ul class='list-group'>
+            {% for post in posts_ %}
+            <li class='list-group-item'>
+                <a class='actions' href="{% url 'edit_post' owner=owner proj_title=title post_title=post.title %}">
+                    <div class='pp-title'>{{ post.title }}</div></a>
+                <span class='label label-info'>{{ post.category }}</span>
+                <div class='go-right'>
+                    <a href="{% url 'edit_post' owner=owner proj_title=title post_title=post.title %}">
+                        <span class='glyphicon glyphicon-edit actions'></span></a>
+                </div>
+            </li>
+            {% endfor %}
+            <li class='list-group-item'><a class='actions' href="{% url 'new_post' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Post</a></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
