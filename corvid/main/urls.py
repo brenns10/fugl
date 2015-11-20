@@ -3,13 +3,14 @@ from .views import ( root_controller, UserHomeView, RegistrationView,
                      CreateProjectView, CreatePageView, UpdatePageView,
                      CreatePostView, UpdatePostView, ProjectDetailView,
                      CreateCategoryView, SiteGenerationView )
+from .views.unauthenticated import login_unrequired
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
 
 
 urlpatterns = [
     url(r'^$', root_controller, name='root'),
-    url(r'^login', login_view, name='login'),
+    url(r'^login', login_unrequired(login_view), name='login'),
     url(r'^logout', logout_view, name='logout'),
     url(r'^home', UserHomeView.as_view(), name='home'),
     url(r'^register', RegistrationView.as_view(), name='register'),

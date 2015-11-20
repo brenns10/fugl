@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Uh Oh, You Derped!</h1>
+
+<p>{{message}}</p>
+
+<p><a href='{{link_url}}'>{{link_text}}</a></p>
+
+<script type='text/javascript'>
+setTimeout('redirect("{{link_url}}")', 3000);
+</script>
+{% endblock %}
