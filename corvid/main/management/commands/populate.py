@@ -10,6 +10,9 @@ class Command(BaseCommand):
         admin_user = User.objects.create_user('admin_user',
                                               'admin@example.com',
                                               'cock-of-the-rock')
+        admin_user.is_superuser = True
+        admin_user.is_staff = True
+        admin_user.is_active = True
         admin_user.save()
 
         default_theme = Theme.objects.create(title='default',
