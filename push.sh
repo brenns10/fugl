@@ -5,7 +5,7 @@
 ORG=jpcjr
 REPO=corvid
 # This probably should match an email for one of your users.
-EMAIL=smb196@case.edu
+EMAIL=example@example.com
 
 set -e
 
