@@ -1,4 +1,5 @@
 PHONY: run migrate test clean
+run: PATH  := venv/bin/:$(PATH)
 run: migrate venv
 	venv/bin/python corvid/manage.py runserver
 
