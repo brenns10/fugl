@@ -14,10 +14,10 @@
         <ul class='list-group'>
             {% for page in pages_ %}
             <li class='list-group-item'>
-                <a class='actions' href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
+                <a class='actions' href="{% url 'edit_page' owner=owner proj_title=title page_id=page.id %}">
                     <span class='pp-title'>{{ page.title }}</span></a>
                 <div class='go-right'>
-                    <a href="{% url 'edit_page' owner=owner proj_title=title page_title=page.title %}">
+                    <a href="{% url 'edit_page' owner=owner proj_title=title page_id=page.id %}">
                         <span class='glyphicon glyphicon-edit actions'></span></a>
                 </div>
             </li>
@@ -36,11 +36,11 @@
         <ul class='list-group'>
             {% for post in posts_ %}
             <li class='list-group-item'>
-                <a class='actions' href="{% url 'edit_post' owner=owner proj_title=title post_title=post.title %}">
+                <a class='actions' href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
                     <div class='pp-title'>{{ post.title }}</div></a>
                 <span class='label label-info'>{{ post.category }}</span>
                 <div class='go-right'>
-                    <a href="{% url 'edit_post' owner=owner proj_title=title post_title=post.title %}">
+                    <a href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
                         <span class='glyphicon glyphicon-edit actions'></span></a>
                 </div>
             </li>
