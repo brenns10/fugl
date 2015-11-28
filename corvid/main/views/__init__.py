@@ -1,7 +1,7 @@
-from .category import CreateCategoryView
-from .create_project import CreateProjectView
-from .page import CreatePageView, UpdatePageView
-from .post import CreatePostView, UpdatePostView
+from .category import CreateCategoryView, DeleteCategoryView
+from .create_project import CreateProjectView, DeleteProjectView
+from .page import CreatePageView, DeletePageView, UpdatePageView
+from .post import CreatePostView, DeletePostView, UpdatePostView
 from .project_home import ProjectDetailView
 from .protected_view import ProtectedViewMixin
 from .registration import RegistrationView

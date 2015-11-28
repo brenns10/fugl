@@ -13,7 +13,8 @@ class Post(models.Model):
     date_updated = models.DateTimeField()
 
     project = models.ForeignKey('Project')
-    category = models.ForeignKey('Category')
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL,
+                                 null=True, blank=True)
     tags = models.ManyToManyField('Tag')
     post_plugins = models.ManyToManyField('PagePlugin')
 
