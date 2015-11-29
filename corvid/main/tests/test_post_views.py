@@ -181,7 +181,7 @@ class UpdatePostViewTestCase(CorvidTestCase):
         # return the url for a project
         return '/project/%s/%s/post/edit/%s' % (post.project.owner.username,
                                                 post.project.title,
-                                                post.title)
+                                                post.id)
 
     def login_other(self):
         # login the client as "otheruser"

@@ -165,7 +165,7 @@ class UpdatePageViewTestCase(CorvidTestCase):
         # return the url for a project
         return '/project/%s/%s/page/edit/%s' % (page.project.owner.username,
                                                 page.project.title,
-                                                page.title)
+                                                page.id)
 
     def login_other(self):
         # login the client as "otheruser"

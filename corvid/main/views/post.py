@@ -94,7 +94,7 @@ class UpdatePostView(ProtectedViewMixin, UpdateView):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
         projectqs = Project.objects.filter(owner=self.request.user)
         project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
-        post = get_object_or_404(Post.objects, project=project, title=self.kwargs['post_title'])
+        post = get_object_or_404(Post.objects, project=project, id=self.kwargs['post_id'])
         return post
 
     def get_form_kwargs(self):

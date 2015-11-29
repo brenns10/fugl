@@ -68,7 +68,7 @@ class UpdatePageView(ProtectedViewMixin, UpdateView):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
         projectqs = Project.objects.filter(owner=self.request.user)
         project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
-        page = get_object_or_404(Page.objects, project=project, title=self.kwargs['page_title'])
+        page = get_object_or_404(Page.objects, project=project, id=self.kwargs['page_id'])
         return page
 
     def get_context_data(self, **kwargs):
