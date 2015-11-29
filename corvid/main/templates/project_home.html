@@ -9,13 +9,14 @@
         </button>
         <ul class='dropdown-menu'>
             {% for category in categories %}
-            <li>
-                {{ category.title }}
+            <li class='dropdown'>
+                <span class='action'>{{ category.title }}</span>
                 <div class='go-right'>
                     <a href="{% url 'delete_category' owner=owner title=title category_id=category.id %}">
                         <span class='glyphicon glyphicon-trash actions'></span></a>
                 </div>
             </li>
+            <li role='seperator' class='divider'></li>
             {% endfor %}
             <li>
                 <a class='actions' href="{% url 'new_category' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Category</a>

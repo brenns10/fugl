@@ -1,5 +1,5 @@
 from .category import CreateCategoryView, DeleteCategoryView
-from .create_project import CreateProjectView, DeleteProjectView
+from .project import CreateProjectView, DeleteProjectView
 from .page import CreatePageView, DeletePageView, UpdatePageView
 from .post import CreatePostView, DeletePostView, UpdatePostView
 from .project_home import ProjectDetailView

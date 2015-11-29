@@ -39,8 +39,13 @@
     border:none;
     box-shadow:none;
 }
+
 .actions-bar {
     padding-bottom: 5px;
+}
+
+.dropdown {
+    padding: 3px 10px;
 }
 
 .pp-title {
