@@ -3,10 +3,6 @@ from django.utils.text import slugify
 
 
 class Page(models.Model):
-    class Meta:
-        unique_together = (('title', 'project'),)
-        index_together = (('title', 'project'),)
-
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=50000)
 
@@ -15,16 +11,18 @@ class Page(models.Model):
 
     @property
     def filename(self):
-        return (slugify(self.title) + '.md')
+        return slugify(self.title)
 
-    def get_markdown(self):
+    def get_markdown(self, slug=None):
         return (page_template % {
             'title': self.title,
             'content': self.content,
+            'slug': slug if slug else self.title
         })
 
 
 page_template = """Title: %(title)s
+Slug: %(slug)s
 
 %(content)s
 """

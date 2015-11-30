@@ -5,6 +5,7 @@ from main.models import Project
 from .protected_view import ProtectedViewMixin
 from subprocess import Popen
 from datetime import datetime
+from collections import Counter
 import tempfile
 import zipfile
 import shutil
@@ -21,19 +22,24 @@ class SiteGenerationView(ProtectedViewMixin, View):
         with open(os.path.join(site_dir, 'pelicanconf.py'), 'w') as f:
             f.write(project.get_pelican_conf())
 
+        pagelike_counter = Counter()
         for page in project.page_set.all():
             page_dir = os.path.join(site_dir, 'content', 'pages')
             mkdirs(page_dir)
-            page_file = os.path.join(page_dir, page.filename)
+
+            filename = get_filename(page, pagelike_counter)
+            page_file = os.path.join(page_dir, filename) + '.md'
             with open(page_file, 'w') as f:
-                f.write(page.get_markdown())
+                f.write(page.get_markdown(slug=filename))
 
         for post in project.post_set.all():
             post_dir = os.path.join(site_dir, 'content', slugify(post.category.title))
             mkdirs(post_dir)
-            post_file = os.path.join(post_dir, post.filename)
+
+            filename = get_filename(post, pagelike_counter)
+            post_file = os.path.join(post_dir, filename) + '.md'
             with open(post_file, 'w') as f:
-                f.write(post.get_markdown())
+                f.write(post.get_markdown(slug=filename))
 
         # now that we've written out the file, call into pelican
         pelican_generate(site_dir, 'content', 'pelicanconf.py')
@@ -64,6 +70,21 @@ class SiteGenerationView(ProtectedViewMixin, View):
         resp['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
         resp['Content-Length'] = len(content)
         return resp
+
+
+def get_filename(pagelike, pagelike_counter):
+    """
+    Return the filename for a Page/Post. Accomodates duplicates.
+    """
+    pagelike_filename = pagelike.filename
+    while True:  # guaranteed to terminate for a finite number of pages
+        pagelike_counter[pagelike_filename] += 1
+        count = pagelike_counter[pagelike_filename]
+        if count > 1:
+            pagelike_filename += ('_%d' % (count,))
+        else:
+            break
+    return pagelike_filename
 
 
 def pelican_generate(site_dir, content_dir, settings_file, timeout=10):

@@ -39,7 +39,7 @@ class PageTestCase(CorvidTestCase):
         self.tearDownTheme()
 
     def test_filename(self):
-        self.assertEqual(self.page.filename, 'page1.md')
+        self.assertEqual(self.page.filename, 'page1')
 
     def test_get_markdown(self):
         md = self.page.get_markdown()
@@ -76,7 +76,7 @@ class PostTestCase(CorvidTestCase):
         self.tearDownTheme()
 
     def test_filename(self):
-        self.assertEqual(self.post.filename, 'post1.md')
+        self.assertEqual(self.post.filename, 'post1')
 
     def test_get_markdown(self):
         md = self.post.get_markdown()
