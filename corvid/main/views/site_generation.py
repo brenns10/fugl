@@ -10,7 +10,6 @@ from collections import Counter
 from pprint import pprint
 import tempfile
 import zipfile
-import shutil
 import shlex
 import os
 
@@ -34,7 +33,6 @@ class SiteGenerationView(ProtectedViewMixin, View):
         project = Project.objects.get(owner=request.user, title=project_title)
 
         with tempfile.TemporaryDirectory() as site_dir:
-            print(site_dir)
             with open(os.path.join(site_dir, 'pelicanconf.py'), 'w') as f:
                 f.write(project.get_pelican_conf())
 
@@ -120,10 +118,3 @@ def mkdirs(dir):
     except OSError:
         # if we fail, we don't care
         pass
-
-# TODO: May want a function responding to get for status updates
-'''
-@login_required
-def site_generation_status(request):
-    pass
-'''
