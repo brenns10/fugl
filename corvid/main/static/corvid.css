@@ -44,6 +44,10 @@
     padding-bottom: 5px;
 }
 
+.pad-vert {
+    padding: 5px 0px;
+}
+
 .dropdown {
     padding: 3px 10px;
 }

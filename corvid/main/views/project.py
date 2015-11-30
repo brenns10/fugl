@@ -56,8 +56,8 @@ class DeleteProjectView(ProtectedViewMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteProjectView, self).get_context_data(**kwargs)
-        context['item'] = self.object.title
-        context['project'] = None
+        context['item'] = None
+        context['project'] = self.object.title
         return context
 
     def get_success_url(self):
