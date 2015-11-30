@@ -30,6 +30,10 @@
     float: right;
 }
 
+.go-left {
+    float: left;
+}
+
 .actions {
     color: black;
     padding: 0px 5px;
@@ -46,6 +50,10 @@
 
 .pad-vert {
     padding: 5px 0px;
+}
+
+.pad-vert-5x {
+    padding-top: 25px;
 }
 
 .dropdown {
