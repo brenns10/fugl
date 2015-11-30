@@ -35,9 +35,21 @@
     padding: 0px 5px;
     vertical-align: middle;
     text-decoration: none;
+    background:none;
+    border:none;
+    box-shadow:none;
 }
+
 .actions-bar {
     padding-bottom: 5px;
+}
+
+.pad-vert {
+    padding: 5px 0px;
+}
+
+.dropdown {
+    padding: 3px 10px;
 }
 
 .pp-title {

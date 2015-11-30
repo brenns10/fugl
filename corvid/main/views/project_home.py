@@ -1,7 +1,7 @@
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
 from .protected_view import ProtectedViewMixin
-from main.models import Project, User, Page, Post
+from main.models import Category, Project, User, Page, Post
 
 
 class ProjectDetailView(ProtectedViewMixin, DetailView):
@@ -26,7 +26,8 @@ class ProjectDetailView(ProtectedViewMixin, DetailView):
         posts = [p for p in Post.objects.filter(project=self.object)]
         context['pages_'] = pages
         context['posts_'] = posts
+        categories = Category.objects.filter(project=self.object)
+        context['categories'] = [c for c in categories]
         # TODO: Getting posts: Category -> posts
-        # categories = Category.objects.filter(project=self.object)
         # context['posts'] = categories.filter(title__in=categories)
         return context

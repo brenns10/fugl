@@ -1,4 +1,5 @@
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
@@ -17,6 +18,15 @@ class PageForm(forms.ModelForm):
     class Meta:
         model = Page
         fields = ['title', 'content']
+
+
+class PageBase:
+    def get_page_object(self):
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        projectqs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
+        page = get_object_or_404(Page.objects, project=project, id=self.kwargs['page_id'])
+        return page
 
 
 class CreatePageView(ProtectedViewMixin, CreateView):
@@ -60,16 +70,32 @@ class CreatePageView(ProtectedViewMixin, CreateView):
         return TemplateResponse(self.request, 'success.html', context=ctx)
 
 
-class UpdatePageView(ProtectedViewMixin, UpdateView):
+class DeletePageView(ProtectedViewMixin, DeleteView, PageBase):
+    form_class = PageForm
+    template_name = 'delete_something.html'
+
+    def get_object(self):
+        return self.get_page_object()
+
+    def get_context_data(self, **kwargs):
+        context = super(DeletePageView, self).get_context_data(**kwargs)
+        context['project'] = self.kwargs['proj_title']
+        context['item'] = self.object.title
+        return context
+
+    def get_success_url(self):
+        kwargs = {
+            'owner': self.request.user.username,
+            'title': self.kwargs['proj_title']
+        }
+        return reverse('project_home', kwargs=kwargs)
+
+class UpdatePageView(ProtectedViewMixin, UpdateView, PageBase):
     form_class = PageForm
     template_name = 'edit_page_post.html'
 
     def get_object(self):
-        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
-        projectqs = Project.objects.filter(owner=self.request.user)
-        project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
-        page = get_object_or_404(Page.objects, project=project, id=self.kwargs['page_id'])
-        return page
+        return self.get_page_object()
 
     def get_context_data(self, **kwargs):
         context = super(UpdatePageView, self).get_context_data(**kwargs)

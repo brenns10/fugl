@@ -3,8 +3,28 @@
 <h1>{{ title }}</h1>
 <div class='col-md-12 actions-bar'>
     <a class='actions' href="{% url 'site_generation' owner=owner proj_title=title %}"><span class='glyphicon glyphicon-download'></span> Download ZIP</a>
-    <a class='actions' href="{% url 'new_category' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Category</a>
+    <div class='btn-group'>
+        <button class='dropdown-toggle actions' data-toggle='dropdown'>
+            Categories <span class="caret"></span>
+        </button>
+        <ul class='dropdown-menu'>
+            {% for category in categories %}
+            <li class='dropdown'>
+                <span class='action'>{{ category.title }}</span>
+                <div class='go-right'>
+                    <a href="{% url 'delete_category' owner=owner title=title category_id=category.id %}">
+                        <span class='glyphicon glyphicon-trash actions'></span></a>
+                </div>
+            </li>
+            <li role='seperator' class='divider'></li>
+            {% endfor %}
+            <li>
+                <a class='actions' href="{% url 'new_category' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Category</a>
+            </li>
+        </ul>
+    </div>
     <a class='actions' href='{% url 'project_settings' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
+    <a class='actions' href='{% url 'delete_project' owner=owner title=title %}'><span class='glyphicon glyphicon-trash'></span> Delete Project</a>
 </div>
 <div class='col-md-6 text-left'>
     <div class='panel panel-default'>
@@ -19,6 +39,8 @@
                 <div class='go-right'>
                     <a href="{% url 'edit_page' owner=owner proj_title=title page_id=page.id %}">
                         <span class='glyphicon glyphicon-edit actions'></span></a>
+                    <a href="{% url 'delete_page' owner=owner proj_title=title page_id=page.id %}">
+                        <span class='glyphicon glyphicon-trash actions'></span></a>
                 </div>
             </li>
             {% endfor %}
@@ -38,10 +60,14 @@
             <li class='list-group-item'>
                 <a class='actions' href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
                     <div class='pp-title'>{{ post.title }}</div></a>
+                {% if post.category %}
                 <span class='label label-info'>{{ post.category }}</span>
+                {% endif %}
                 <div class='go-right'>
                     <a href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
                         <span class='glyphicon glyphicon-edit actions'></span></a>
+                    <a href="{% url 'delete_post' owner=owner proj_title=title post_id=post.id %}">
+                        <span class='glyphicon glyphicon-trash actions'></span></a>
                 </div>
             </li>
             {% endfor %}

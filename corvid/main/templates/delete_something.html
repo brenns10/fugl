@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='std-form'>
+    <form action='#' method='POST'>
+        {% csrf_token %}
+        Are you sure you want to <b>delete</b>
+        {% if item %}
+        <em>'{{ item }}'</em> in {{ project }}?
+        {% else %}
+        <em>'{{ project }}'</em>?
+        {% endif %}
+        <div class='form-actions pad-vert'>
+            <input class='btn btn-primary' type='submit' name='confirm' value='Delete'/>
+            <a class='btn btn-default' href='{% url 'project_home' owner=user.username title=project %}'>Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

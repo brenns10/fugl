@@ -1,4 +1,5 @@
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
@@ -28,6 +29,14 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'category', 'content']
 
+
+class PostBase:
+    def get_project_object(self):
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        projectqs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
+        post = get_object_or_404(Post.objects, project=project, id=self.kwargs['post_id'])
+        return post
 
 class CreatePostView(ProtectedViewMixin, CreateView):
     form_class = PostForm
@@ -86,16 +95,32 @@ class CreatePostView(ProtectedViewMixin, CreateView):
         return TemplateResponse(self.request, 'success.html', context=ctx)
 
 
-class UpdatePostView(ProtectedViewMixin, UpdateView):
+class DeletePostView(ProtectedViewMixin, DeleteView, PostBase):
+    template_name = 'delete_something.html'
+
+    def get_object(self):
+        return self.get_project_object()
+
+    def get_context_data(self, **kwargs):
+        context = super(DeletePostView, self).get_context_data(**kwargs)
+        context['project'] = self.kwargs['proj_title']
+        context['item'] = self.object.title
+        return context
+
+    def get_success_url(self):
+        kwargs = {
+            'owner': self.request.user.username,
+            'title': self.kwargs['proj_title']
+        }
+        return reverse('project_home', kwargs=kwargs)
+
+
+class UpdatePostView(ProtectedViewMixin, UpdateView, PostBase):
     form_class = PostForm
     template_name = 'edit_page_post.html'
 
     def get_object(self):
-        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
-        projectqs = Project.objects.filter(owner=self.request.user)
-        project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
-        post = get_object_or_404(Post.objects, project=project, id=self.kwargs['post_id'])
-        return post
+        return self.get_project_object()
 
     def get_form_kwargs(self):
         initial = super().get_form_kwargs()
