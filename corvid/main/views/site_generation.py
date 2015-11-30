@@ -7,6 +7,7 @@ from .protected_view import ProtectedViewMixin
 from subprocess import Popen
 from datetime import datetime
 from collections import Counter
+from pprint import pprint
 import tempfile
 import zipfile
 import shutil
@@ -18,7 +19,8 @@ class SiteGenerationView(ProtectedViewMixin, View):
     def get(self, request, *args, **kwargs):
         try:
             return self._do_generate(request, args, kwargs)
-        except:
+        except Exception as e:
+            pprint(e)
             ctx = {
                 'message': "Actually, we derped. You can redeem this"
                            " page for a free hug from the Corvidae. Sorry :(",
