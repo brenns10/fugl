@@ -16,15 +16,16 @@ class Post(models.Model):
 
     @property
     def filename(self):
-        return (slugify(self.title) + '.md')
+        return slugify(self.title)
 
-    def get_markdown(self):
+    def get_markdown(self, slug=None):
         kwargs = {
             'title': self.title,
             'author': self.project.owner.username,
             'content': self.content,
             'date_created_str': '',
             'date_modified_str': '',
+            'slug': slug if slug else self.title,
         }
         date_fmt = '%Y-%m-%d'
         if self.date_created is not None:
@@ -38,6 +39,7 @@ class Post(models.Model):
 
 post_template = """Title: %(title)s
 Author: %(author)s
+Slug: %(slug)s
 %(date_created_str)s%(date_modified_str)s
 %(content)s
 """
