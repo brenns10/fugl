@@ -2,12 +2,18 @@
 {% load bootstrap_tags %}
 {% block content %}
 <div class='std-form'>
-<h1>{{ action }} {{ type }}</h1>
-<form action='#' method='post'>
+  <form action='#' method='post'>
+    <div class="row">
+      <div class="go-left">
+        <h1>{{ action }} {{ type }}</h1>
+      </div>
+      <div class="go-right pad-vert-5x">
+        <a class='btn btn-default' href='{% url "project_home" owner=user.username title=project %}'>Cancel</a>
+        <input type='submit' class='btn btn-primary' name='create_account' value='Submit'/>
+      </div>
+    </div>
     {% csrf_token %}
     {{ form|as_bootstrap }}
-    <input type='submit' class='btn btn-primary' name='create_account' value='Submit'/>
-    <a class='btn btn-default' href='{% url "project_home" owner=user.username title=project %}'>Cancel</a>
 </form>
 </div>
 {% endblock %}
