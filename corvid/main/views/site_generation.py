@@ -1,5 +1,6 @@
 from django.views.generic.base import View
 from django.utils.text import slugify
+from django.template.response import TemplateResponse
 from django.http import HttpResponse
 from main.models import Project
 from .protected_view import ProtectedViewMixin
@@ -15,6 +16,19 @@ import os
 
 class SiteGenerationView(ProtectedViewMixin, View):
     def get(self, request, *args, **kwargs):
+        try:
+            return self._do_generate(request, args, kwargs)
+        except:
+            ctx = {
+                'message': "Actually, we derped. Sorry. You can redeem this"
+                           " page for a free hug from a member of the"
+                           " Corvidae.",
+                'link_url': '/project/{0}/{1}'.format(kwargs['owner'], kwargs['proj_title']),
+                'link_text': 'Return to Project Home',
+            }
+            return TemplateResponse(request, 'error.html', context=ctx)
+
+    def _do_generate(self, request, *args, **kwargs):
         project_title = request.resolver_match.kwargs['proj_title']
         project = Project.objects.get(owner=request.user, title=project_title)
 
@@ -42,7 +56,9 @@ class SiteGenerationView(ProtectedViewMixin, View):
                 f.write(post.get_markdown(slug=filename))
 
         # now that we've written out the file, call into pelican
-        pelican_generate(site_dir, 'content', 'pelicanconf.py')
+        returncode = pelican_generate(site_dir, 'content', 'pelicanconf.py')
+        if returncode != 0:
+            raise RuntimeError('Pelican returned status: {0}'.format(returncode))
 
         # now zip the output (in RAM)...
         tempzipfile = tempfile.NamedTemporaryFile(delete=True)
@@ -96,6 +112,7 @@ def pelican_generate(site_dir, content_dir, settings_file, timeout=10):
     })
     p = Popen(shlex.split(cmd))
     p.wait(timeout=timeout)  # we don't have all day
+    return p.returncode
 
 
 def mkdirs(dir):
