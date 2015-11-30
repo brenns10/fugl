@@ -3,10 +3,6 @@ from django.utils.text import slugify
 
 
 class Page(models.Model):
-    class Meta:
-        unique_together = (('title', 'project'),)
-        index_together = (('title', 'project'),)
-
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=50000)
 
