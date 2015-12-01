@@ -83,3 +83,23 @@ class CreateProjectPluginView(ProtectedViewMixin, CreateView, ProjectPluginBase)
             'return_url': reverse('project_home', kwargs=url_kwargs),
         }
         return TemplateResponse(self.request, 'success.html', context=ctx)
+
+
+class DeleteProjectPluginView(ProtectedViewMixin, DeleteView, ProjectPluginBase):
+    template_name = 'delete_something.html'
+
+    def get_object(self):
+        return self.get_project_plugin()
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteProjectPluginView, self).get_context_data(**kwargs)
+        context['item'] = self.object.title
+        context['project'] = self.kwargs['title']
+        return context
+
+    def get_success_url(self):
+        kwargs = {
+            'owner': self.request.user.username,
+            'title': self.kwargs['title']
+        }
+        return reverse('project_home', kwargs=kwargs)

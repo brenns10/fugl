@@ -27,6 +27,34 @@
             </li>
         </ul>
     </div>
+
+    <!--
+    <div class='btn-group'>
+        <button class='dropdown-toggle actions' data-toggle='dropdown'>
+            Project Plugins <span class="caret"></span>
+        </button>
+        <ul class='dropdown-menu'>
+            {% for plugin in project_plugins %}
+            <li>
+                <div class='go-left'>
+                    <a class='actions dropdown-title' href='{% url 'edit_project' owner=owner title=title category_id=category.id %}'>{{ category.title }}</a>
+                </div>
+                <div class='go-right'>
+                    <a class='action' href='{% url 'edit_category' owner=owner title=title category_id=category.id %}'>
+                        <span class='glyphicon glyphicon-edit actions'><span>
+                    </a>
+                    <a href="{% url 'delete_category' owner=owner title=title category_id=category.id %}">
+                        <span class='glyphicon glyphicon-trash actions'></span></a>
+                </div>
+            </li>
+            {% endfor %}
+            <li>
+                <a class='actions' href="{% url 'new_category' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Category</a>
+            </li>
+        </ul>
+    </div>
+    -->
+
     <a class='actions' href='{% url 'project_settings' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
     <a class='actions' href='{% url 'new_project_plugin' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Plugin</a>
     <a class='actions' href='{% url 'delete_project' owner=owner title=title %}'><span class='glyphicon glyphicon-trash'></span> Delete Project</a>

@@ -9,4 +9,4 @@ from .root import root_controller
 from .user import UserHomeView
 from .site_generation import SiteGenerationView
 from .project_settings import ProjectSettingsView
-from .project_plugins import CreateProjectPluginView
+from .project_plugins import CreateProjectPluginView, DeleteProjectPluginView
