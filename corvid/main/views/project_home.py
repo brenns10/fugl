@@ -26,6 +26,7 @@ class ProjectDetailView(ProtectedViewMixin, DetailView):
         posts = [p for p in Post.objects.filter(project=self.object)]
         context['pages_'] = pages
         context['posts_'] = posts
+        context['plugins_'] = []
         categories = Category.objects.filter(project=self.object)
         context['categories'] = [c for c in categories]
         # TODO: Getting posts: Category -> posts

@@ -28,6 +28,7 @@
         </ul>
     </div>
     <a class='actions' href='{% url 'project_settings' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
+    <a class='actions' href='{% url 'new_project_plugin' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Plugin</a>
     <a class='actions' href='{% url 'delete_project' owner=owner title=title %}'><span class='glyphicon glyphicon-trash'></span> Delete Project</a>
 </div>
 <div class='col-md-6 text-left'>
