@@ -60,9 +60,15 @@ class CreateCategoryView(ProtectedViewMixin, CreateView):
             with transaction.atomic():
                 category = Category.objects.create(**kwargs)
                 category.save()
-        except:
+        except IntegrityError:
             # category already exists; don't care here
-            pass
+            ctx = self.get_context_data(form = form)
+            ctx['form_error'] = {
+                'title': form.cleaned_data['title'],
+                'error': ' already exists in this project '
+            }
+            return TemplateResponse(self.request, 'edit_category.html', context=ctx)
+
         url_kwargs = {
             'owner': self.request.user.username,
             'title': self.kwargs['title'],
