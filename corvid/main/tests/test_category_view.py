@@ -136,7 +136,8 @@ class CreateCategoryViewTestCase(CorvidTestCase):
         response = self.client.post(url, data)
 
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Category created!', response.content)
+        self.assertIn(bytes('<em>{0}</em> already exists'.format(data['title']), encoding='utf8'),
+                      response.content)
         cats = Category.objects.filter(project=self.project,
                                        title=data['title'])
         self.assertEqual(len(cats), 1)
