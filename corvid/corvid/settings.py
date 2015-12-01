@@ -118,12 +118,14 @@ USE_TZ = True
 # Security: we already force HTTPS on every single request via Nginx.  However,
 # these are recommended in the Django deployment settings and certainly don't
 # hurt anything.
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+if not DEBUG:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/srv/http/static'
+if not DEBUG:
+    STATIC_ROOT = '/srv/http/static'
