@@ -15,8 +15,8 @@ def deploy():
     sudo('service nginx stop')
     with cd(REPO):
         sudo('git pull', user=USER)
-        sudo('source %s && python corvid/manage.py collectstatic' % VENV,
-             user=USER)
+        sudo('source %s && python corvid/manage.py collectstatic --noinput'
+             % VENV, user=USER)
         sudo('source %s && python corvid/manage.py makemigrations' % VENV,
              user=USER)
         sudo('source %s && python corvid/manage.py migrate' % VENV,
