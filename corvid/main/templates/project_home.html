@@ -65,7 +65,7 @@
                 <a class='actions' href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
                     <div class='pp-title'>{{ post.title }}</div></a>
                 {% if post.category %}
-                <span class='label label-info'>{{ post.category }}</span>
+                <a class='label label-info' href='{% url 'edit_category' owner=owner title=title category_id=post.category.id %}'>{{ post.category }}</a>
                 {% endif %}
                 <div class='go-right'>
                     <a href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
