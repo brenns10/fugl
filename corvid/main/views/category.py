@@ -3,6 +3,7 @@ from django.views.generic.edit import DeleteView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.db import transaction
 from django import forms
 from main.models import Category, Project, User
 from .protected_view import ProtectedViewMixin
@@ -36,8 +37,14 @@ class CreateCategoryView(ProtectedViewMixin, CreateView):
             'project': project
         }
         try:
-            category = Category.objects.create(**kwargs)
-            category.save()
+            # BTDubs - need to wrap this in an transaction since it could potentially cause an
+            # exception and if it does no other queries can be executed after the error.
+            # This causes saving the session at the end of the request to fail without wrapping in new transaction.
+            # See this SO question/answer:
+            # https://stackoverflow.com/questions/21458387/transactionmanagementerror-you-cant-execute-queries-until-the-end-of-the-atom
+            with transaction.atomic():
+                category = Category.objects.create(**kwargs)
+                category.save()
         except:
             # category already exists; don't care here
             pass
