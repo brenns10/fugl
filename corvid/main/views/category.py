@@ -65,7 +65,7 @@ class CreateCategoryView(ProtectedViewMixin, CreateView):
             ctx = self.get_context_data(form=form)
             ctx['form_error'] = {
                 'title': form.cleaned_data['title'],
-                'error': ' already exists in this project '
+                'error': 'already exists in this project '
             }
             return TemplateResponse(self.request, 'edit_category.html', context=ctx)
 
@@ -130,7 +130,7 @@ class UpdateCategoryView(ProtectedViewMixin, UpdateView, CategoryBase):
             ctx = self.get_context_data(form=form)
             ctx['form_error'] = {
                 'title': form.cleaned_data['title'],
-                'error': ' already exists in this project '
+                'error': 'already exists in this project '
             }
             return TemplateResponse(self.request, 'edit_category.html', context=ctx)
 
