@@ -128,4 +128,4 @@ if not DEBUG:
 
 STATIC_URL = '/static/'
 if not DEBUG:
-    STATIC_ROOT = '/srv/http/static'
+    STATIC_ROOT = '/srv/www/static'
