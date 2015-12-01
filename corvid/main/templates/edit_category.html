@@ -3,6 +3,11 @@
 {% block content %}
 <div class='std-form'>
 <h1>{{ action }} {{ type }}</h1>
+{% if form_error %}
+<div class='alert alert-danger center-text'>
+    Category of <em>{{ form_error.title }}</em> {{ form_error.error }}
+</div>
+{% endif %}
 <form action='#' method='post'>
     {% csrf_token %}
     {{ form|as_bootstrap }}

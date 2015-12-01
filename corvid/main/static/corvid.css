@@ -26,6 +26,10 @@
     float: right;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .go-right {
     float: right;
 }
@@ -66,6 +70,14 @@
     font-size: 18;
     vertical-align: middle;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-title {
+    display: block;
+    white-space: nowrap;
+    max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
