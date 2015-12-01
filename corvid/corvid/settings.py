@@ -127,5 +127,4 @@ if not DEBUG:
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-if not DEBUG:
-    STATIC_ROOT = '/srv/www/static'
+STATIC_ROOT = '/srv/www/static'
