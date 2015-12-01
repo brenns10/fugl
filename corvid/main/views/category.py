@@ -14,6 +14,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['title']
 
+
 class CategoryBase:
     def get_category(self):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
@@ -22,6 +23,7 @@ class CategoryBase:
         categoryqs = Category.objects.filter(project=project)
         category = get_object_or_404(categoryqs, project=project, id=self.kwargs['category_id'])
         return category
+
 
 class CreateCategoryView(ProtectedViewMixin, CreateView):
     form_class = CategoryForm
@@ -92,6 +94,7 @@ class DeleteCategoryView(ProtectedViewMixin, DeleteView, CategoryBase):
         }
         return reverse('project_home', kwargs=kwargs)
 
+
 class UpdateCategoryView(ProtectedViewMixin, UpdateView, CategoryBase):
     form_class = CategoryForm
     template_name = 'edit_category.html'
@@ -106,7 +109,7 @@ class UpdateCategoryView(ProtectedViewMixin, UpdateView, CategoryBase):
         categories = [c for c in Category.objects.filter(project=project)]
 
         context = super(UpdateCategoryView, self).get_context_data(**kwargs)
-        context['action'] = 'Add'
+        context['action'] = 'Update'
         context['type'] = 'Category'
         context['project'] = self.kwargs['title']
         context['categories_'] = categories
