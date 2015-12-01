@@ -63,4 +63,15 @@ cd ../corvid
 ```
 
 # Deployment
-WIP. Something using the fabfile.
+
+Corvid is now deployed at `corvid.xyz`.  To deploy a new version, the following
+procedure should be used:
+
+- (as root) Stop the uWSGI application server: `service uwsgi stop corvid`.
+- (as django) Go to `/home/django/corvid` and do your `git pull`.
+- (still as django, in virtualenv) Make sure to do `./manage.py makemigrations`
+  and `./manage.py migrate`.
+- (as root, in virtualenv) Do `./manage.py collectstatic`!
+- (as root) Start the uWSGI application server: `service uwsgi start corvid`.
+
+And you should have successfully deployed a new Corvid!
