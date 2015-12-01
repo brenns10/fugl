@@ -4,7 +4,7 @@ from .views import (root_controller, UserHomeView, RegistrationView,
                     CreatePageView, UpdatePageView, DeletePageView,
                     CreatePostView, UpdatePostView, DeletePostView,
                     ProjectDetailView, SiteGenerationView,
-                    CreateCategoryView, DeleteCategoryView,
+                    CreateCategoryView, UpdateCategoryView, DeleteCategoryView,
                     ProjectSettingsView)
 from .views.unauthenticated import login_unrequired
 from django.contrib.auth.views import login as login_view
@@ -26,10 +26,14 @@ urlpatterns = [
         ProjectSettingsView.as_view(), name='project_settings'),
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/?$',
         ProjectDetailView.as_view(), name='project_home'),
+
+    # Category URLs
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/category/new',
         CreateCategoryView.as_view(), name='new_category'),
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/category/delete/(?P<category_id>[0-9]+)/?',
         DeleteCategoryView.as_view(), name='delete_category'),
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/category/edit/(?P<category_id>[0-9]+)/?',
+        UpdateCategoryView.as_view(), name='edit_category'),
 
     # Page URLS
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/page/new',

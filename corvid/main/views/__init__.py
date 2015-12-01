@@ -1,4 +1,4 @@
-from .category import CreateCategoryView, DeleteCategoryView
+from .category import CreateCategoryView, DeleteCategoryView, UpdateCategoryView
 from .project import CreateProjectView, DeleteProjectView
 from .page import CreatePageView, DeletePageView, UpdatePageView
 from .post import CreatePostView, DeletePostView, UpdatePostView
