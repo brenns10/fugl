@@ -103,3 +103,40 @@ class DeleteProjectPluginView(ProtectedViewMixin, DeleteView, ProjectPluginBase)
             'title': self.kwargs['title']
         }
         return reverse('project_home', kwargs=kwargs)
+
+
+class UpdateProjectPluginView(ProtectedViewMixin, UpdateView, ProjectPluginBase):
+    form_class = ProjectPluginForm
+    template_name = 'edit_plugin.html'
+
+    def get_object(self):
+        return self.get_project_plugin()
+
+    def get_context_data(self, **kwargs):
+        project_plugins = self.get_all_project_plugins()
+
+        context = super(UpdateProjectPluginView, self).get_context_data(**kwargs)
+        context['action'] = 'Edit'
+        context['type'] = 'Project Plugin'
+        context['project'] = self.kwargs['title']
+        context['plugins_'] = project_plugins
+        return context
+
+    def form_valid(self, form):
+        try:
+            with transaction.atomic():  # Auto-rollback on error
+                return super(UpdateProjectPluginView, self).form_valid(form)
+        except IntegrityError:
+            ctx = self.get_context_data(form=form)
+            ctx['form_error'] = {
+                'title': form.cleaned_data['title'],
+                'error': ' already exists in this project '
+            }
+            return TemplateResponse(self.request, 'edit_plugin.html', context=ctx)
+
+    def get_success_url(self):
+        kwargs = {
+            'owner': self.request.user.username,
+            'title': self.kwargs['title']
+        }
+        return reverse('project_home', kwargs=kwargs)
