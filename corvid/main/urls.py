@@ -6,7 +6,7 @@ from .views import (root_controller, UserHomeView, RegistrationView,
                     ProjectDetailView, SiteGenerationView,
                     CreateCategoryView, UpdateCategoryView, DeleteCategoryView,
                     CreateProjectPluginView, UpdateProjectPluginView, DeleteProjectPluginView,
-                    ProjectSettingsView)
+                    ProjectSettingsView, CloneProjectView)
 from .views.unauthenticated import login_unrequired
 from django.contrib.auth.views import login as login_view
 from django.contrib.auth.views import logout_then_login as logout_view
@@ -27,6 +27,8 @@ urlpatterns = [
         ProjectSettingsView.as_view(), name='project_settings'),
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/?$',
         ProjectDetailView.as_view(), name='project_home'),
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/clone/?$',
+        CloneProjectView.as_view(), name='clone_project'),
 
     # Category URLs
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/category/new',

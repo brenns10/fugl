@@ -11,3 +11,15 @@ class PagePlugin(models.Model):
     body_markup = models.CharField(max_length=5000)
 
     project = models.ForeignKey('Project')
+
+    def clone(self, newproject):
+        """Clone the plugin into a new project."""
+        kwargs = {
+            'title': self.title,
+            'head_markup': self.head_markup,
+            'body_markup': self.body_markup,
+            'project': newproject,
+        }
+        new = PagePlugin.objects.create(**kwargs)
+        new.save()
+        return new

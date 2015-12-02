@@ -1,18 +1,20 @@
 from django import forms
 from django.core.exceptions import ValidationError
+
 from main.models import Project
 
 
-class CreateProjectForm(forms.ModelForm):
+class CloneProjectForm(forms.Form):
+
+    title = forms.CharField(max_length=50)
+    clone_theme = forms.BooleanField(initial=True, required=False)
+    clone_pages = forms.BooleanField(initial=True, required=False)
+    clone_posts = forms.BooleanField(initial=True, required=False)
+    clone_plugins = forms.BooleanField(initial=True, required=False)
 
     def __init__(self, *args, **kwargs):
-        # Capture the user!
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-
-    class Meta:
-        model = Project
-        fields = ['title', 'description']
 
     def clean_title(self):
         # Validation - make sure this is the only project with that title by
