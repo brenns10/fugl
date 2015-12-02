@@ -79,7 +79,6 @@ class CloneProjectView(ProtectedViewMixin, FormView):
         project = get_object_or_404(projectqs, owner=user,
                                     title=self.kwargs['title'])
         data = form.cleaned_data
-        print(data)
         project.clone(data['title'], data['clone_theme'], data['clone_pages'],
                       data['clone_posts'], data['clone_plugins'])
         ctx = {
