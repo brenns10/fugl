@@ -29,7 +29,7 @@ class Page(models.Model):
         new = Page.objects.create(**kwargs)
 
         if plugins:
-            for plugin in self.post_plugins:
+            for plugin in self.post_plugins.all():
                 new.post_plugins.add(plugins[plugin])
 
         new.save()
