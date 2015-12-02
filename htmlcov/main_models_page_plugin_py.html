@@ -30,8 +30,8 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
 
         <h2 class="stats">
-            9 statements &nbsp;
-            <span class="run hide_run shortkey_r button_toggle_run">9 run</span>
+            14 statements &nbsp;
+            <span class="run hide_run shortkey_r button_toggle_run">14 run</span>
             <span class="mis shortkey_m button_toggle_mis">0 missing</span>
             <span class="exc shortkey_x button_toggle_exc">0 excluded</span>
 
@@ -80,6 +80,18 @@
 <p id="n11" class="stm run hide_run"><a href="#n11">11</a></p>
 <p id="n12" class="pln"><a href="#n12">12</a></p>
 <p id="n13" class="stm run hide_run"><a href="#n13">13</a></p>
+<p id="n14" class="pln"><a href="#n14">14</a></p>
+<p id="n15" class="stm run hide_run"><a href="#n15">15</a></p>
+<p id="n16" class="pln"><a href="#n16">16</a></p>
+<p id="n17" class="stm run hide_run"><a href="#n17">17</a></p>
+<p id="n18" class="pln"><a href="#n18">18</a></p>
+<p id="n19" class="pln"><a href="#n19">19</a></p>
+<p id="n20" class="pln"><a href="#n20">20</a></p>
+<p id="n21" class="pln"><a href="#n21">21</a></p>
+<p id="n22" class="pln"><a href="#n22">22</a></p>
+<p id="n23" class="stm run hide_run"><a href="#n23">23</a></p>
+<p id="n24" class="stm run hide_run"><a href="#n24">24</a></p>
+<p id="n25" class="stm run hide_run"><a href="#n25">25</a></p>
                 
             </td>
             <td class="text">
@@ -96,6 +108,18 @@
 <p id="t11" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">body_markup</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">CharField</span><span class="op">(</span><span class="nam">max_length</span><span class="op">=</span><span class="num">5000</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t12" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t13" class="stm run hide_run">&nbsp; &nbsp; <span class="nam">project</span> <span class="op">=</span> <span class="nam">models</span><span class="op">.</span><span class="nam">ForeignKey</span><span class="op">(</span><span class="str">&#39;Project&#39;</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t14" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t15" class="stm run hide_run">&nbsp; &nbsp; <span class="key">def</span> <span class="nam">clone</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">newproject</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t16" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&quot;&quot;&quot;Clone the plugin into a new project.&quot;&quot;&quot;</span><span class="strut">&nbsp;</span></p>
+<p id="t17" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">kwargs</span> <span class="op">=</span> <span class="op">{</span><span class="strut">&nbsp;</span></p>
+<p id="t18" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;title&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">title</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t19" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;head_markup&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">head_markup</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t20" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;body_markup&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">body_markup</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t21" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;project&#39;</span><span class="op">:</span> <span class="nam">newproject</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t22" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">}</span><span class="strut">&nbsp;</span></p>
+<p id="t23" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span> <span class="op">=</span> <span class="nam">PagePlugin</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t24" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t25" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">new</span><span class="strut">&nbsp;</span></p>
                 
             </td>
         </tr>
@@ -106,7 +130,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.3</a>,
-            created at 2015-12-02 02:30
+            created at 2015-12-02 16:55
         </p>
     </div>
 </div>
