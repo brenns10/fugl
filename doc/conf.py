@@ -31,7 +31,6 @@ import shlex
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
 ]
@@ -52,8 +51,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Corvid'
-copyright = '2015, Stephen Brennan, Jeffrey Copeland, Kyle Deal'
-author = 'Stephen Brennan, Jeffrey Copeland, Kyle Deal'
+copyright = '2015, The Corvidae'
+author = 'The Corvidae'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
