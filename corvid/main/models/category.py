@@ -12,3 +12,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def clone(self, newproject):
+        new = Category.objects.create(title=self.title, project=newproject)
+        new.save()
+        return new

@@ -10,3 +10,13 @@ class ProjectPlugin(models.Model):
     markup = models.CharField(max_length=5000)
 
     project = models.ForeignKey('Project')
+
+    def clone(self, newproject):
+        kwargs = {
+            'title': self.title,
+            'markup': self.markup,
+            'project': newproject,
+        }
+        new = ProjectPlugin.objects.create(**kwargs)
+        new.save()
+        return new

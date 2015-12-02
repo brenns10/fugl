@@ -20,6 +20,21 @@ class Page(models.Model):
             'slug': slug if slug else self.title
         })
 
+    def clone(self, newproject, plugins):
+        kwargs = {
+            'title': self.title,
+            'content': self.content,
+            'project': newproject,
+        }
+        new = Page.objects.create(**kwargs)
+
+        if plugins:
+            for plugin in self.post_plugins:
+                new.post_plugins.add(plugins[plugin])
+
+        new.save()
+        return new
+
 
 page_template = """Title: %(title)s
 Slug: %(slug)s
