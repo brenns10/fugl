@@ -9,6 +9,5 @@
     <input type='submit' class='btn btn-primary' name='create_account' value='Submit'/>
     <a class='btn btn-default' href='{% url "project_home" owner=user.username title=project %}'>Cancel</a>
 </form>
-<a class='btn btn-default' href='{% url "clone_project" owner=user.username title=project %}'>Clone Project</a>
 </div>
 {% endblock %}
