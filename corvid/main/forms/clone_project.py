@@ -7,10 +7,10 @@ from main.models import Project
 class CloneProjectForm(forms.Form):
 
     title = forms.CharField(max_length=50)
-    clone_theme = forms.BooleanField(initial=True)
-    clone_pages = forms.BooleanField(initial=True)
-    clone_posts = forms.BooleanField(initial=True)
-    clone_plugins = forms.BooleanField(initial=True)
+    clone_theme = forms.BooleanField(initial=True, required=False)
+    clone_pages = forms.BooleanField(initial=True, required=False)
+    clone_posts = forms.BooleanField(initial=True, required=False)
+    clone_plugins = forms.BooleanField(initial=True, required=False)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
