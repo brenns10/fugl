@@ -53,11 +53,13 @@ urlpatterns = [
         DeletePostView.as_view(), name='delete_post'),
 
     # Plugin URLs
-    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/plugin/new',
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/project_plugin/new',
         CreateProjectPluginView.as_view(), name='new_project_plugin'),
-    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/plugin/edit/(?P<project_plugin_id>[0-9]+)/?',
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/project_plugin'
+        '/edit/(?P<project_plugin_id>[0-9]+)/?',
         UpdateProjectPluginView.as_view(), name='edit_project_plugin'),
-    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/plugin/delete/(?P<project_plugin_id>[0-9]+)/?',
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/project_plugin'
+        '/delete/(?P<project_plugin_id>[0-9]+)/?',
         DeleteProjectPluginView.as_view(), name='delete_project_plugin'),
 
 
