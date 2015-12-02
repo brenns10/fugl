@@ -2,7 +2,9 @@
 Represents a project: a static website.
 """
 from django.db import models
+
 from .user import User
+from .theme import Theme
 
 
 class Project(models.Model):
@@ -33,6 +35,55 @@ class Project(models.Model):
             'theme': self.theme.filepath,
         }
         return pelicanconf_template % template_args
+
+    def clone(self, newtitle, theme, pages, posts, plugins):
+        """
+        Clone this project.
+
+        Creates a new project with the same attributes and owner, but a
+        different title.  Depending on the parameters given to this method, the
+        theme, pages, posts, and/or plugins will also be copied to the new
+        project.  Returns the cloned project, which has already been saved to
+        the database.
+        """
+        kwargs = {
+            'title': newtitle,
+            'description': self.description,
+            'owner': self.owner,
+            'preview_url': '',
+        }
+        if theme:
+            kwargs['theme'] = self.theme
+        else:
+            kwargs['theme'] = Theme.objects.get(title='default')
+
+        new = Project.objects.create(**kwargs)
+        new.save()
+
+        # Copy over all the categories.
+        for category in self.category_set.all():
+            category.clone(new)
+
+        # First, we clone all the plugins.  We keep a dictionary of page for
+        # our pages and posts to lookup their new plugins when they are cloned.
+        if plugins:
+            plugin_dict = {}
+            for plugin in self.pageplugin_set.all():
+                plugin_dict[plugin] = plugin.clone(new)
+            for plugin in self.projectplugin_set.all():
+                plugin.clone(new)
+        else:
+            plugin_dict = None
+
+        # Now, we clone pages and posts (if requested)
+        if pages:
+            for page in self.page_set.all():
+                page.clone(new, plugin_dict)
+        if posts:
+            for post in self.post_set.all():
+                post.clone(new, plugin_dict)
+
+        return new
 
 
 pelicanconf_template = """#!/usr/bin/env python

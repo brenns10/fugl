@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Account Home</h1>
-<h3>Projects:</h3>
-<ul style='list-style-type:none'>
-    {% for project in object_list %}
-    <li><a href='{{ project.project_home_url }}'>{{ project.title }}</li>
-    {% endfor %}
-</ul>
-<a href='{% url 'new_project' %}'>New Project</a>
+<div class='col-md-6 col-md-offset-3 text-left'>
+  <h1>Account Home</h1>
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            <h2 class='panel-title'>Projects</h2>
+        </div>
+        <ul class='list-group'>
+            {% for project in object_list %}
+            <li class='list-group-item'>
+                <a class='actions' href="{% url 'project_home' owner=project.owner.username title=project.title %}">
+                    <span class='pp-title'>{{ project.title }}</span></a>
+                <div class='go-right'>
+                    <a href="{% url 'clone_project' owner=project.owner.username title=project.title %}" title="Clone Project">
+                        <span class='glyphicon glyphicon-duplicate actions'></span></a>
+                    <a href="{% url 'delete_project' owner=project.owner.username title=project.title %}" title="Delete Project">
+                        <span class='glyphicon glyphicon-trash actions'></span></a>
+                </div>
+            </li>
+            {% endfor %}
+            <li class='list-group-item'>
+                <a class='actions' href="{% url 'new_project' %}"><span class='glyphicon glyphicon-plus'></span> New Project</a>
+            </li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

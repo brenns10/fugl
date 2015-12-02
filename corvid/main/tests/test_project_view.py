@@ -12,6 +12,18 @@ CreateProjectViewTestCase:
     - empty project name?
     - empty description?
     - invalid names?
+CloneProjectViewTestCase:
+- GET:
+  - not logged in user redirected to login
+  - non-owner cannot access form
+  - user can access form
+- POST:
+  - not logged in user redirected to login
+  - non-owner cannot clone
+  - user can clone project
+    - empty project name?
+    - empty description?
+    - invalid names?
 DeleteProjectTestCase:
 - GET:
   - not logged in user redirected to login
@@ -111,6 +123,182 @@ class CreateProjectViewTestCase(CorvidTestCase):
         new_number_of_projects = len(Project.objects.all())
         self.assertEqual(old_number_of_projects, new_number_of_projects)
 
+    def test_post_too_long_title(self):
+        old_number_of_projects = len(Project.objects.all())
+        data = {
+            'title': '123456789012345678901234567890123456789012345678901',
+            'description': 'blah project',
+        }
+        self.login()
+        resp = self.client.post(self.url, data)
+        # 200 doesn't mean failure, sadly
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b'Ensure this value has at most 50 characters',
+                      resp.content)
+        new_number_of_projects = len(Project.objects.all())
+        self.assertEqual(old_number_of_projects, new_number_of_projects)
+
+
+class CloneProjectTestCase(CorvidTestCase):
+
+    def setUp(self):
+        super().setUpTheme()
+        self.client = Client()
+
+        self.otherpass = 'cock-of-the-rock'
+        self.otheruser = User.objects.create_user('other_user',
+                                                  'other@example.com',
+                                                  self.otherpass)
+        self.otheruser.save()
+        self.project = Project.objects.create(
+            title='testproj', description='test project', preview_url='',
+            owner=self.admin_user, theme=self.default_theme
+        )
+        self.project.save()
+
+    def tearDown(self):
+        self.project.delete()
+        self.otheruser.delete()
+        super().tearDownTheme()
+
+    def url_for(self, project):
+        # return the "delete project" url for a project
+        return '/project/%s/%s/clone' % (project.owner.username,
+                                         project.title)
+
+    def login_other(self):
+        # login the client as "otheruser"
+        self.client.login(username=self.otheruser.username,
+                          password=self.otherpass)
+
+    def test_get_not_logged_in_redirect(self):
+        url = self.url_for(self.project)
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, 'http://testserver/login/?next=' + url)
+
+    def test_get_not_owner_404(self):
+        url = self.url_for(self.project)
+        self.login_other()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+
+    def test_get_owner(self):
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('Clone ' + self.project.title, content)
+
+    def test_post_not_logged_in_redirect(self):
+        formdata = {'title': 'cloned'}
+        url = self.url_for(self.project)
+        resp = self.client.post(url, formdata)
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(resp.url, 'http://testserver/login/?next=' + url)
+
+    def test_post_not_owner_404(self):
+        formdata = {'title': 'cloned'}
+        url = self.url_for(self.project)
+        self.login_other()
+        response = self.client.post(url, formdata)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_owner(self):
+        formdata = {'title': 'cloned'}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200,
+        self.assertEqual(resp.status_code, 200)
+        # Assert that the change happened.
+        matching_projects = Project.objects.filter(owner=self.admin_user,
+                                                   title='cloned')
+        self.assertEqual(len(matching_projects), 1)
+        # Clean it up.
+        matching_projects[0].delete()
+
+    def test_post_forward_slash(self):
+        formdata = {'title': 'cloned/project'}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('may not contain forward slash', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_post_empty_title(self):
+        formdata = {'title': ''}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('field is required', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_post_too_long_title(self):
+        formdata = {
+            'title': '123456789012345678901234567890123456789012345678901'
+        }
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('Ensure this value has at most 50 characters', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_post_duplicate_title(self):
+        formdata = {'title': self.project.title}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('Project with that name already exists', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_get_invalid_user(self):
+        url = '/project/idontexist/%s/clone' % self.project.title
+        self.login()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_invalid_user(self):
+        formdata = {'title': 'cloned'}
+        url = '/project/idontexist/%s/clone' % self.project.title
+        self.login()
+        response = self.client.post(url, formdata)
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_invalid_project(self):
+        url = '/project/%s/idontexist/clone' % self.admin_user.username
+        self.login()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_invalid_project(self):
+        formdata = {'title': 'cloned'}
+        url = '/project/%s/idontexist/clone' % self.admin_user.username
+        self.login()
+        response = self.client.post(url, formdata)
+        self.assertEqual(response.status_code, 404)
+
 
 class DeleteProjectTestCase(CorvidTestCase):
 
@@ -131,6 +319,7 @@ class DeleteProjectTestCase(CorvidTestCase):
 
     def tearDown(self):
         self.project.delete()
+        self.otheruser.delete()
         super().tearDownTheme()
 
     def url_for(self, project):

@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from main.models import Category
+
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
@@ -35,6 +37,33 @@ class Post(models.Model):
             kwargs['date_modified_str'] = ('Modified: {0}\n'
                                            .format(self.date_updated.strftime(date_fmt)))
         return (post_template % kwargs)
+
+    def clone(self, newproject, plugins):
+        """
+        Clones this Post into a new project.
+        :param newproject: The new project to stick this one into.
+        :param plugins: Either None (if plugins are not being cloned), or a
+          dictionary mapping old plugins to plugins in the new project.
+        :return: The new post (already saved to database)
+        """
+        category = Category.objects.get(project=newproject,
+                                        title=self.category.title)
+        kwargs = {
+            'title': self.title,
+            'content': self.content,
+            'date_created': self.date_created,
+            'date_updated': self.date_updated,
+            'project': newproject,
+            'category': category,
+        }
+        new = Post.objects.create(**kwargs)
+
+        if plugins:
+            for plugin in self.post_plugins.all():
+                new.post_plugins.add(plugins[plugin])
+
+        new.save()
+        return new
 
 
 post_template = """Title: %(title)s
