@@ -28,11 +28,14 @@ class Project(models.Model):
 
     def get_pelican_conf(self, content_path='content'):
         """Returns pelicanconf correspnding to this Project."""
+        project_plugins = self.projectplugin_set.all()
+        project_plugins_str = [{'markup': p.markup} for p in project_plugins]
         template_args = {
             'author': self.owner.username,
             'site_name': self.title,
             'content_path': content_path,
             'theme': self.theme.filepath,
+            'project_plugins_str': str(project_plugins_str),
         }
         return pelicanconf_template % template_args
 
@@ -118,4 +121,6 @@ DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+PROJECT_PLUGINS = %(project_plugins_str)s
 """
