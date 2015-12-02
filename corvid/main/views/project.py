@@ -58,6 +58,21 @@ class CloneProjectView(ProtectedViewMixin, FormView):
         kwargs.update({'user': self.request.user})
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # These just ensure that we will 404 if:
+        # - the user doesn't exist
+        # - the project doesn't exist
+        # - the project isn't owned by the user
+        user = get_object_or_404(User.objects, username=self.kwargs['owner'])
+        projectqs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(projectqs, owner=user,
+                                    title=self.kwargs['title'])
+
+        context['project'] = self.kwargs['title']
+        return context
+
     def form_valid(self, form):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
         projectqs = Project.objects.filter(owner=self.request.user)
