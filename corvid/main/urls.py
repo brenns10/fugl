@@ -6,6 +6,7 @@ from .views import (root_controller, UserHomeView, RegistrationView,
                     ProjectDetailView, SiteGenerationView,
                     CreateCategoryView, UpdateCategoryView, DeleteCategoryView,
                     CreateProjectPluginView, UpdateProjectPluginView, DeleteProjectPluginView,
+                    CreatePagePluginView, UpdatePagePluginView, DeletePagePluginView,
                     ProjectSettingsView, CloneProjectView)
 from .views.unauthenticated import login_unrequired
 from django.contrib.auth.views import login as login_view
@@ -63,7 +64,14 @@ urlpatterns = [
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/project_plugin'
         '/delete/(?P<project_plugin_id>[0-9]+)/?',
         DeleteProjectPluginView.as_view(), name='delete_project_plugin'),
-
+    url(r'^page/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin/new',
+        CreatePagePluginView.as_view(), name='new_page_plugin'),
+    url(r'^page/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin'
+        '/edit/(?P<page_plugin_id>[0-9]+)/?',
+        UpdatePagePluginView.as_view(), name='edit_page_plugin'),
+    url(r'^page/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin'
+        '/delete/(?P<page_plugin_id>[0-9]+)/?',
+        DeletePagePluginView.as_view(), name='delete_page_plugin'),
 
     # Site generation
     url(r'^project/(?P<owner>[^/]+)/(?P<proj_title>[^/]+)/generate',
