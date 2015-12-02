@@ -20,7 +20,7 @@ CloneProjectViewTestCase:
 - POST:
   - not logged in user redirected to login
   - non-owner cannot clone
-  - user can create project
+  - user can clone project
     - empty project name?
     - empty description?
     - invalid names?
@@ -123,6 +123,21 @@ class CreateProjectViewTestCase(CorvidTestCase):
         new_number_of_projects = len(Project.objects.all())
         self.assertEqual(old_number_of_projects, new_number_of_projects)
 
+    def test_post_too_long_title(self):
+        old_number_of_projects = len(Project.objects.all())
+        data = {
+            'title': '123456789012345678901234567890123456789012345678901',
+            'description': 'blah project',
+        }
+        self.login()
+        resp = self.client.post(self.url, data)
+        # 200 doesn't mean failure, sadly
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b'Ensure this value has at most 50 characters',
+                      resp.content)
+        new_number_of_projects = len(Project.objects.all())
+        self.assertEqual(old_number_of_projects, new_number_of_projects)
+
 
 class CloneProjectTestCase(CorvidTestCase):
 
@@ -203,6 +218,60 @@ class CloneProjectTestCase(CorvidTestCase):
         self.assertEqual(len(matching_projects), 1)
         # Clean it up.
         matching_projects[0].delete()
+
+    def test_post_forward_slash(self):
+        formdata = {'title': 'cloned/project'}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('may not contain forward slash', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_post_empty_title(self):
+        formdata = {'title': ''}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('field is required', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_post_too_long_title(self):
+        formdata = {
+            'title': '123456789012345678901234567890123456789012345678901'
+        }
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('Ensure this value has at most 50 characters', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
+
+    def test_post_duplicate_title(self):
+        formdata = {'title': self.project.title}
+        url = self.url_for(self.project)
+        self.login()
+        resp = self.client.post(url, formdata)
+        # should get a 200, with a form error
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf8')
+        self.assertIn('Project with that name already exists', content)
+        # Assert that the change never happened
+        matching_projects = Project.objects.filter(owner=self.admin_user)
+        self.assertEqual(matching_projects.count(), 1)
 
     def test_get_invalid_user(self):
         url = '/project/idontexist/%s/clone' % self.project.title
