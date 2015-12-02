@@ -39,6 +39,13 @@ class Post(models.Model):
         return (post_template % kwargs)
 
     def clone(self, newproject, plugins):
+        """
+        Clones this Post into a new project.
+        :param newproject: The new project to stick this one into.
+        :param plugins: Either None (if plugins are not being cloned), or a
+          dictionary mapping old plugins to plugins in the new project.
+        :return: The new post (already saved to database)
+        """
         category = Category.objects.get(project=newproject,
                                         title=self.category.title)
         kwargs = {

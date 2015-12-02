@@ -37,6 +37,15 @@ class Project(models.Model):
         return pelicanconf_template % template_args
 
     def clone(self, newtitle, theme, pages, posts, plugins):
+        """
+        Clone this project.
+
+        Creates a new project with the same attributes and owner, but a
+        different title.  Depending on the parameters given to this method, the
+        theme, pages, posts, and/or plugins will also be copied to the new
+        project.  Returns the cloned project, which has already been saved to
+        the database.
+        """
         kwargs = {
             'title': newtitle,
             'description': self.description,

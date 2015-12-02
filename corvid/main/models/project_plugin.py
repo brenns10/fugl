@@ -12,6 +12,7 @@ class ProjectPlugin(models.Model):
     project = models.ForeignKey('Project')
 
     def clone(self, newproject):
+        """Clone the plugin into a new project."""
         kwargs = {
             'title': self.title,
             'markup': self.markup,

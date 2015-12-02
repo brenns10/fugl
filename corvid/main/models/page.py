@@ -21,6 +21,13 @@ class Page(models.Model):
         })
 
     def clone(self, newproject, plugins):
+        """
+        Clones this Page into a new project.
+        :param newproject: The new project to stick this one into.
+        :param plugins: Either None (if plugins are not being cloned), or a
+          dictionary mapping old plugins to plugins in the new project.
+        :return: The new page (already saved to database)
+        """
         kwargs = {
             'title': self.title,
             'content': self.content,

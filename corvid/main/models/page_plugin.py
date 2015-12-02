@@ -13,6 +13,7 @@ class PagePlugin(models.Model):
     project = models.ForeignKey('Project')
 
     def clone(self, newproject):
+        """Clone the plugin into a new project."""
         kwargs = {
             'title': self.title,
             'head_markup': self.head_markup,

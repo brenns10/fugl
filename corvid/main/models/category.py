@@ -14,6 +14,7 @@ class Category(models.Model):
         return self.title
 
     def clone(self, newproject):
+        """Clone this category into a new project."""
         new = Category.objects.create(title=self.title, project=newproject)
         new.save()
         return new
