@@ -28,7 +28,6 @@
         </ul>
     </div>
     <a class='actions' href='{% url 'project_settings' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
-    <a class='actions' href='{% url 'delete_project' owner=owner title=title %}'><span class='glyphicon glyphicon-trash'></span> Delete Project</a>
 </div>
 <div class='col-md-6 text-left'>
     <div class='panel panel-default'>
@@ -41,9 +40,9 @@
                 <a class='actions' href="{% url 'edit_page' owner=owner proj_title=title page_id=page.id %}">
                     <span class='pp-title'>{{ page.title }}</span></a>
                 <div class='go-right'>
-                    <a href="{% url 'edit_page' owner=owner proj_title=title page_id=page.id %}">
+                    <a href="{% url 'edit_page' owner=owner proj_title=title page_id=page.id %}" title="Edit Page">
                         <span class='glyphicon glyphicon-edit actions'></span></a>
-                    <a href="{% url 'delete_page' owner=owner proj_title=title page_id=page.id %}">
+                    <a href="{% url 'delete_page' owner=owner proj_title=title page_id=page.id %}" title="Delete Page">
                         <span class='glyphicon glyphicon-trash actions'></span></a>
                 </div>
             </li>
@@ -68,9 +67,9 @@
                 <a class='label label-info' href='{% url 'edit_category' owner=owner title=title category_id=post.category.id %}'>{{ post.category }}</a>
                 {% endif %}
                 <div class='go-right'>
-                    <a href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}">
+                    <a href="{% url 'edit_post' owner=owner proj_title=title post_id=post.id %}" title="Edit Post">
                         <span class='glyphicon glyphicon-edit actions'></span></a>
-                    <a href="{% url 'delete_post' owner=owner proj_title=title post_id=post.id %}">
+                    <a href="{% url 'delete_post' owner=owner proj_title=title post_id=post.id %}" title="Delete Post">
                         <span class='glyphicon glyphicon-trash actions'></span></a>
                 </div>
             </li>
