@@ -100,6 +100,17 @@ class CreateProjectViewTestCase(CorvidTestCase):
         self.assertEqual(old_number_of_projects, new_number_of_projects)
         proj.delete()
 
+    def test_forward_slash_in_project_name(self):
+        old_number_of_projects = len(Project.objects.all())
+        data = {'title': 'forward/slash', 'description': 'blah project'}
+        self.login()
+        resp = self.client.post(self.url, data)
+        # 200 doesn't mean failure, sadly
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b'may not contain forward slash', resp.content)
+        new_number_of_projects = len(Project.objects.all())
+        self.assertEqual(old_number_of_projects, new_number_of_projects)
+
 
 class DeleteProjectTestCase(CorvidTestCase):
 
