@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% block title %}
+{% if item %}
+Delete {{ item }} &#8226; {{ project }} &#8226; Corvid
+{% endif %}
+Delete {{ project }} &#8226; Corvid
+{% endblock %}
 {% block content %}
 <div class='std-form'>
     <form action='#' method='POST'>
@@ -11,7 +17,11 @@
         {% endif %}
         <div class='form-actions pad-vert'>
             <input class='btn btn-primary' type='submit' name='confirm' value='Delete'/>
+            {% if item %}
             <a class='btn btn-default' href='{% url 'project_home' owner=user.username title=project %}'>Cancel</a>
+            {% else %}
+            <a class='btn btn-default' href='{% url 'home' %}'>Cancel</a>
+            {% endif %}
         </div>
     </form>
 </div>

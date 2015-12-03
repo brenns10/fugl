@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block title %}
+Success! &#8226; Corvid
+{% endblock %}
 {% block content %}
 <h3>{{ success_message }}</h3>
 You should be automatically redirected to {{return_message }}. To go there now <a href="{{ return_url }}">click here</a>

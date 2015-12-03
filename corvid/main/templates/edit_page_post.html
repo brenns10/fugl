@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load bootstrap_tags %}
+{% block title %}
+{{ action }} {{ type }} &#8226; {{ project }} &#8226; Corvid
+{% endblock %}
 {% block content %}
 <div class='std-form'>
   <form action='#' method='post'>
