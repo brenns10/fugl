@@ -46,16 +46,19 @@ class Post(models.Model):
           dictionary mapping old plugins to plugins in the new project.
         :return: The new post (already saved to database)
         """
-        category = Category.objects.get(project=newproject,
-                                        title=self.category.title)
         kwargs = {
             'title': self.title,
             'content': self.content,
             'date_created': self.date_created,
             'date_updated': self.date_updated,
             'project': newproject,
-            'category': category,
         }
+
+        if self.category:
+            kwargs['category'] = Category.objects.get(
+                project=newproject, title=self.category.title
+            )
+
         new = Post.objects.create(**kwargs)
 
         if plugins:
