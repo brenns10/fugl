@@ -30,8 +30,8 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
 
         <h2 class="stats">
-            32 statements &nbsp;
-            <span class="run hide_run shortkey_r button_toggle_run">32 run</span>
+            33 statements &nbsp;
+            <span class="run hide_run shortkey_r button_toggle_run">33 run</span>
             <span class="mis shortkey_m button_toggle_mis">0 missing</span>
             <span class="exc shortkey_x button_toggle_exc">0 excluded</span>
 
@@ -117,30 +117,33 @@
 <p id="n48" class="pln"><a href="#n48">48</a></p>
 <p id="n49" class="stm run hide_run"><a href="#n49">49</a></p>
 <p id="n50" class="pln"><a href="#n50">50</a></p>
-<p id="n51" class="stm run hide_run"><a href="#n51">51</a></p>
+<p id="n51" class="pln"><a href="#n51">51</a></p>
 <p id="n52" class="pln"><a href="#n52">52</a></p>
 <p id="n53" class="pln"><a href="#n53">53</a></p>
 <p id="n54" class="pln"><a href="#n54">54</a></p>
 <p id="n55" class="pln"><a href="#n55">55</a></p>
 <p id="n56" class="pln"><a href="#n56">56</a></p>
-<p id="n57" class="pln"><a href="#n57">57</a></p>
-<p id="n58" class="pln"><a href="#n58">58</a></p>
-<p id="n59" class="stm run hide_run"><a href="#n59">59</a></p>
+<p id="n57" class="stm run hide_run"><a href="#n57">57</a></p>
+<p id="n58" class="stm run hide_run"><a href="#n58">58</a></p>
+<p id="n59" class="pln"><a href="#n59">59</a></p>
 <p id="n60" class="pln"><a href="#n60">60</a></p>
-<p id="n61" class="stm run hide_run"><a href="#n61">61</a></p>
+<p id="n61" class="pln"><a href="#n61">61</a></p>
 <p id="n62" class="stm run hide_run"><a href="#n62">62</a></p>
-<p id="n63" class="stm run hide_run"><a href="#n63">63</a></p>
-<p id="n64" class="pln"><a href="#n64">64</a></p>
+<p id="n63" class="pln"><a href="#n63">63</a></p>
+<p id="n64" class="stm run hide_run"><a href="#n64">64</a></p>
 <p id="n65" class="stm run hide_run"><a href="#n65">65</a></p>
 <p id="n66" class="stm run hide_run"><a href="#n66">66</a></p>
 <p id="n67" class="pln"><a href="#n67">67</a></p>
-<p id="n68" class="pln"><a href="#n68">68</a></p>
+<p id="n68" class="stm run hide_run"><a href="#n68">68</a></p>
 <p id="n69" class="stm run hide_run"><a href="#n69">69</a></p>
 <p id="n70" class="pln"><a href="#n70">70</a></p>
 <p id="n71" class="pln"><a href="#n71">71</a></p>
-<p id="n72" class="pln"><a href="#n72">72</a></p>
+<p id="n72" class="stm run hide_run"><a href="#n72">72</a></p>
 <p id="n73" class="pln"><a href="#n73">73</a></p>
 <p id="n74" class="pln"><a href="#n74">74</a></p>
+<p id="n75" class="pln"><a href="#n75">75</a></p>
+<p id="n76" class="pln"><a href="#n76">76</a></p>
+<p id="n77" class="pln"><a href="#n77">77</a></p>
                 
             </td>
             <td class="text">
@@ -192,32 +195,35 @@
 <p id="t46" class="pln"><span class="str">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dictionary mapping old plugins to plugins in the new project.</span><span class="strut">&nbsp;</span></p>
 <p id="t47" class="pln"><span class="str">&nbsp; &nbsp; &nbsp; &nbsp; :return: The new post (already saved to database)</span><span class="strut">&nbsp;</span></p>
 <p id="t48" class="pln"><span class="str">&nbsp; &nbsp; &nbsp; &nbsp; &quot;&quot;&quot;</span><span class="strut">&nbsp;</span></p>
-<p id="t49" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">category</span> <span class="op">=</span> <span class="nam">Category</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="nam">project</span><span class="op">=</span><span class="nam">newproject</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t50" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">title</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">category</span><span class="op">.</span><span class="nam">title</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t51" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">kwargs</span> <span class="op">=</span> <span class="op">{</span><span class="strut">&nbsp;</span></p>
-<p id="t52" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;title&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">title</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t53" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;content&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">content</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t54" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;date_created&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">date_created</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t55" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;date_updated&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">date_updated</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t56" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;project&#39;</span><span class="op">:</span> <span class="nam">newproject</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t57" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;category&#39;</span><span class="op">:</span> <span class="nam">category</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t58" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">}</span><span class="strut">&nbsp;</span></p>
-<p id="t59" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span> <span class="op">=</span> <span class="nam">Post</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t60" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t61" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">if</span> <span class="nam">plugins</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t62" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="key">for</span> <span class="nam">plugin</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">post_plugins</span><span class="op">.</span><span class="nam">all</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t63" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span><span class="op">.</span><span class="nam">post_plugins</span><span class="op">.</span><span class="nam">add</span><span class="op">(</span><span class="nam">plugins</span><span class="op">[</span><span class="nam">plugin</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t64" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t65" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
-<p id="t66" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">new</span><span class="strut">&nbsp;</span></p>
+<p id="t49" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">kwargs</span> <span class="op">=</span> <span class="op">{</span><span class="strut">&nbsp;</span></p>
+<p id="t50" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;title&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">title</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t51" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;content&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">content</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t52" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;date_created&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">date_created</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t53" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;date_updated&#39;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">date_updated</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t54" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="str">&#39;project&#39;</span><span class="op">:</span> <span class="nam">newproject</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t55" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; <span class="op">}</span><span class="strut">&nbsp;</span></p>
+<p id="t56" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t57" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">category</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t58" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">kwargs</span><span class="op">[</span><span class="str">&#39;category&#39;</span><span class="op">]</span> <span class="op">=</span> <span class="nam">Category</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="strut">&nbsp;</span></p>
+<p id="t59" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">project</span><span class="op">=</span><span class="nam">newproject</span><span class="op">,</span> <span class="nam">title</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">category</span><span class="op">.</span><span class="nam">title</span><span class="strut">&nbsp;</span></p>
+<p id="t60" class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t61" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t62" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span> <span class="op">=</span> <span class="nam">Post</span><span class="op">.</span><span class="nam">objects</span><span class="op">.</span><span class="nam">create</span><span class="op">(</span><span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t63" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t64" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">if</span> <span class="nam">plugins</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t65" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="key">for</span> <span class="nam">plugin</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">post_plugins</span><span class="op">.</span><span class="nam">all</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t66" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span><span class="op">.</span><span class="nam">post_plugins</span><span class="op">.</span><span class="nam">add</span><span class="op">(</span><span class="nam">plugins</span><span class="op">[</span><span class="nam">plugin</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t67" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t68" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t69" class="stm run hide_run"><span class="nam">post_template</span> <span class="op">=</span> <span class="str">&quot;&quot;&quot;Title: %(title)s</span><span class="strut">&nbsp;</span></p>
-<p id="t70" class="pln"><span class="str">Author: %(author)s</span><span class="strut">&nbsp;</span></p>
-<p id="t71" class="pln"><span class="str">Slug: %(slug)s</span><span class="strut">&nbsp;</span></p>
-<p id="t72" class="pln"><span class="str">%(date_created_str)s%(date_modified_str)s</span><span class="strut">&nbsp;</span></p>
-<p id="t73" class="pln"><span class="str">%(content)s</span><span class="strut">&nbsp;</span></p>
-<p id="t74" class="pln"><span class="str">&quot;&quot;&quot;</span><span class="strut">&nbsp;</span></p>
+<p id="t68" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="nam">new</span><span class="op">.</span><span class="nam">save</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t69" class="stm run hide_run">&nbsp; &nbsp; &nbsp; &nbsp; <span class="key">return</span> <span class="nam">new</span><span class="strut">&nbsp;</span></p>
+<p id="t70" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t71" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t72" class="stm run hide_run"><span class="nam">post_template</span> <span class="op">=</span> <span class="str">&quot;&quot;&quot;Title: %(title)s</span><span class="strut">&nbsp;</span></p>
+<p id="t73" class="pln"><span class="str">Author: %(author)s</span><span class="strut">&nbsp;</span></p>
+<p id="t74" class="pln"><span class="str">Slug: %(slug)s</span><span class="strut">&nbsp;</span></p>
+<p id="t75" class="pln"><span class="str">%(date_created_str)s%(date_modified_str)s</span><span class="strut">&nbsp;</span></p>
+<p id="t76" class="pln"><span class="str">%(content)s</span><span class="strut">&nbsp;</span></p>
+<p id="t77" class="pln"><span class="str">&quot;&quot;&quot;</span><span class="strut">&nbsp;</span></p>
                 
             </td>
         </tr>
@@ -228,7 +234,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.org">coverage.py v4.0.3</a>,
-            created at 2015-12-03 12:52
+            created at 2015-12-03 17:57
         </p>
     </div>
 </div>
