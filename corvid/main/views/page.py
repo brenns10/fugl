@@ -7,27 +7,31 @@ from django.shortcuts import get_object_or_404
 from django import forms
 from pagedown.widgets import PagedownWidget
 
-from main.models import Project, Page, User, PagePlugin
+from main.models import Project, Page, User
 from .protected_view import ProtectedViewMixin
 
 
 class PageForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
-        '''
-        DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
-        '''
+        # Order is important here: project must be removed from kwargs or super
+        # constructor fails.  Querysets must be modified after super
+        # constructor finishes, otherwise the self.fields dict is not yet
+        # initialized.
         project = kwargs.pop('__project')
         super(PageForm, self).__init__(*args, **kwargs)
         plugins = project.pageplugin_set.all()
         self.fields['post_plugins'].queryset = plugins
 
-    content = forms.CharField(widget=PagedownWidget())
-    # Added Empty queryset to satisfy Field's constructor until PostForm's is called.
-    post_plugins = forms.ModelMultipleChoiceField(queryset=PagePlugin.objects.none(),
-                                                  required=False)
     class Meta:
         model = Page
-        fields = ['title', 'content', 'post_plugins']
+        fields = ['title', 'post_plugins', 'content']
+        widgets = {
+            'content': PagedownWidget(),
+        }
+        help_texts = {
+            'post_plugins': 'Hold "Control" while clicking to select multiple.'
+        }
 
 
 class PageBase:

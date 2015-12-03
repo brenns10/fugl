@@ -9,15 +9,17 @@ from django import forms
 from main.models import Category
 from pagedown.widgets import PagedownWidget
 
-from main.models import Project, Post, User, PagePlugin
+from main.models import Project, Post, User
 from .protected_view import ProtectedViewMixin
 
 
 class PostForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
-        '''
-        DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
-        '''
+        # Order is important here: project must be removed from kwargs or super
+        # constructor fails.  Querysets must be modified after super
+        # constructor finishes, otherwise the self.fields dict is not yet
+        # initialized.
         project = kwargs.pop('__project')
         super(PostForm, self).__init__(*args, **kwargs)
         categoryqs = Category.objects.filter(project=project)
@@ -25,14 +27,15 @@ class PostForm(forms.ModelForm):
         pluginqs = project.pageplugin_set.all()
         self.fields['post_plugins'].queryset = pluginqs
 
-    content = forms.CharField(widget=PagedownWidget())
-    # Added Empty queryset to satisfy Field's constructor until PostForm's is called.
-    post_plugins = forms.ModelMultipleChoiceField(queryset=PagePlugin.objects.none(),
-                                                  required=False)
-
     class Meta:
         model = Post
-        fields = ['title', 'category', 'content', 'post_plugins']
+        fields = ['title', 'category', 'post_plugins', 'content']
+        widgets = {
+            'content': PagedownWidget(),
+        }
+        help_texts = {
+            'post_plugins': 'Hold "Control" while clicking to select multiple.'
+        }
 
 
 class PostBase:
