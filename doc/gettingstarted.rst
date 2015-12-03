@@ -96,7 +96,10 @@ up" your site with a different theme.  To do this:
 2. Select "html5-dopetrope" from the Theme drop-down box.
 3. Click Submit.  You are returned to your project homepage.
 
-Now, your project's theme will be different.
+Now, your project's theme will be different.  If you'd like to see previews for
+some of the themes available within Corvid, please check `this
+<http://www.pelicanthemes.com/>`_ website.  Right now, Corvid only supports a
+few of the themes shown on this site, but this can be easily expanded!
 
 Download your site!
 -------------------
