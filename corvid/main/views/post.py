@@ -3,6 +3,7 @@ from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django import forms
 from main.models import Category
