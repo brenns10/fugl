@@ -17,6 +17,7 @@ class PageForm(forms.ModelForm):
         DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
         '''
         project = kwargs.pop('__project')
+        page = None
         try:
             page = kwargs.pop('__page')
         except:
@@ -87,6 +88,7 @@ class CreatePageView(ProtectedViewMixin, CreateView):
         }
         page = Page.objects.create(**kwargs)
         page.save()
+        page.post_plugins.add(*data['post_plugins'])
         url_kwargs = {
             'owner': self.request.user.username,
             'title': self.kwargs['title'],

@@ -20,6 +20,7 @@ class PostForm(forms.ModelForm):
         DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
         '''
         project = kwargs.pop('__project')
+        post = None
         try:
             post = kwargs.pop('__post')
         except:
@@ -96,10 +97,10 @@ class CreatePostView(ProtectedViewMixin, CreateView):
             'date_updated': now,
             'project': project,
             'category': data['category'],
-            'post_plugins': data['post_plugins'],
         }
         post = Post.objects.create(**kwargs)
         post.save()
+        post.post_plugins.add(*data['post_plugins'])
 
         url_kwargs = {
             'owner': self.request.user.username,
