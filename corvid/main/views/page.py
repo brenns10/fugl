@@ -17,27 +17,14 @@ class PageForm(forms.ModelForm):
         DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
         '''
         project = kwargs.pop('__project')
-        page = None
-        try:
-            page = kwargs.pop('__page')
-        except:
-            pass
         super(PageForm, self).__init__(*args, **kwargs)
         plugins = project.pageplugin_set.all()
         self.fields['post_plugins'].queryset = plugins
-        if page:
-            '''
-            TODO: Make initial values show up. Don't know why this isn't working.
-            '''
-            active_plugins = {p.id: (p in page.post_plugins.all()) for p in plugins}
-            self.fields['post_plugins'].initial = active_plugins
 
     content = forms.CharField(widget=PagedownWidget())
     # Added Empty queryset to satisfy Field's constructor until PostForm's is called.
-    post_plugins = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),
-                                                  queryset=PagePlugin.objects.none(),
+    post_plugins = forms.ModelMultipleChoiceField(queryset=PagePlugin.objects.none(),
                                                   required=False)
-
     class Meta:
         model = Page
         fields = ['title', 'content', 'post_plugins']
@@ -132,9 +119,9 @@ class UpdatePageView(ProtectedViewMixin, UpdateView, PageBase):
     def get_form_kwargs(self):
         initial = super().get_form_kwargs()
         qs = Project.objects.filter(owner=self.request.user)
-        project = get_object_or_404(qs, owner=self.request.user, title=self.kwargs['proj_title'])
+        project = get_object_or_404(qs, owner=self.request.user,
+                                    title=self.kwargs['proj_title'])
         initial['__project'] = project
-        initial['__page'] = self.object
         return initial
 
     def get_context_data(self, **kwargs):

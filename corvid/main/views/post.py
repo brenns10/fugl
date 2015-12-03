@@ -19,26 +19,15 @@ class PostForm(forms.ModelForm):
         DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
         '''
         project = kwargs.pop('__project')
-        post = None
-        try:
-            post = kwargs.pop('__post')
-        except:
-            pass
         super(PostForm, self).__init__(*args, **kwargs)
-        self.fields['category'].queryset = Category.objects.filter(project=project)
-        plugins = project.pageplugin_set.all()
-        self.fields['post_plugins'].queryset = plugins
-        if post:
-            '''
-            TODO: Make initial values show up. Don't know why this isn't working.
-            '''
-            active_plugins = {p.id: (p in post.post_plugins.all()) for p in plugins}
-            self.fields['post_plugins'].initial = active_plugins
+        categoryqs = Category.objects.filter(project=project)
+        self.fields['category'].queryset = categoryqs
+        pluginqs = project.pageplugin_set.all()
+        self.fields['post_plugins'].queryset = pluginqs
 
     content = forms.CharField(widget=PagedownWidget())
     # Added Empty queryset to satisfy Field's constructor until PostForm's is called.
-    post_plugins = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),
-                                                  queryset=PagePlugin.objects.none(),
+    post_plugins = forms.ModelMultipleChoiceField(queryset=PagePlugin.objects.none(),
                                                   required=False)
 
     class Meta:
@@ -145,7 +134,6 @@ class UpdatePostView(ProtectedViewMixin, UpdateView, PostBase):
         qs = Project.objects.filter(owner=self.request.user)
         project = get_object_or_404(qs, owner=self.request.user, title=self.kwargs['proj_title'])
         initial['__project'] = project
-        initial['__post'] = self.object
         return initial
 
     def get_context_data(self, **kwargs):
