@@ -1,41 +1,12 @@
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import DeleteView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django import forms
-from main.models import Category
-from pagedown.widgets import PagedownWidget
 
-from main.models import Project, Post, User
+from ..models import Project, Post, User
+from ..forms import PostForm
 from .protected_view import ProtectedViewMixin
-
-
-class PostForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        # Order is important here: project must be removed from kwargs or super
-        # constructor fails.  Querysets must be modified after super
-        # constructor finishes, otherwise the self.fields dict is not yet
-        # initialized.
-        project = kwargs.pop('__project')
-        super(PostForm, self).__init__(*args, **kwargs)
-        categoryqs = Category.objects.filter(project=project)
-        self.fields['category'].queryset = categoryqs
-        pluginqs = project.pageplugin_set.all()
-        self.fields['post_plugins'].queryset = pluginqs
-
-    class Meta:
-        model = Post
-        fields = ['title', 'category', 'post_plugins', 'content']
-        widgets = {
-            'content': PagedownWidget(),
-        }
-        help_texts = {
-            'post_plugins': 'Hold "Control" while clicking to select multiple.'
-        }
 
 
 class PostBase:
