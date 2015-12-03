@@ -11,6 +11,12 @@ from .protected_view import ProtectedViewMixin
 
 
 class PagePluginForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # User may not need these fields: let the submit it blank if need-be
+        self.fields['head_markup'].required = False
+        self.fields['body_markup'].required = False
+
     class Meta:
         model = PagePlugin
         fields = ['title', 'head_markup', 'body_markup']

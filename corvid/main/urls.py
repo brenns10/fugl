@@ -64,12 +64,12 @@ urlpatterns = [
     url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/project_plugin'
         '/delete/(?P<project_plugin_id>[0-9]+)/?',
         DeleteProjectPluginView.as_view(), name='delete_project_plugin'),
-    url(r'^page/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin/new',
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin/new',
         CreatePagePluginView.as_view(), name='new_page_plugin'),
-    url(r'^page/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin'
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin'
         '/edit/(?P<page_plugin_id>[0-9]+)/?',
         UpdatePagePluginView.as_view(), name='edit_page_plugin'),
-    url(r'^page/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin'
+    url(r'^project/(?P<owner>[^/]+)/(?P<title>[^/]+)/page_plugin'
         '/delete/(?P<page_plugin_id>[0-9]+)/?',
         DeletePagePluginView.as_view(), name='delete_page_plugin'),
 

@@ -23,3 +23,6 @@ class PagePlugin(models.Model):
         new = PagePlugin.objects.create(**kwargs)
         new.save()
         return new
+
+    def __str__(self):
+        return self.title
