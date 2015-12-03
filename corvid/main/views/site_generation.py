@@ -143,7 +143,8 @@ def get_plugin_dict(p2slug):
         head = '\n'.join([p.head_markup for p in post.post_plugins.all()])
         body = '\n'.join([p.body_markup for p in post.post_plugins.all()])
         plugin_dict['posts'][slug] = (head, body)
-    return str(plugin_dict)
+    plugin_dict_str = str(plugin_dict)
+    return plugin_dict_str
 
 
 PLUGIN_BODY = '''
