@@ -2,10 +2,18 @@
 Represents a project: a static website.
 """
 from django.db import models
+from django.core.exceptions import ValidationError
+
+from re import compile
 
 from .user import User
 from .theme import Theme
 
+
+def validate_project(value):
+    reg = compile('[\w\-\ ]+\Z')
+    if not reg.match(value):
+        raise ValidationError('Not letters, digits, and -/_.', code='invalid')
 
 class Project(models.Model):
     """
@@ -15,7 +23,9 @@ class Project(models.Model):
         unique_together = (('title', 'owner'),)
         index_together = (('title', 'owner'),)
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50,
+                             help_text='Required. Letters, digits, and -/_.',
+                             validators=[validate_project])
     description = models.CharField(max_length=1000)
     preview_url = models.URLField()
 
