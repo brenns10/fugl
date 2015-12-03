@@ -21,9 +21,4 @@ class CreateProjectForm(forms.ModelForm):
                                       title=self.cleaned_data['title'])) > 0:
             raise ValidationError('Project with that name already exists.')
 
-        # More validation - make sure this title has no forward slashes:
-        if '/' in self.cleaned_data['title']:
-            raise ValidationError('Project title may not contain forward slash'
-                                  ' ("/").')
-
         return self.cleaned_data['title']

@@ -119,7 +119,7 @@ class CreateProjectViewTestCase(CorvidTestCase):
         resp = self.client.post(self.url, data)
         # 200 doesn't mean failure, sadly
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(b'may not contain forward slash', resp.content)
+        self.assertIn(b'Not letters, digits, and -/_.', resp.content)
         new_number_of_projects = len(Project.objects.all())
         self.assertEqual(old_number_of_projects, new_number_of_projects)
 
@@ -227,7 +227,7 @@ class CloneProjectTestCase(CorvidTestCase):
         # should get a 200, with a form error
         self.assertEqual(resp.status_code, 200)
         content = resp.content.decode('utf8')
-        self.assertIn('may not contain forward slash', content)
+        self.assertIn('Not letters, digits, and -/_.', content)
         # Assert that the change never happened
         matching_projects = Project.objects.filter(owner=self.admin_user)
         self.assertEqual(matching_projects.count(), 1)
