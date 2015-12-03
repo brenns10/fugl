@@ -13,5 +13,12 @@
 			{% if FACEBOOK_APPID %}<div class="fb-comments" data-href="{{ FQ_SITEURL }}/{{ article.url }}" data-num-posts="10" data-width="760"></div>{% endif %}
 		<div>
         {% endif %}
+        {% if article.body_markup %}
+            {{ article.body_markup }}
+        {% endif %}
+        {% if article.head_markup %}
+            {{ article.head_markup }}
+        {% endif %}
+
 	</div>
 {% endblock %}

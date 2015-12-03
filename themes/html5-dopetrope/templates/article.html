@@ -28,6 +28,12 @@
 									{{ article.content }}
 								</article>
 								{% include 'disqus_script.html' %}
+                                {% if article.body_markup %}
+                                   {{ article.body_markup }}
+                                {% endif %}
+                                {% if article.head_markup %}
+                                    {{ article.head_markup }}
+                                {% endif %} 
 						</div>
 					</div>
 				</div>

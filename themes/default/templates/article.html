@@ -31,6 +31,12 @@
       <noscript>Please enable JavaScript to view the comments.</noscript>
     </div>
     {% endif %}
+    {% if article.body_markup %}
+        {{ article.body_markup }}
+    {% endif %}
+    {% if article.head_markup %}
+        {{ article.head_markup }}
+    {% endif %}
 
   </article>
 </section>

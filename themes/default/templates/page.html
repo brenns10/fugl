@@ -6,5 +6,12 @@
     {% import 'translations.html' as translations with context %}
     {{ translations.translations_for(page) }}
     {{ page.content }}
+    {% if page.body_markup %}
+        {{ page.body_markup }}
+    {% endif %}
+    {% if page.head_markup %}
+        {{ page.head_markup }}
+    {% endif %}
+ 
 </section>
 {% endblock %}
