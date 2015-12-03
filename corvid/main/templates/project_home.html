@@ -51,6 +51,30 @@
             </li>
         </ul>
     </div>
+    <div class='btn-group'>
+        <button class='dropdown-toggle actions' data-toggle='dropdown'>
+            Page Plugins <span class="caret"></span>
+        </button>
+        <ul class='dropdown-menu'>
+            {% for plugin in page_plugins_ %}
+            <li>
+                <div class='go-left'>
+                    <a class='actions dropdown-title' href='{% url 'edit_page_plugin' owner=owner title=title page_plugin_id=plugin.id %}'>{{ plugin.title }}</a>
+                </div>
+                <div class='go-right'>
+                    <a class='action' href='{% url 'edit_page_plugin' owner=owner title=title page_plugin_id=plugin.id %}'>
+                        <span class='glyphicon glyphicon-edit actions'><span>
+                    </a>
+                    <a href="{% url 'delete_page_plugin' owner=owner title=title page_plugin_id=plugin.id %}">
+                        <span class='glyphicon glyphicon-trash actions'></span></a>
+                </div>
+            </li>
+            {% endfor %}
+            <li>
+                <a class='actions' href="{% url 'new_page_plugin' owner=owner title=title %}"><span class='glyphicon glyphicon-plus'></span> New Page Plugin </a>
+            </li>
+        </ul>
+    </div>
     <a class='actions' href='{% url 'project_settings' owner=owner title=title %}'><span class='glyphicon glyphicon-cog'></span> Project Settings</a>
 </div>
 <div class='col-md-6 text-left'>

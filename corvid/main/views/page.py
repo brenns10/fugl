@@ -4,20 +4,10 @@ from django.views.generic.edit import UpdateView
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
-from django import forms
-from pagedown.widgets import PagedownWidget
 
-from main.models import Project, Page, User
+from ..models import Project, Page, User
+from ..forms import PageForm
 from .protected_view import ProtectedViewMixin
-
-
-class PageForm(forms.ModelForm):
-
-    content = forms.CharField(widget=PagedownWidget())
-
-    class Meta:
-        model = Page
-        fields = ['title', 'content']
 
 
 class PageBase:
@@ -46,6 +36,13 @@ class CreatePageView(ProtectedViewMixin, CreateView):
         context['project'] = self.kwargs['title']
         return context
 
+    def get_form_kwargs(self):
+        initial = super().get_form_kwargs()
+        qs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(qs, owner=self.request.user, title=self.kwargs['title'])
+        initial['__project'] = project
+        return initial
+
     def form_valid(self, form):
         user = get_object_or_404(User.objects, username=self.kwargs['owner'])
         qs = Project.objects.filter(owner=self.request.user)
@@ -58,6 +55,7 @@ class CreatePageView(ProtectedViewMixin, CreateView):
         }
         page = Page.objects.create(**kwargs)
         page.save()
+        page.post_plugins.add(*data['post_plugins'])
         url_kwargs = {
             'owner': self.request.user.username,
             'title': self.kwargs['title'],
@@ -90,12 +88,21 @@ class DeletePageView(ProtectedViewMixin, DeleteView, PageBase):
         }
         return reverse('project_home', kwargs=kwargs)
 
+
 class UpdatePageView(ProtectedViewMixin, UpdateView, PageBase):
     form_class = PageForm
     template_name = 'edit_page_post.html'
 
     def get_object(self):
         return self.get_page_object()
+
+    def get_form_kwargs(self):
+        initial = super().get_form_kwargs()
+        qs = Project.objects.filter(owner=self.request.user)
+        project = get_object_or_404(qs, owner=self.request.user,
+                                    title=self.kwargs['proj_title'])
+        initial['__project'] = project
+        return initial
 
     def get_context_data(self, **kwargs):
         context = super(UpdatePageView, self).get_context_data(**kwargs)

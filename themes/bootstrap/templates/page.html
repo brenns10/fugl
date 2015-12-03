@@ -5,4 +5,10 @@
 		<div class="page-header"><h1>{{ page.title }}</h1></div>
 		<div>{{ page.content }}</div>
 	</div>
+    {% if page.body_markup %}
+        {{ page.body_markup }}
+    {% endif %}
+    {% if page.head_markup %}
+        {{ page.head_markup }}
+    {% endif %}
 {% endblock %}

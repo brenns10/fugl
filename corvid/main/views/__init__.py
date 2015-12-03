@@ -10,3 +10,4 @@ from .user import UserHomeView
 from .site_generation import SiteGenerationView
 from .project_settings import ProjectSettingsView
 from .project_plugins import CreateProjectPluginView, UpdateProjectPluginView, DeleteProjectPluginView
+from .page_plugins import CreatePagePluginView, UpdatePagePluginView, DeletePagePluginView

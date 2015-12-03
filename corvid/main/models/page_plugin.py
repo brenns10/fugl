@@ -7,8 +7,8 @@ class PagePlugin(models.Model):
         index_together = (('title', 'project'),)
 
     title = models.CharField(max_length=50)
-    head_markup = models.CharField(max_length=5000)
-    body_markup = models.CharField(max_length=5000)
+    head_markup = models.TextField(max_length=5000)
+    body_markup = models.TextField(max_length=5000)
 
     project = models.ForeignKey('Project')
 
@@ -23,3 +23,6 @@ class PagePlugin(models.Model):
         new = PagePlugin.objects.create(**kwargs)
         new.save()
         return new
+
+    def __str__(self):
+        return self.title

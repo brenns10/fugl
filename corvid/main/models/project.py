@@ -133,4 +133,7 @@ DEFAULT_PAGINATION = False
 #RELATIVE_URLS = True
 
 PROJECT_PLUGINS = %(project_plugins_str)s
+
+PLUGIN_PATHS = ['.']
+PLUGINS = ['page_plugins']
 """

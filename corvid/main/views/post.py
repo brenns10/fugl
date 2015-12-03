@@ -1,33 +1,12 @@
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import DeleteView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
 from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.http import Http404
-from django import forms
-from main.models import Category
-from pagedown.widgets import PagedownWidget
 
-from main.models import Project, Post, User
+from ..models import Project, Post, User
+from ..forms import PostForm
 from .protected_view import ProtectedViewMixin
-
-
-class PostForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        '''
-        DON'T CHANGE THE ORDER LEST YOU WISH TO BREAK CATEGORIES
-        '''
-        project = kwargs.pop('__project')
-        super().__init__(*args, **kwargs)
-        self.fields['category'].queryset = Category.objects.filter(project=project)
-
-    content = forms.CharField(widget=PagedownWidget())
-
-    class Meta:
-        model = Post
-        fields = ['title', 'category', 'content']
 
 
 class PostBase:
@@ -37,6 +16,7 @@ class PostBase:
         project = get_object_or_404(projectqs, owner=user, title=self.kwargs['proj_title'])
         post = get_object_or_404(Post.objects, project=project, id=self.kwargs['post_id'])
         return post
+
 
 class CreatePostView(ProtectedViewMixin, CreateView):
     form_class = PostForm
@@ -82,6 +62,7 @@ class CreatePostView(ProtectedViewMixin, CreateView):
         }
         post = Post.objects.create(**kwargs)
         post.save()
+        post.post_plugins.add(*data['post_plugins'])
 
         url_kwargs = {
             'owner': self.request.user.username,
