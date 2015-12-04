@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Plugins &mdash; Corvid 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Corvid 1.0 documentation" href="index.html"/>
+        <link rel="prev" title="All About Projects" href="projects.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Corvid
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whatis.html">What is Corvid?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">All About Projects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#project-plugins">Project Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#page-plugins">Page Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disqus-comments">Disqus Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#social-media-buttons">Social Media Buttons</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Corvid</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Plugins</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/plugins.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plugins">
+<h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
+<p>As you&#8217;ve probably read by now, plugins are bits of code that get mixed into
+your site to alter its behavior.  If you don&#8217;t know much about code or HTML,
+that&#8217;s fine &#8211; you don&#8217;t need to!  This article will describe a few different
+types of plugins which you can easily add to your project.</p>
+<div class="section" id="project-plugins">
+<h2>Project Plugins<a class="headerlink" href="#project-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Project plugins are plugins that are applied to every single page in your site.
+They don&#8217;t usually show up visibly on your site content, but rather they can
+make your site do interesting things.  Here&#8217;s an example of some code that you
+could put into a project plugin:</p>
+<div class="code html highlight-python"><div class="highlight"><pre>&lt;script&gt;
+  alert(&quot;I&#39;m an annoying popup!&quot;);
+&lt;/script&gt;
+</pre></div>
+</div>
+<p>If you&#8217;re not familiar with HTML or Javascript, this code will make a little
+message box pop up proclaiming &#8220;I&#8217;m an annoying popup!&#8221;.  Since project plugins
+are added to every single page in your site, this plugin would interrupt your
+site&#8217;s user every time they go to a new page with a new popup.  Clearly, this
+isn&#8217;t a useful plugin, but hopefully it gets the idea across.</p>
+<p>So what sort of useful plugins can you add to your site?  Well, perhaps the most
+useful site-wide plugin you could add to a site is something called Google
+Analytics.  This product from Google will collect useful information about your
+site&#8217;s visitors and their behavior.  This is very useful for understanding the
+type of people that use your site, so that you can better cater to your
+visitors.  In order to get Google Analytics up and running, you&#8217;ll have to do
+two things:</p>
+<ol class="arabic simple">
+<li>Set up a Google Analytics account and create a &#8220;property&#8221; for your website.
+See Google&#8217;s <a class="reference external" href="https://support.google.com/analytics/answer/1008015?hl=en">help</a> document about
+this process for more information.</li>
+<li>From your Corvid project&#8217;s home, click the &#8220;Project Plugins&#8221; dropdown, and
+select &#8220;New Project Plugin&#8221;.</li>
+<li>In the &#8220;Title&#8221; field <a class="footnote-reference" href="#projplugtitle" id="id1">[1]</a>, enter &#8220;Google Analytics&#8221;</li>
+<li>Get your web tracking code for your site on Google Analytics.  Instructions
+for doing this are on <a class="reference external" href="https://support.google.com/analytics/answer/1008080">this help document</a> by Google.  You want
+to follow the instructions under &#8220;Add the tracking code directly to your
+site.&#8221;  Copy and paste your tracking code into the &#8220;Markup&#8221; field.</li>
+<li>Click Submit.</li>
+</ol>
+<p>Once you download a new zip and deploy to your web host, you should be able to
+watch live analytics information for your website on Google Analytics!</p>
+<table class="docutils footnote" frame="void" id="projplugtitle" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>A project plugin may have any title you&#8217;d like!  It&#8217;s just
+for you to remember what it is &#8211; it won&#8217;t show up on your
+site.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="page-plugins">
+<h2>Page Plugins<a class="headerlink" href="#page-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Page Plugins are a bit different from Project Plugins.  Unlike project plugins,
+these only go on specific Pages.  Once you&#8217;ve created a Page Plugin, you can
+edit your pages and add the plugin to whatever pages you&#8217;d like.  The other
+major difference is that Page Plugins typically add content to your page, rather
+than just make your site do cool things.  Typically they have two parts: head
+markup and body markup, with head markup guaranteed to go before body markup.
+First, here are some instructions on how to add Page Plugins to your site:</p>
+<ol class="arabic simple">
+<li>From the Project Homepage, click the &#8220;Page Plugins&#8221; dropdown.  Click &#8220;New
+Page Plugin&#8221;.</li>
+<li>Enter a title (this will depend on what your plugin is for).  Your title can
+be anything; it&#8217;s just for your organization.  The title won&#8217;t show up on
+your site.</li>
+<li>Paste the head and body markup in (you will see some examples shortly).</li>
+<li>Click Submit.</li>
+</ol>
+<p>To add a Page Plugin to a Page:</p>
+<ol class="arabic simple">
+<li>Click the Page title in the Project Home.  This will take you to the Edit
+Page screen.</li>
+<li>You should now see the title of your Page Plugin under the &#8220;Plugins&#8221; heading.
+You can select it for this page.  If you&#8217;d like to select multiple plugins,
+hold the control button while you click.</li>
+<li>Click Submit.</li>
+</ol>
+<p>Now, when you download your site again, you will have the plugin on this page.
+You may have to repeat this process for each page you&#8217;d like this plugin to
+appear on.  There is currently no way to automatically add a plugin to many
+pages, although this feature could be added in the future.</p>
+</div>
+<div class="section" id="disqus-comments">
+<h2>Disqus Comments<a class="headerlink" href="#disqus-comments" title="Permalink to this headline">¶</a></h2>
+<p>So now that you know all about creating page plugins and adding them to pages,
+what can you do with a page plugin?  Well, one of the best things to do is add
+Disqus!  Disqus is a system that puts a comment section on a page, without any
+extra complexity to you.  To use Disqus, you&#8217;ll need to create an account
+(<a class="reference external" href="https://disqus.com/">start here</a> for that).  Once you have an account, you
+can <a class="reference external" href="https://disqus.com/admin/create/">create</a> your own site profile.</p>
+<p>Next, get your &#8220;universal code&#8221; by going to this URL:</p>
+<div class="code highlight-python"><div class="highlight"><pre>https://[shortname].disqus.com/admin/settings/universalcode/
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">shortname</span></code> is the Disqus shortname you should have created in the
+previous step.  Copy and paste the universal code into the &#8220;body markup&#8221; section
+of a page plugin.</p>
+<p>Now, when you add this plugin to a page, download the ZIP, and deploy, you&#8217;ll
+have comments built in to your website on that page!</p>
+</div>
+<div class="section" id="social-media-buttons">
+<h2>Social Media Buttons<a class="headerlink" href="#social-media-buttons" title="Permalink to this headline">¶</a></h2>
+<p>When you&#8217;re trying to gain popularity on a website, one of the best things you
+can do is make it easy for your visitors to share content from your site.  For
+instance, if you&#8217;ve written a particularly good blog article, you should make it
+easy for readers to share it to Facebook, Twitter, and other social media
+platforms.  Social media buttons make this easy.</p>
+<p>There are many ways you can add social buttons, but the most straightforward way
+is to use a free tool to generate code you can put into a Corvid plugin.  One
+free example is called <a class="reference external" href="http://www.sharethis.com/">Share This</a>.</p>
+<ol class="arabic simple">
+<li>Create a Share This account (all that is required is an email and password).</li>
+<li>Go to the <a class="reference external" href="http://www.sharethis.com/">homepage</a> and click &#8220;Free Sharing
+Buttons&#8221;.</li>
+<li>Click &#8220;Website&#8221;.</li>
+<li>Select the style of the buttons that you&#8217;d prefer on your site.</li>
+<li>Customize which social media platforms you&#8217;d like to target.</li>
+<li>When you are done, click &#8220;Get the code&#8221;.</li>
+<li>The first block of code they give you (under number 2) should be pasted into
+the body markup of a Page Plugin.</li>
+<li>The second block of code (under number 3) should be pasted into the head
+markup section of the same Page Plugin.</li>
+<li>Every page and post you add this plugin to will have social media sharing
+buttons enabled!</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="projects.html" class="btn btn-neutral" title="All About Projects" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, The Corvidae.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
