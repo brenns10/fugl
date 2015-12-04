@@ -17,6 +17,7 @@ class PageForm(forms.ModelForm):
         plugins = project.pageplugin_set.all()
         self.fields['post_plugins'].queryset = plugins
         self.fields['post_plugins'].required = False
+        self.fields['post_plugins'].label = 'Page plugins'
 
     class Meta:
         model = Page
