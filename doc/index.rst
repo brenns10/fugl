@@ -3,20 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Corvid's documentation!
+Welcome to the Corvid user manual!
 ==================================
+
+This document should give you enough information to get started making websites
+using Corvid.  See the table of contents below to select a topic, or start at
+the beginning and read all the way through to get a good understanding of how to
+use Corvid.
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   whatis
+   gettingstarted
+   projects
+   plugins
 
