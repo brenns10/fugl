@@ -19,4 +19,5 @@ Contents:
    whatis
    gettingstarted
    projects
+   plugins
 

@@ -101,6 +101,7 @@ can `create <https://disqus.com/admin/create/>`_ your own site profile.
 Next, get your "universal code" by going to this URL:
 
 .. code::
+
    https://[shortname].disqus.com/admin/settings/universalcode/
 
 Here, ``shortname`` is the Disqus shortname you should have created in the
