@@ -8,10 +8,13 @@ In order to use Corvid, you need to have a user account.  All of your projects
 will be associated with your user account, so make sure you use a good password!
 
 1. Go to https://corvid.xyz/register
-2. Enter a username, email address, and password, and then click submit.
+2. Enter a username [#un]_, email address, and password, and then click submit.
 3. You should be redirected to the login page.
 4. Enter your username and password, and you'll be presented with your account
    homepage.
+
+.. [#un] A valid username must be 30 characters or fewer, and consist of
+         letters, digits, and the following characters: ``@.+-_``
 
 Create your first project
 -------------------------
@@ -22,12 +25,15 @@ duplicate, and delete projects.  We'll start by creating a simple example
 project to help you understand what Corvid lets you do.
 
 1. Click the "New Project" button.
-2. In the "Title" field, enter a title.  For the purpose of this example, you
-   can enter something like "My First Website".
-3. In the "Description" field, enter a sentence that describes the purpose of
-   your website.  For this example, you can use something like "I'm learning to
-   use Corvid!".
+2. In the "Title" field [#title]_, enter a title.  For the purpose of this
+   example, you can enter something like "My First Website".
+3. In the "Description" [#desc]_ field, enter a sentence that describes the
+   purpose of your website.  For this example, you can use something like "I'm
+   learning to use Corvid!".
 4. You should be redirected to your project homepage.
+
+.. [#title] A valid title may contain: letters, digits, hyphens, and spaces.
+.. [#desc] A description may contain anything!
 
 Create your first page
 ----------------------
@@ -43,7 +49,7 @@ So, if you're making a simple site, the first thing you'll probably want to do
 is make an "About Us" page:
 
 1. Click the "New Page" button.
-2. In the "Title" field, enter "About Us".
+2. In the "Title" field [#artitle]_, enter "About Us".
 3. In the "Content" field, type or paste the following:
 
    .. code::
@@ -76,6 +82,11 @@ is make an "About Us" page:
    to your project home.
 5. If you'd like to make changes to the page, you can click on the page's name
    in the "Page" list to edit it.
+
+.. [#artitle] Article and post titles can be anything, although when they are
+              translated into files on your site, they will be altered slightly
+              (to remove spaces and unusual spaces, as well as resolve duplicate
+              titles).
 
 Create your first post
 ----------------------
