@@ -63,8 +63,9 @@ Page Plugins are a bit different from Project Plugins.  Unlike project plugins,
 these only go on specific Pages.  Once you've created a Page Plugin, you can
 edit your pages and add the plugin to whatever pages you'd like.  The other
 major difference is that Page Plugins typically add content to your page, rather
-than just make your site do cool things.  First, here are some instructions on
-how to add Page Plugins to your site:
+than just make your site do cool things.  Typically they have two parts: head
+markup and body markup, with head markup guaranteed to go before body markup.
+First, here are some instructions on how to add Page Plugins to your site:
 
 1. From the Project Homepage, click the "Page Plugins" dropdown.  Click "New
    Page Plugin".
