@@ -119,3 +119,7 @@ Now that you have some content created for your website, you can click "Download
 ZIP".  A ZIP file containing your generated website will begin downloading.  You
 can give this ZIP file to your web host to deploy, or you can extract it and
 upload it via FTP to your web server directly.  Enjoy your new site!
+
+If you'd like to preview your site before deploying, you'll need to unzip the
+file and preview it using a web server.  This is important because otherwise
+your themes won't display properly when you preview.
