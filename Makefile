@@ -1,18 +1,18 @@
 PHONY: run migrate test clean
 run: PATH  := venv/bin/:$(PATH)
 run: migrate venv
-	venv/bin/python corvid/manage.py runserver
+	venv/bin/python fugl/manage.py runserver
 
 migrate: venv
-	venv/bin/python corvid/manage.py makemigrations
-	venv/bin/python corvid/manage.py migrate
+	venv/bin/python fugl/manage.py makemigrations
+	venv/bin/python fugl/manage.py migrate
 
 test: migrate venv
-	cd corvid && ../venv/bin/python manage.py test
+	cd fugl && ../venv/bin/python manage.py test
 
 coverage: migrate venv
-	cd corvid && ../venv/bin/coverage run --source=corvid,main --omit=\*/migrations/\*,\*/management/\*,corvid/wsgi.py manage.py test
-	cd corvid && ../venv/bin/coverage html -d ../htmlcov
+	cd fugl && ../venv/bin/coverage run --source=fugl,main --omit=\*/migrations/\*,\*/management/\*,fugl/wsgi.py manage.py test
+	cd fugl && ../venv/bin/coverage html -d ../htmlcov
 
 venv:
 	virtualenv -p python3 venv

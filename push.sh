@@ -2,8 +2,8 @@
 # Push HTML files to gh-pages automatically.
 
 # Fill this out with the correct org/repo
-ORG=jpcjr
-REPO=corvid
+ORG=ajm188
+REPO=fugl
 # This probably should match an email for one of your users.
 EMAIL=example@example.com
 

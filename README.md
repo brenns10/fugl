@@ -1,4 +1,4 @@
-# Corvid ![Build Status](https://travis-ci.org/jpcjr/corvid.svg?branch=master)
+# Fugl ![Build Status](https://travis-ci.org/ajm188/fugl.svg?branch=master)
 
 User-friendly static site generation as a service. Powered by [Pelican](http://blog.getpelican.com/).
 
@@ -7,15 +7,15 @@ User-friendly static site generation as a service. Powered by [Pelican](http://b
 ## Postgresql
 - Use your package manager. Be sure to get development headers.
   + On Ubuntu, run `sudo apt-get install postgresql-9.4 postgresql-server-dev-9.4`
-- The settings given in the repo are expecting a role named `corvid` that owns
+- The settings given in the repo are expecting a role named `fugl` that owns
   a database with the same name. To set this up, enter the Postgres REPL with
   `sudo -u postgres psql` and enter the following commands:
 - When doing development, you need `CREATEDB` to run tests, but during deploy we
   will shut that off.
 
 ```sql
-    CREATE ROLE corvid PASSWORD '<password>' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
-    CREATE DATABASE corvid OWNER corvid;
+    CREATE ROLE fugl PASSWORD '<password>' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;
+    CREATE DATABASE fugl OWNER fugl;
 ```
 
 - Edit `postgresql.conf` (found on Ubuntu under `/etc/postgresql/9.4/main/postgresql.conf`),
@@ -58,20 +58,19 @@ cd pelican-themes
 git submodule init
 git submodule update
 # wait a lot longer
-cd ../corvid
+cd ../fugl
 ./manage.py loadthemes
 ```
 
 # Deployment
 
-Corvid is now deployed at `corvid.xyz`.  To deploy a new version, the following
-procedure should be used:
+To deploy a new version, the following procedure should be used:
 
-- (as root) Stop the uWSGI application server: `service uwsgi stop corvid`.
-- (as django) Go to `/home/django/corvid` and do your `git pull`.
+- (as root) Stop the uWSGI application server: `service uwsgi stop fugl`.
+- (as django) Go to `/home/django/fugl` and do your `git pull`.
 - (still as django, in virtualenv) Make sure to do `./manage.py makemigrations`
   and `./manage.py migrate`.
 - (as root, in virtualenv) Do `./manage.py collectstatic`!
-- (as root) Start the uWSGI application server: `service uwsgi start corvid`.
+- (as root) Start the uWSGI application server: `service uwsgi start fugl`.
 
-And you should have successfully deployed a new Corvid!
+And you should have successfully deployed a new Fugl!

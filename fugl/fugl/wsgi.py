@@ -1,5 +1,5 @@
 """
-WSGI config for corvid project.
+WSGI config for fugl project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "corvid.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fugl.settings")
 
 application = get_wsgi_application()

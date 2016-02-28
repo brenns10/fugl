@@ -113,5 +113,5 @@ venv/*
 
 
 # User-defined ignores
-corvid/corvid/credentials.py
+fugl/fugl/credentials.py
 doc/_build
